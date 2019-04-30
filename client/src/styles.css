@@ -1,0 +1,5 @@
+.section-mgt {
+  background-image: url(../public/assets/images/mgt-bg.jpg);
+  background-position: cover;
+  min-height: 100vh;
+}
