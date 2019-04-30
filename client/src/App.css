@@ -33,7 +33,7 @@
 }
 
 .section-mgt {
-  background-image: url(./img/mgt-bg.jpg);
-
+  background-image: url(./assets/img/mgt-bg.jpg);
+  background-position: cover;
   height: 100vh;
 }

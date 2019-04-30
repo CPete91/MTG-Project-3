@@ -1,9 +1,16 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Example from "./components/card-test";
 
 function App() {
-  return <h1>Hello world!</h1>;
+  return (
+    <section className="section-mgt">
+      <div className="container">
+        <Example />
+      </div>
+    </section>
+  );
 }
 
 export default App;
