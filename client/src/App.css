@@ -31,3 +31,9 @@
     transform: rotate(360deg);
   }
 }
+
+.section-mgt {
+  background-image: url(./img/mgt-bg.jpg);
+
+  height: 100vh;
+}
