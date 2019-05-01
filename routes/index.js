@@ -1,27 +1,13 @@
-const express = require("express");
-const app = express()
+const path = require("path");
 const router = require("express").Router();
-const deckController = require("../controllers/deckController.js");
-const cardController = require("../controllers/cardController.js");
+const userController = require("./../controllers/userController");
 
+router.route("/login").post(userController.checkLogIn);
 
-app.get("/", function (req, res) {
-    res.send(JSON.stringify({ res: "Hello World" }));
+router.route("/signup").post(userController.newUser);
+
+router.use(function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
-
-
-//retrieves all decks in database
-router.route("/api/decks")
-    .get(deckController.findAll);
-
-//retrieves all decks of a particular user
-router.route("/api/decks/:id")
-    .get(deckController.findByUid);
-
-
-router.route("/api/cards")
-    .get(cardController.findAll);
-
-
 
 module.exports = router;
