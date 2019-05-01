@@ -1,39 +1,34 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: "Dark Crystal";
+  src: 
+    /* Modern Browsers */ url("./assets/fonts/dark-crystal/dc_s.ttf")
+    format("truetype");
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .section-mgt {
   background-image: url(./assets/img/mgt-bg.jpg);
   background-position: cover;
   height: 100vh;
+}
+
+.logo {
+  height: 150px;
+  width: 150px;
+}
+/* login page styles */
+
+.brand-container {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  padding-top: 25px;
+}
+
+.mgt-h1 {
+  font-family: "Dark Crystal";
+  color: #82693b;
+  text-align: center;
+}
+
+.logo-login {
+  margin: 0 auto;
 }
