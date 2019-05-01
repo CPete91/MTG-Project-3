@@ -10,25 +10,6 @@ module.exports = {
       }
     });
   },
-  // newUser: function(req, res) {
-  //   db.User.find(
-  //     { $or: [{ userName: req.body.userName }, { email: req.body.email }] },
-  //     function(data) {
-  //       console.log("data", data);
-  //       if (data && data.userName === req.body.userName) {
-  //         res.json({
-  //           uid: false,
-  //           err:
-  //             "That username has already been taken. Please select a new username."
-  //         });
-  //       } else if (data && data.email === req.body.email) {
-  //         res.json({ uid: false, err: "That email is already in use." });
-  //       } else {
-  //         db.User.create(req.body).then(data => res.json({ uid: data._id }));
-  //       }
-  //     }
-  //   );
-  // },
 
   newUser: function(req, res) {
     db.User.find(
