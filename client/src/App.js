@@ -1,15 +1,16 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Example from "./components/card-test";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./pages/login";
 
 function App() {
   return (
-    <section className="section-mgt">
-      <div className="container">
-        <Example />
-      </div>
-    </section>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Login} />
+      </Switch>
+    </Router>
   );
 }
 
