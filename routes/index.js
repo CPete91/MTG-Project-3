@@ -1,6 +1,13 @@
-const express = require("express");
-const app = express()
+const path = require("path");
+const router = require("express").Router();
+const userController = require("./../controllers/userController");
 
-app.get("/", function (req, res) {
-    res.send(JSON.stringify({ res: "Hello World" }));
+router.route("/login").post(userController.checkLogIn);
+
+router.route("/signup").post(userController.newUser);
+
+router.use(function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
+
+module.exports = router;
