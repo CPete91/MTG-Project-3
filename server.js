@@ -18,6 +18,23 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/MTG");
 
+const Schema = mongoose.Schema;
+
+const cardSchema = new Schema({}, { strict: false });
+const cardData = require("./mockdata/mtgstandard.json");
+
+const Card = mongoose.model('Card', cardSchema);
+
+
+
+
+Card.find().remove();
+for (var i = 0; i < cardData.length; i++) {
+  new Card(cardData[i]).save();
+}
+
+
+
 // Start the API server
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
