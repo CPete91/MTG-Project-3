@@ -17,6 +17,9 @@ const deckSchema = new Schema({
         type: String
 
     },
+    tags: {
+        type: Array
+    },
 
     uid: {
         type: Schema.Types.ObjectId
