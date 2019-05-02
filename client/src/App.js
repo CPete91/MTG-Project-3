@@ -6,7 +6,7 @@ import Login from "./pages/login";
 
 import Flip from "./pages/flip";
 
-import DeckDisplay from "./pages/DeckDisplay";
+// import DeckDisplay from "./pages/DeckDisplay";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/" component={Login} />
 
         <Route exact path="/flip" component={Flip} />
-        <Route exact path="/deck_display" component={DeckDisplay} />
+        {/* <Route exact path="/deck_display" component={DeckDisplay} /> */}
       </Switch>
     </Router>
   );

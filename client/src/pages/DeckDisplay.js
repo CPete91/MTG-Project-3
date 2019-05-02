@@ -13,8 +13,8 @@ import {
   CardBody
 } from "reactstrap";
 
-// const DeckDisplay = props => {
-//   return <CardDeck />;
-// };
+const DeckDisplay = props => {
+  return <CardDeck />;
+};
 
 export default DeckDisplay;
