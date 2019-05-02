@@ -8,7 +8,6 @@ import Flip from "./pages/flip";
 
 import DeckDisplay from "./pages/DeckDisplay";
 
-
 function App() {
   return (
     <Router>
@@ -17,7 +16,6 @@ function App() {
 
         <Route exact path="/flip" component={Flip} />
         <Route exact path="/deck_display" component={DeckDisplay} />
-
       </Switch>
     </Router>
   );

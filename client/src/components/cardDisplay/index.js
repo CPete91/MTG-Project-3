@@ -1,31 +1,26 @@
 import React from "react";
 import { Card, Button, CardTitle, CardText, Row, Col } from "reactstrap";
 
-const CardDisplay = props => {
+export function CardDisplay(props) {
   return (
-    <Row>
-      <Col sm="6">
-        <Card body>
-          <CardTitle>Special Title Treatment</CardTitle>
-          <CardText>
-            With supporting text below as a natural lead-in to additional
-            content.
-          </CardText>
-          <Button>Go somewhere</Button>
-        </Card>
-      </Col>
-      <Col sm="6">
-        <Card body>
-          <CardTitle>Special Title Treatment</CardTitle>
-          <CardText>
-            With supporting text below as a natural lead-in to additional
-            content.
-          </CardText>
-          <Button>Go somewhere</Button>
-        </Card>
-      </Col>
-    </Row>
+    <Card>
+      <CardImg
+        top
+        width="100%"
+        src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180"
+        alt="Card image cap"
+      />
+      <CardBody>
+        <CardTitle />
+        <CardSubtitle>Card subtitle</CardSubtitle>
+        <CardText>
+          This is a wider card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </CardText>
+        <Button>Select Card</Button>
+      </CardBody>
+    </Card>
   );
-};
+}
 
 export default CardDisplay;
