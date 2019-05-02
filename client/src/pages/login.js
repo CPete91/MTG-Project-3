@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import LoginForm from "../components/login-form";
 
 class Login extends Component {
   render() {
@@ -10,8 +11,10 @@ class Login extends Component {
               className="logo logo-login"
               src={require("../assets/img/mgt-logo.png")}
             />
+
             <h1 className="mgt-h1">DECK BUILDER</h1>
           </div>
+          <LoginForm />
         </div>
       </section>
     );
