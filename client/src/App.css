@@ -1,7 +1,11 @@
+body {
+  background-image: url(./assets/img/mgt-bg.jpg);
+}
+
 @font-face {
   font-family: "Dark Crystal";
   src: 
-    /* Modern Browsers */ url("./assets/fonts/dark-crystal/dc_s.ttf")
+      /* Modern Browsers */ url("./assets/fonts/dark-crystal/dc_s.ttf")
     format("truetype");
 }
 .section-mgt {
@@ -28,9 +32,14 @@
   font-size: 5rem;
   color: #82693b;
   text-align: center;
+  padding-top: 35px;
 }
 
 .form-h1 {
+  font-family: "Dark Crystal";
+  font-size: 5rem;
+  color: #82693b;
+  text-align: center;
   margin-bottom: 20px;
   font-size: 48px;
 }
@@ -43,7 +52,7 @@
   background-color: #010101;
   border: 8px solid #82693b;
   padding: 20px;
-  margin: 50px auto 0 auto;
+  margin: 25px auto 0 auto;
   width: 400px;
 }
 
@@ -119,4 +128,20 @@
   width: 300px;
 }
 
-/* media quries  */
+/* media queries 
+
+/* login */
+@media only screen and (min-width: 375px) and (max-width: 667px) {
+  .logo {
+    height: 100px;
+    width: 100px;
+  }
+
+  .mgt-h1 {
+    font-size: 3rem;
+  }
+
+  .form-container {
+    width: 350px;
+  }
+}

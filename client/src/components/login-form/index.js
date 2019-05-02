@@ -4,9 +4,9 @@ import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 export default class LoginForm extends React.Component {
   render() {
     return (
-      <div className="form-container">
-        <Form>
-          <h1 className="mgt-h1 form-h1">Login</h1>
+      <div>
+        <Form className="form-container">
+          <h1 className="form-h1">Login</h1>
           <FormGroup>
             {/* <Label for="exampleEmail">Email</Label> */}
             <Input
