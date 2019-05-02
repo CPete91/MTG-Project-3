@@ -22,18 +22,18 @@ const Schema = mongoose.Schema;
 const cardSchema = new Schema({}, { strict: false });
 //const cardData = require("./mockdata/mtgstandard.json");
 
-const Card = mongoose.model('Card', cardSchema);
+const Card = require("./models/card");
 
 
 const initCards = () => {
-  Card.deleteMany();
+  Card.deleteMany({});
 
-  newData = axios.get("https://api.scryfall.com/cards/search?q=f:standard");
+  newData = axios.get("https://api.scryfall.com/cards/search?unique=cards&q=f:standard");
 
   Card.insertMany(newData.data);
 
 
-  if (newData.has_more === true) {
+  if (newData.has_more) {
     createCards(axios.get(newData.next_page));
   }
 }
@@ -43,7 +43,7 @@ const createCards = (cardData) => {
 
   Card.insertMany(cardData.data);
 
-  if (cardData.has_more === true) {
+  if (cardData.has_more) {
     createCards(axios.get(cardData.next_page));
   }
 
