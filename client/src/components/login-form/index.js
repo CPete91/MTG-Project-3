@@ -8,21 +8,20 @@ export default class LoginForm extends React.Component {
         <Form className="form-container">
           <h1 className="form-h1">Welcome</h1>
           <FormGroup>
-            {/* <Label for="exampleEmail">Email</Label> */}
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="enter email"
-            />
+            <Label className="form-label" for="email">
+              Email
+            </Label>
+            <Input type="email" name="email" id="email" placeholder="" />
           </FormGroup>
           <FormGroup>
-            {/* <Label for="examplePassword">Password</Label> */}
+            <Label className="form-label" for="password">
+              Password
+            </Label>
             <Input
               type="password"
               name="password"
               id="password"
-              placeholder="enter password"
+              placeholder=""
             />
           </FormGroup>
           <div className="btn-wrapper">
