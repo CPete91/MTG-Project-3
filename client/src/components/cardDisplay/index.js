@@ -1,10 +1,20 @@
 import React from "react";
-import { Card, Button, CardTitle, CardText, Row, Col } from "reactstrap";
+import {
+  Card,
+  Button,
+  CardTitle,
+  Row,
+  Col,
+  CardImg,
+  CardText,
+  CardBody,
+  CardSubtitle
+} from "reactstrap";
 
 export function CardDisplay(props) {
   return (
     <Card>
-      <CardImg src={props.card.img_uris.normal} alt={props.card.name} />
+      <CardImg src={props.card.image_uris.normal} alt={props.card.name} />
       <CardBody>
         <CardTitle>{props.card.name}</CardTitle>
         <Button>Select Card</Button>
