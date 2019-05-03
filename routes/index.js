@@ -10,6 +10,11 @@ router.route("/signup").post(userController.newUser);
 
 router.route("/api/cards").get(cardController.findAll);
 router.route("/api/cards/:id").get(cardController.findId);
+router.route("/api/decks/").get(deckController.findAll);
+router.route("/api/decks/:id").get(deckController.findByUid);
+router.route("/api/decks/:search").get(deckController.findByTags);
+router.route("/api/decks/").post(deckController.createDeck);
+
 
 
 router.use(function (req, res) {
