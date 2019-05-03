@@ -22,15 +22,15 @@ class CardSelector extends Component {
 
   loadCards = () => {
     console.log("yesssss");
-    API.getCards();
+    // API.getCards();
 
-    // API.getCards()
-    //   .then(res =>
-    //     this.setState({
-    //       cardArray: res.data
-    //     })
-    //   )
-    //   .catch(err => console.log(err));
+    API.getCards()
+      .then(res =>
+        this.setState({
+          cardArray: res.data
+        })
+      )
+      .catch(err => console.log(err));
   };
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class CardSelector extends Component {
       <div>
         <Container>
           <CardDeck>
-            <CardDisplay card={this.state.cardArray[0]} />
+            {/* <CardDisplay card={this.state.cardArray[0]} /> */}
           </CardDeck>
         </Container>
       </div>
