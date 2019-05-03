@@ -20,9 +20,21 @@ class CardSelector extends Component {
     cardArray: []
   };
 
+  renderCard = () => {
+
+    if (this.state.cardArray.length > 0) {
+
+      return <CardDisplay card={this.state.cardArray[0]} />
+
+    }
+
+  }
+
   loadCards = () => {
     console.log("yesssss");
-    API.getCards();
+    API.getCards().then(data => {
+      this.setState({ cardArray: data.data })
+    });
 
     // API.getCards()
     //   .then(res =>
@@ -42,7 +54,7 @@ class CardSelector extends Component {
       <div>
         <Container>
           <CardDeck>
-            <CardDisplay card={this.state.cardArray[0]} />
+            {this.renderCard()}
           </CardDeck>
         </Container>
       </div>

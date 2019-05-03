@@ -37,6 +37,5 @@
   },
   "react-flip-dom": {
     "orientation": "horizontal"
-  },
-  "proxy": "https://localhost:3001/"
+  }
 }
