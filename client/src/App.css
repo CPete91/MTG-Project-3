@@ -64,14 +64,19 @@ body {
 
 .form-btn {
   font-family: "Dark Crystal";
-  font-size: 30px;
+  font-size: 25px;
   color: #82693b;
   background-color: #010101;
   border: 8px solid #82693b;
   text-align: center;
   padding: 5px 20px 40px 20px;
+
   height: 40px;
   width: auto;
+}
+
+.form-btn:last-child {
+  margin-left: 20px;
 }
 
 .form-btn:hover {
