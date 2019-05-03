@@ -29,19 +29,29 @@ body {
 
 .mgt-h1 {
   font-family: "Dark Crystal";
-  font-size: 5rem;
+  font-size: 100px;
   color: #82693b;
   text-align: center;
   padding-top: 35px;
+  /* background-color: #010101;
+  border-radius: 50px; */
 }
 
 .form-h1 {
   font-family: "Dark Crystal";
-  font-size: 5rem;
+  font-size: 20px;
   color: #82693b;
   text-align: center;
   margin-bottom: 20px;
   font-size: 48px;
+  border-bottom: 2px solid #82693b;
+}
+
+.form-label {
+  font-family: "Dark Crystal";
+  font-size: 30px;
+  color: #82693b;
+  text-align: center;
 }
 
 .logo-login {
@@ -148,5 +158,9 @@ body {
 
   .form-container {
     width: 350px;
+  }
+
+  .form-btn {
+    font-size: 1.3rem;
   }
 }
