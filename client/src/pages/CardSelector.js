@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import CardDisplay from "../components/cardDisplay";
+// import CardDisplay from "../components/cardDisplay";
 import { Link } from "react-router-dom";
+import API from "../utils/API";
 
 import {
   Card,
@@ -15,19 +16,37 @@ import {
 } from "reactstrap";
 
 class CardSelector extends Component {
-  loadBooks = () => {
-    API.getBooks()
+  state = {
+    cardArray: []
+  };
+
+  componentDidMount() {
+    this.getCards();
+  }
+
+  loadCards = () => {
+    API.getCards()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({
+          cardArray: res.data
+        })
       )
       .catch(err => console.log(err));
   };
 
   render() {
     return (
-      <Container>
-        <CardDeck />
-      </Container>
+      <div>
+        {this.state.data.map((val, idx) => (
+          <div className="col-md-3">
+            <Container>
+              <CardDeck>
+                <CardDisplay card={state.cardArray[0]} />
+              </CardDeck>
+            </Container>
+          </div>
+        ))}
+      </div>
     );
   }
 }
