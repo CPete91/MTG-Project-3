@@ -6,7 +6,7 @@ export default class LoginForm extends React.Component {
     return (
       <div>
         <Form className="form-container">
-          <h1 className="form-h1">Login</h1>
+          <h1 className="form-h1">Welcome</h1>
           <FormGroup>
             {/* <Label for="exampleEmail">Email</Label> */}
             <Input
@@ -26,7 +26,8 @@ export default class LoginForm extends React.Component {
             />
           </FormGroup>
           <div className="btn-wrapper">
-            <button className="form-btn ">Submit</button>
+            <button className="form-btn ">Log In</button>
+            <button className="form-btn ">Sign Up</button>
           </div>
         </Form>
       </div>
