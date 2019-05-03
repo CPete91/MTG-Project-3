@@ -10,6 +10,7 @@ import Auth from "./Auth/Auth.js";
 
 const auth = new Auth();
 // auth.login();
+// import DeckDisplay from "./pages/DeckDisplay";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
         <Route exact path="/flip" component={Flip} />
         <Route exact path="/deck_display" component={DeckDisplay} />
+        {/* <Route exact path="/deck_display" component={DeckDisplay} /> */}
       </Switch>
     </Router>
   );

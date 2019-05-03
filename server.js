@@ -19,39 +19,52 @@ app.use(routes);
 
 const Schema = mongoose.Schema;
 
-const cardSchema = new Schema({}, { strict: false });
 //const cardData = require("./mockdata/mtgstandard.json");
 
-const Card = mongoose.model('Card', cardSchema);
+const db = require("./models");
 
 
 const initCards = () => {
-  Card.deleteMany();
-
-  newData = axios.get("https://api.scryfall.com/cards/search?q=f:standard");
-
-  Card.insertMany(newData.data);
 
 
-  if (newData.has_more === true) {
-    createCards(axios.get(newData.next_page));
-  }
+
+  axios.get("https://api.scryfall.com/cards/search?unique=cards&q=f:standard").then(function (response) {
+
+
+    createCards(response.data);
+  });
+
+  // db.CardDB.insertMany(newData.data);
+
+
+
+  //if (newData.has_more) {
+  //createCards(axios.get(newData.next_page));
+  //}
+  console.log("done");
 }
 
 const createCards = (cardData) => {
 
+  // console.log(cardData);
 
-  Card.insertMany(cardData.data);
+  db.CardDB.insertMany(cardData.data);
 
-  if (cardData.has_more === true) {
-    createCards(axios.get(cardData.next_page));
+  if (cardData.has_more) {
+    axios.get(cardData.next_page).then(function (response) {
+
+      createCards(response.data);
+    });
   }
-
+  console.log("done");
 
 }
 
+
+
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/MTG").then(initCards());
+
 
 
 
