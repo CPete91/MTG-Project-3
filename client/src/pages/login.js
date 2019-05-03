@@ -6,14 +6,19 @@ class Login extends Component {
     return (
       <section className="section-mgt">
         <div className="container">
-          <div className="brand-container">
-            <img
-              className="logo logo-login"
-              src={require("../assets/img/mgt-logo.png")}
-            />
+          <div className="row">
+            <div className="col-sm">
+              <div className="brand-container">
+                <img
+                  className="logo logo-login"
+                  src={require("../assets/img/mgt-logo.png")}
+                />
 
-            <h1 className="mgt-h1">DECK BUILDER</h1>
+                <h1 className="mgt-h1">DECK BUILDER</h1>
+              </div>
+            </div>
           </div>
+
           <LoginForm />
         </div>
       </section>
