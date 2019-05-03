@@ -41,7 +41,7 @@ class CardSelector extends Component {
           <div className="col-md-3">
             <Container>
               <CardDeck>
-                <CardDisplay card={state.cardArray[0]} />
+                <CardDisplay card={this.state.cardArray[0]} />
               </CardDeck>
             </Container>
           </div>
