@@ -23,55 +23,40 @@ const Schema = mongoose.Schema;
 
 const db = require("./models");
 
-
 const initCards = () => {
-
-
-
-  axios.get("https://api.scryfall.com/cards/search?unique=cards&q=f:standard").then(function (response) {
-
-
-    createCards(response.data);
-  });
+  axios
+    .get("https://api.scryfall.com/cards/search?unique=cards&q=f:standard")
+    .then(function(response) {
+      createCards(response.data);
+    });
 
   // db.CardDB.insertMany(newData.data);
-
-
 
   //if (newData.has_more) {
   //createCards(axios.get(newData.next_page));
   //}
   console.log("done");
-}
+};
 
-const createCards = (cardData) => {
-
+const createCards = cardData => {
   // console.log(cardData);
 
   db.CardDB.insertMany(cardData.data);
 
   if (cardData.has_more) {
-    axios.get(cardData.next_page).then(function (response) {
-
+    axios.get(cardData.next_page).then(function(response) {
       createCards(response.data);
     });
   }
   console.log("done");
-
-}
-
-
+};
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/MTG").then(initCards());
-
-
-
-
-
-
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/MTG")
+  .then(initCards());
 
 // Start the API server
-app.listen(PORT, function () {
+app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
