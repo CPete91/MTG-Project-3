@@ -22,7 +22,7 @@ export default {
         const totalProb = 0;
         for(let j=0;j<playable.length;j++){
           if(playable[j]){
-            totalProb += optionProb(cardArray[i].options[j],manaObj,deckLength)
+            totalProb += optionProb(cardArray[i].options[j],manaObj,deckLength,cardArray[i].cmc)
           }
         }
       }

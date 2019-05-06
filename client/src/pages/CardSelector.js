@@ -36,17 +36,17 @@ class CardSelector extends Component {
   loadCards = () => {
     console.log("yesssss");
     API.getCards().then(data => {
-      console.log(data);
+      console.log(data, "DATA WE GT BACK!!!!!!!!");
       this.setState({ cardArray: data.data });
     });
 
-    API.getCards()
-      .then(res =>
-        this.setState({
-          cardArray: res.data
-        })
-      )
-      .catch(err => console.log(err));
+    // API.getCards()
+    //   .then(res =>
+    //     this.setState({
+    //       cardArray: res.data
+    //     })
+    //   )
+    //   .catch(err => console.log(err));
   };
 
   componentDidMount() {

@@ -5,6 +5,10 @@ module.exports = {
     db.CardDB.find({})
       .then(dbModel => {
         console.log("got this back from DB!!!", dbModel[0]);
+        var data = {
+          data: dbModel[0]
+        };
+        // res.send("THIS IS TOM TEST");
         res.json(dbModel);
       })
       .catch(err => res.status(422).json(err));

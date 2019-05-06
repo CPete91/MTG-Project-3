@@ -12,15 +12,53 @@ export default {
   manaObj,
   deckLength,
   cmc => {
+    const keys = Object.keys(manaObj);
+    let unfavorableCards = deckLength - 1;
+    keys.forEach(key => {
+      if (paymentOption[key > 0]) {
+        favorable[key] = manaObj[key];
+        unfavorableCards = unfavorableCards - manaObj[key];
+        // Set up a favorable object. This has attributes of different mana type that are required to play a card.
+      }
+    });
     let probability = 0;
     for (let i = 0; i < 7 + cmc; i++) {
-      let favorable = 0;
-      let unfavorableCards = deckLength - 1;
-      const keys = Object.keys(manaObj);
-      keys.forEach(key => {
-        unfavorableCards = manaObj[key] - paymentOption[key];
-      });
+      let currentUnfavorableCards = unfavorableCards;
+      let favorable = {};
       let cardsDrawn = 0;
+      let thisProb = 0;
+      for (unfavorable = 0; unfavorable < i; unfavorable++) {
+        cardsDrawn++;
+        if (unfavorable === 0) {
+          thisProb = unfavorableCards / deckLength;
+          cardsDrawn++;
+        } else {
+          thisProb =
+            ((currentUnfavorableCards - cardsDrawn) /
+              (deckLength - cardsDrawn)) *
+            thisProb;
+        }
+      }
+      // Calculate the odds of first drawing unfavorable cards before drawing favorable cards.
+      let keys = Object.keys(favorable);
+      keys.forEach(key => {
+        for (let i = 0; i < favorable[key]; i++) {
+          if (thisProb > 0) {
+            thisProb =
+              (thisProb * (favorable[key] - i)) / (deckLength - cardsDrawn);
+            cardsDrawn++;
+          } else {
+            thisProb = favorable[key] / deckLength;
+            cardsDrawn++;
+          }
+        }
+        // Calculate the probability of drawing the cards we want. Assume that we draw them all in a clump,
+        // because it turns out that I took AP statistics a decade ago, and I forgot how to calculate the odds
+        // that a subset will show up in a randomly selected set.
+      });
+      probability += thisProb;
+      // Add in the probability of each possible situation.
     }
+    return probability;
   })
 };
