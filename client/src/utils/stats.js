@@ -4,6 +4,7 @@
 // This needs to look through each card. If it's a land-type, we need to create a list of how many of each type we have. There are 10 2 land-types possible.
 // I don't wanna brute force that. That sounds like hell. Instead, let's just make an array of dual land types.
 
+playNum = import("./playNum");
 export default {
   stats: deck => {
     //   Our mana object is a count of how much mana we will have available. It will be updated based upon
@@ -18,6 +19,7 @@ export default {
       C: 0,
       multi: []
     };
+    const deckLength = deck.length;
     // The playable array will be an array of arrays. The array at index 0 will be cards that can be paid for with 0 mana. Next will be cards that can
     // be paid for with 1 mana. etc. Lands are not included in this array.
     let playableArr = [];
@@ -47,5 +49,8 @@ export default {
         playableArr[cmc].push(card);
       }
     }
+    playNum(manaObj, playableArr, deckLength);
   }
+  //   Thanks to the mana calculator, we have an array of all possible options for how to pay for a card saved in our deck. As such, we can predict
+  // the probability that we will be able to play a card based off of our known mana
 };

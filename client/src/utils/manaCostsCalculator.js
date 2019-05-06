@@ -53,11 +53,10 @@ export default {
         option[arr[i][j]]++;
       }
       if (finalObj.options.indexOf(option) === -1) {
-        finalObj.options.push(option);
+        card.options.push(option);
       }
     }
 
-    card.allPossiblePayment = finalObj;
     return card;
   }
 };
