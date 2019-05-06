@@ -59,7 +59,7 @@ body {
 }
 
 .form-container {
-  background-color: #010101;
+  background-color: #010101e5;
   border: 8px solid #82693b;
   padding: 20px;
   margin: 25px auto 0 auto;
@@ -135,12 +135,26 @@ body {
 .flip-container {
   display: flex;
   justify-content: center;
+  align-content: center;
   padding: 150px 0 0 0;
 }
 
+.flip-page {
+  border: 8px solid #82693b;
+}
+
 .flip-img {
+  display: flex;
+  justify-content: center;
+  align-content: center;
   height: 300px;
   width: 300px;
+  padding-top: 50px;
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }
 
 /* media queries 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginForm from "../components/login-form";
-
+import "../animate.css";
 class Login extends Component {
   render() {
     return (
@@ -14,7 +14,7 @@ class Login extends Component {
                   src={require("../assets/img/mgt-logo.png")}
                 />
 
-                <h1 className="mgt-h1">DECK BUILDER</h1>
+                <h1 className="mgt-h1 fadeIn">DECK BUILDER</h1>
               </div>
             </div>
           </div>
