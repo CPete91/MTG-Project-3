@@ -17,7 +17,8 @@ export function CardDisplay(props) {
       <CardImg src={props.card.image_uris.normal} alt={props.card.name} />
       <CardBody>
         <CardTitle>{props.card.name}</CardTitle>
-        <Button>Select Card</Button>
+        <Button>Add to Deck</Button>
+        <Button>Remove from Deck</Button>
       </CardBody>
     </Card>
   );
