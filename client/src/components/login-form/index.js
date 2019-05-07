@@ -9,7 +9,12 @@ const signUp = (password, username, e) => {
   e.preventDefault();
   API.signUp({ userName: username, password: password }).then(data => {
 
-    console.log(data);
+    if (data.data.uid) {
+      console.log(data);
+    } else {
+
+    }
+
 
 
 
