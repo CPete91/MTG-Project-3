@@ -12,8 +12,10 @@ export default {
   login: (user) => {
     return axios.post("http://localhost:3001/login", user, { crossdomain: true });
   },
-  getUserHash: (userName) => {
-    return axios.get("http://localhost:3001/userhash/" + userName);
+
+  // saves deckArray to database
+  submitDeck: deckData => {
+    return axios.post("/api/decks", deckData);
   }
 
 

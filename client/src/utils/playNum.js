@@ -18,15 +18,17 @@ export default {
         }
     })
       }
-      if(playable.forEach(true)!== -1){
-        const totalProb = 0;
+      if(playable.indexOf(true)!== -1){
+        let totalProb = 0;
         for(let j=0;j<playable.length;j++){
           if(playable[j]){
             totalProb += optionProb(cardArray[i].options[j],manaObj,deckLength,cardArray[i].cmc)
           }
         }
+        cardArray[i].probability = totalProb
       }
     }
+    return cardArray
   })
 
 }
