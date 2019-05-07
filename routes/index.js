@@ -8,6 +8,7 @@ router.route("/login").post(userController.checkLogIn);
 
 router.route("/signup").post(userController.newUser);
 
+
 router.route("/api/cards").get(cardController.findAll);
 router.route("/api/cards/:id").get(cardController.findId);
 router.route("/api/decks/").get(deckController.findAll);

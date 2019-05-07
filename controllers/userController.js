@@ -1,20 +1,35 @@
 const db = require("../models");
+const bcrypt = require('bcrypt');
 
 module.exports = {
-  checkLogIn: function(req, res) {
-    db.User.find(req.body).then(data => {
+  checkLogIn: function (req, res) {
+    db.User.find({ userName: req.userName }).then(data => {
       if (data.length) {
-        res.json({ uid: data[0]._id });
+        bcrypt.compare(req.password, data[0].password, function (err, res) {
+          if (res) {
+            res.json({ uid: data[0]._id });
+
+
+          } else {
+            res.json({ uid: false, err: "Username or password is incorrect." });
+
+          }
+          // res == true
+        });
+
       } else {
         res.json({ uid: false, err: "Username or password is incorrect." });
       }
-    });
+
+    })
+
+
   },
 
-  newUser: function(req, res) {
+  newUser: function (req, res) {
     db.User.find(
       { $or: [{ userName: req.body.userName }, { email: req.body.email }] },
-      function(err, data) {
+      function (err, data) {
         if (err) throw err;
         console.log("data", data);
         if (data.length && data[0].email == req.body.email) {
@@ -30,5 +45,15 @@ module.exports = {
         }
       }
     );
+  },
+
+  userHash: function (req, res) {
+    db.User.find({ userName: req.params.user }, function (err, data) {
+      if (err) throw err;
+
+      res.json(data);
+
+    });
+
   }
 };
