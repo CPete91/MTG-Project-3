@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import test from "./../components/stats";
+import Stats from "./../components/stats";
 
 import {
   Card,
@@ -13,17 +13,16 @@ import {
   Container
 } from "reactstrap";
 
-class test extends Component {
+class Test extends Component {
   render() {
-    console.log(this.state.cardArray);
     return (
       <div>
         <Container>
-          <stats />
+          <Stats dataArray={[12, 13, 14, 15, 16, 16, 17, 18, 19, 20]} />
         </Container>
       </div>
     );
   }
 }
 
-export default test;
+export default Test;

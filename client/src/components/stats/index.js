@@ -2,8 +2,9 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
 
-class ChartsPage extends React.Component {
-  state = {
+export function Stats(props) {
+  console.log(props);
+  let cardData = {
     dataBar: {
       labels: [
         "Turn 1",
@@ -12,25 +13,16 @@ class ChartsPage extends React.Component {
         "Turn 4",
         "Turn 5",
         "Turn 6",
-        "Turn 7"
+        "Turn 7",
+        "Turn 8",
+        "Turn 9",
+        "Turn 10"
       ],
       datasets: [
         {
-          label: "#1",
-          data: [12, 39, 3, 50, 2, 32, 84],
-          backgroundColor: "rgba(245, 74, 85, 0.5)",
-          borderWidth: 1
-        },
-        {
-          label: "#2",
-          data: [56, 24, 5, 16, 45, 24, 8],
-          backgroundColor: "rgba(90, 173, 246, 0.5)",
-          borderWidth: 1
-        },
-        {
-          label: "#3",
-          data: [12, 25, 54, 3, 15, 44, 3],
-          backgroundColor: "rgba(245, 192, 50, 0.5)",
+          label: "Probability of a Viable Play",
+          data: props.dataArray,
+          backgroundColor: "rgba(245, 74, 85, 1)",
           borderWidth: 1
         }
       ]
@@ -44,7 +36,7 @@ class ChartsPage extends React.Component {
             barPercentage: 1,
             gridLines: {
               display: true,
-              color: "rgba(0, 0, 0, 0.1)"
+              color: "rgba(0, 0, 0, 1)"
             }
           }
         ],
@@ -52,7 +44,7 @@ class ChartsPage extends React.Component {
           {
             gridLines: {
               display: true,
-              color: "rgba(0, 0, 0, 0.1)"
+              color: "rgba(250, 250, 250, 1)"
             },
             ticks: {
               beginAtZero: true
@@ -62,15 +54,12 @@ class ChartsPage extends React.Component {
       }
     }
   };
-
-  render() {
-    return (
-      <MDBContainer>
-        <h3 className="mt-5">Radar chart</h3>
-        <Bar data={this.state.dataBar} options={this.state.barChartOptions} />
-      </MDBContainer>
-    );
-  }
+  return (
+    <MDBContainer>
+      <h3 className="mt-5">Probability of Plays on Each Turn</h3>
+      <Bar data={cardData.dataBar} options={cardData.barChartOptions} />
+    </MDBContainer>
+  );
 }
 
-export default ChartsPage;
+export default Stats;
