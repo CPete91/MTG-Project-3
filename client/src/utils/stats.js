@@ -39,6 +39,8 @@ export default {
         } else if (colors.length === 1) {
           // Standard lands only have 1 color, and we can keep track of them with a simple integer as well.
           manaObj[colors[0]]++;
+          manaObj.C++;
+          // Add in a colorless mana opportunity as well, since literally any mana can count as colorless
         } else {
           manaObj[multi].push(colors);
         }
@@ -49,7 +51,8 @@ export default {
         playableArr[cmc].push(card);
       }
     }
-    playNum(manaObj, playableArr, deckLength);
+    let statsDeck = playNum(manaObj, playableArr, deckLength);
+    return statsDeck;
   }
   //   Thanks to the mana calculator, we have an array of all possible options for how to pay for a card saved in our deck. As such, we can predict
   // the probability that we will be able to play a card based off of our known mana

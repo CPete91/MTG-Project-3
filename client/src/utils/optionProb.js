@@ -21,8 +21,10 @@ export default {
         // Set up a favorable object. This has attributes of different mana type that are required to play a card.
       }
     });
+    let probabilityArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    // Our chart will take in an array of probabilities. We populate this with the probability of each respective play.
     let probability = 0;
-    for (let i = 0; i < 7 + cmc; i++) {
+    for (let i = 0; i <= 10 - cmc; i++) {
       let currentUnfavorableCards = unfavorableCards;
       let favorable = {};
       let cardsDrawn = 0;
@@ -41,15 +43,24 @@ export default {
       }
       // Calculate the odds of first drawing unfavorable cards before drawing favorable cards.
       let keys = Object.keys(favorable);
+      let manaDrawn = 0;
       keys.forEach(key => {
         for (let i = 0; i < favorable[key]; i++) {
           if (thisProb > 0) {
             thisProb =
               (thisProb * (favorable[key] - i)) / (deckLength - cardsDrawn);
             cardsDrawn++;
+            manaDrawn++;
+          } else if (key === "C") {
+            thisProb =
+              (thisProb * (favorable[key] - manaDrawn)) /
+              (deckLength - cardsDrawn);
+            cardsDrawn++;
+            manaDrawn++;
           } else {
             thisProb = favorable[key] / deckLength;
             cardsDrawn++;
+            manaDrawn++;
           }
         }
         // Calculate the probability of drawing the cards we want. Assume that we draw them all in a clump,
@@ -57,8 +68,9 @@ export default {
         // that a subset will show up in a randomly selected set.
       });
       probability += thisProb;
+      probabilityArray[cmc + i] = probability;
       // Add in the probability of each possible situation.
     }
-    return probability;
+    return probabilityArray;
   })
 };
