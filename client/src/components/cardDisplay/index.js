@@ -17,7 +17,13 @@ export function CardDisplay(props) {
       <CardImg src={props.card.image_uris.normal} alt={props.card.name} />
       <CardBody>
         <CardTitle>{props.card.name}</CardTitle>
-        <Button>Add to Deck</Button>
+        <Button
+          onClick={() => {
+            props.onClickCommand(props.card);
+          }}
+        >
+          Add to Deck
+        </Button>
         <Button>Remove from Deck</Button>
       </CardBody>
     </Card>
