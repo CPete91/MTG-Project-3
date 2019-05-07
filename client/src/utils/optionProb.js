@@ -22,7 +22,7 @@ optionProb = function(paymentOption, manaObj, deckLength, cmc) {
   let probabilityArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   // Our chart will take in an array of probabilities. We populate this with the probability of each respective play.
   let probability = 0;
-  for (let i = 0; i <= 10 - cmc; i++) {
+  for (let i = 0; i <= 9 - cmc; i++) {
     let currentUnfavorableCards = unfavorableCards;
 
     let cardsDrawn = 0;
@@ -44,7 +44,8 @@ optionProb = function(paymentOption, manaObj, deckLength, cmc) {
     let manaDrawn = 0;
     console.log("Cards drawn before loop", cardsDrawn);
     keys.forEach(key => {
-      for (let j = 0; j <= favorable[key]; j++) {
+      console.log(key, favorable[key]);
+      for (let j = 0; j <= paymentOption[key]; j++) {
         if (key === "C" && thisProb > 0) {
           thisProb =
             (thisProb * (favorable[key] - manaDrawn)) /
@@ -56,7 +57,7 @@ optionProb = function(paymentOption, manaObj, deckLength, cmc) {
             (thisProb * (favorable[key] - j)) / (deckLength - cardsDrawn);
           cardsDrawn++;
           manaDrawn++;
-        } else {
+        } else if (thisProb === 0) {
           thisProb =
             ((1 / deckLength) * favorable[key]) / (deckLength - cardsDrawn);
           cardsDrawn++;
@@ -66,18 +67,19 @@ optionProb = function(paymentOption, manaObj, deckLength, cmc) {
           cardsDrawn--;
           manaDrawn--;
         }
-        if (thisProb < 0) {
-          console.log(
-            "key",
-            key,
-            "decklength",
-            deckLength,
-            "Cards Drawn",
-            cardsDrawn,
-            "mana Drawn",
-            manaDrawn
-          );
-        }
+
+        console.log(
+          "key",
+          key,
+          "decklength",
+          deckLength,
+          "Cards Drawn",
+          cardsDrawn,
+          "mana Drawn",
+          manaDrawn,
+          "This Prob",
+          thisProb
+        );
       }
       // Calculate the probability of drawing the cards we want. Assume that we draw them all in a clump,
       // because it turns out that I took AP statistics a decade ago, and I forgot how to calculate the odds
