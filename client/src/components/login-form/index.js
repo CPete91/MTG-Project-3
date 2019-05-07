@@ -1,45 +1,15 @@
 import React from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import API from "../../utils/API";
-
-
-const signUp = (password, username, e) => {
-  console.log(username);
-  console.log("Pressed Signup");
-  e.preventDefault();
-  API.signUp({ userName: username, password: password }).then(data => {
-
-    if (data.data.uid) {
-      console.log(data);
-    } else {
-
-    }
+import { Route, Redirect } from 'react-router'
 
 
 
-
-  });
-}
-
-const checker = (password, username, e) => {
-  e.preventDefault();
-
-  API.login({ userName: username, password: password }).then(data => {
-
-    if (data.data.uid) {
-      console.log(data);
-    } else {
-
-    }
-
-  });
-}
-
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { username: '', password: '', toDashboard: false };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
@@ -52,8 +22,58 @@ export default class LoginForm extends React.Component {
     this.setState({ password: evt.target.value });
   }
 
+  signUp = (password, username, e) => {
+    console.log(username);
+    console.log("Pressed Signup");
+
+    e.preventDefault();
+    API.signUp({ userName: username, password: password }).then(data => {
+      console.log(data);
+
+      if (data.data.uid) {
+        console.log(data);
+        sessionStorage.setItem("uid", data.data.uid);
+        console.log(sessionStorage.getItem("uid"));
+        this.setState({ toDashboard: true });
+      } else {
+        console.log(data.data.err)
+      }
+
+
+
+
+    });
+  }
+
+
+  checker = (password, username, e) => {
+    e.preventDefault();
+
+
+    API.login({ userName: username, password: password }).then(data => {
+
+      if (data.data.uid) {
+        console.log(data);
+        sessionStorage.setItem("uid", data.data.uid);
+        console.log(sessionStorage.getItem("uid"));
+
+        this.setState({ toDashboard: true });
+
+      } else {
+
+      }
+
+    });
+  }
+
+
+
 
   render() {
+    if (this.state.toDashboard === true) {
+      return <Redirect to='/cardselector' />
+    }
+
     return (
       <div>
         <Form className="form-container">
@@ -78,11 +98,13 @@ export default class LoginForm extends React.Component {
             />
           </FormGroup>
           <div className="btn-wrapper">
-            <button className="form-btn " onClick={e => { checker(this.state.password, this.state.username, e) }}>Log In</button>
-            <button className="form-btn " onClick={e => { signUp(this.state.password, this.state.username, e) }}>Sign Up</button>
+            <button className="form-btn " onClick={e => { this.checker(this.state.password, this.state.username, e) }}>Log In</button>
+            <button className="form-btn " onClick={e => { this.signUp(this.state.password, this.state.username, e) }}>Sign Up</button>
           </div>
         </Form>
       </div>
     );
   }
 }
+
+export default LoginForm;

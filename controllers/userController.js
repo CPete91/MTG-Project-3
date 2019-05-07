@@ -9,6 +9,7 @@ const hasher = (password, username, res) => {
   bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(password, salt, function (err, hash) {
 
+      console.log(hash);
       db.User.create({ userName: username, password: hash }).then(data => res.json({ uid: data._id }));
 
       //console.log(hash[0]);
@@ -51,7 +52,7 @@ module.exports = {
     console.log("wowee: " + req.body.userName);
 
     db.User.find(
-      { $or: [{ userName: req.body.userName }, { email: req.body.email }] },
+      { userName: req.body.userName },
       function (err, data) {
         if (err) throw err;
         console.log("data", data);
