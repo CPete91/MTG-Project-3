@@ -18,7 +18,7 @@ playNum = function(manaObj, cardArray, deckLength) {
         }
       });
     }
-    console.log(playable);
+
     if (playable.indexOf(true) !== -1) {
       console.log("Playable");
       let totalProb = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
