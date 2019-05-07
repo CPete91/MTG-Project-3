@@ -21,8 +21,10 @@ export default {
         // Set up a favorable object. This has attributes of different mana type that are required to play a card.
       }
     });
+    let probabilityArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    // Our chart will take in an array of probabilities. We populate this with the probability of each respective play.
     let probability = 0;
-    for (let i = 0; i < 7 + cmc; i++) {
+    for (let i = 0; i <= 10 - cmc; i++) {
       let currentUnfavorableCards = unfavorableCards;
       let favorable = {};
       let cardsDrawn = 0;
@@ -66,8 +68,9 @@ export default {
         // that a subset will show up in a randomly selected set.
       });
       probability += thisProb;
+      probabilityArray[cmc + i] = probability;
       // Add in the probability of each possible situation.
     }
-    return probability;
+    return probabilityArray;
   })
 };
