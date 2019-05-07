@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/login";
 import Flip from "./pages/flip";
 import CardSelector from "./pages/CardSelector";
-import Test from "./pages/Test";
+import Test from "./pages/test";
 
 import DeckDisplay from "./pages/DeckDisplay";
 
