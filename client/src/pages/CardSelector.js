@@ -27,7 +27,12 @@ class CardSelector extends Component {
     var cards = [];
     if (this.state.cardArray.length > 0) {
       for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
-        cards.push(<CardDisplay card={this.state.cardArray[i]} />);
+        cards.push(
+          <CardDisplay
+            card={this.state.cardArray[i]}
+            onClickCommand={this.saveToDeck}
+          />
+        );
       }
     }
     return cards;
@@ -84,19 +89,30 @@ class CardSelector extends Component {
     }
   };
 
+  saveToDeck = () => {};
+
+  saveDeck = () => {
+    API.submitDeck({
+      Deck: this.state.deckArray,
+      userId: 1
+    });
+  };
+
   render() {
     console.log(this.state.cardArray);
     return (
       <div>
         <Container>
           <button onClick={this.handleSort}>sort</button>
+
+          <CardDeck>{this.renderCard()}</CardDeck>
           <button name="backClick" onClick={this.handleClick}>
             Back
           </button>
-          <CardDeck>{this.renderCard()}</CardDeck>
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
           </button>
+          <button onClick={this.saveDeck}>Save Deck</button>
         </Container>
       </div>
     );
