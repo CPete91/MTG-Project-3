@@ -51,7 +51,7 @@ const multi = function(arr) {
   // We create a final array that is composed of one array for each possible combination. We initially populate half of the array with the 0th mana type of
   // the first option, and the other half of the array with the 1st mana type of the first option. We will use this 50% fill rate to inform all subsequent calculations.
 
-  for (let i = 1; i < arr.length - 1; i++) {
+  for (let i = 1; i < 10 - cmc; i++) {
     // Index this loop at 1, because we already pre-populated our final array with the 0th value.
     let zerozero = 0;
     let zeroone = 0;

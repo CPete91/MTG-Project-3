@@ -9,5 +9,5 @@ for (let i = 0; i < deck.length; i++) {
 
 let newDeck = stats(deck);
 for (let i = 0; i < newDeck.length; i++) {
-  console.log(newDeck[i].name, newDeck[i].probability);
+  console.log(newDeck[i].name, newDeck[i].probability, newDeck[i].options);
 }

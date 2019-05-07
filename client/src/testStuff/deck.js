@@ -1952,6 +1952,107 @@ const deck = [
       cardhoarder:
         "https://www.cardhoarder.com/cards/30562?affiliate_id=scryfall&ref=card-profile&utm_campaign=affiliate&utm_medium=card&utm_source=scryfall"
     }
+  },
+  {
+    object: "card",
+    id: "4b81165e-f091-4211-8b47-5ea6868b0d4c",
+    oracle_id: "4567a528-75f0-4ea6-b927-3a500caf76ac",
+    multiverse_ids: [442149],
+    mtgo_id: 67234,
+    mtgo_foil_id: 67235,
+    tcgplayer_id: 161851,
+    name: "Arbor Elf",
+    lang: "en",
+    released_at: "2018-03-16",
+    uri: "https://api.scryfall.com/cards/4b81165e-f091-4211-8b47-5ea6868b0d4c",
+    scryfall_uri: "https://scryfall.com/card/a25/160/arbor-elf?utm_source=api",
+    layout: "normal",
+    highres_image: true,
+    image_uris: {
+      small: "https://img.scryfall.com/cards/small/en/a25/160.jpg?1521723812",
+      normal: "https://img.scryfall.com/cards/normal/en/a25/160.jpg?1521723812",
+      large: "https://img.scryfall.com/cards/large/en/a25/160.jpg?1521723812",
+      png: "https://img.scryfall.com/cards/png/en/a25/160.png?1521723812",
+      art_crop:
+        "https://img.scryfall.com/cards/art_crop/en/a25/160.jpg?1521723812",
+      border_crop:
+        "https://img.scryfall.com/cards/border_crop/en/a25/160.jpg?1521723812"
+    },
+    mana_cost: "{G}",
+    cmc: 1,
+    type_line: "Creature — Elf Druid",
+    oracle_text: "{T}: Untap target Forest.",
+    power: "1",
+    toughness: "1",
+    colors: ["G"],
+    color_identity: ["G"],
+    legalities: {
+      standard: "not_legal",
+      future: "not_legal",
+      frontier: "not_legal",
+      modern: "legal",
+      legacy: "legal",
+      pauper: "legal",
+      vintage: "legal",
+      penny: "not_legal",
+      commander: "legal",
+      duel: "legal",
+      oldschool: "not_legal"
+    },
+    games: ["mtgo", "paper"],
+    reserved: false,
+    foil: true,
+    nonfoil: true,
+    oversized: false,
+    promo: false,
+    reprint: true,
+    set: "a25",
+    set_name: "Masters 25",
+    set_uri:
+      "https://api.scryfall.com/sets/41ee6e2f-69b3-4c53-8a8e-960f5e974cfc",
+    set_search_uri:
+      "https://api.scryfall.com/cards/search?order=set&q=e%3Aa25&unique=prints",
+    scryfall_set_uri: "https://scryfall.com/sets/a25?utm_source=api",
+    rulings_uri:
+      "https://api.scryfall.com/cards/4b81165e-f091-4211-8b47-5ea6868b0d4c/rulings",
+    prints_search_uri:
+      "https://api.scryfall.com/cards/search?order=released&q=oracleid%3A4567a528-75f0-4ea6-b927-3a500caf76ac&unique=prints",
+    collector_number: "160",
+    digital: false,
+    rarity: "common",
+    watermark: "set",
+    illustration_id: "7b3a17fe-4bf8-4e49-af95-8043b4b24a99",
+    artist: "rk post",
+    border_color: "black",
+    frame: "2015",
+    full_art: false,
+    story_spotlight: false,
+    edhrec_rank: 397,
+    usd: "0.34",
+    eur: "0.28",
+    tix: "0.04",
+    prices: {
+      usd: "0.34",
+      usd_foil: "1.68",
+      eur: "0.28",
+      tix: "0.04"
+    },
+    related_uris: {
+      gatherer:
+        "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=442149",
+      tcgplayer_decks:
+        "https://decks.tcgplayer.com/magic/deck/search?contains=Arbor+Elf&page=1&partner=Scryfall&utm_campaign=affiliate&utm_medium=scryfall&utm_source=scryfall",
+      edhrec: "http://edhrec.com/route/?cc=Arbor+Elf",
+      mtgtop8: "http://mtgtop8.com/search?MD_check=1&SB_check=1&cards=Arbor+Elf"
+    },
+    purchase_uris: {
+      tcgplayer:
+        "https://shop.tcgplayer.com/magic/masters-25/arbor-elf?partner=Scryfall&utm_campaign=affiliate&utm_medium=scryfall&utm_source=scryfall",
+      cardmarket:
+        "https://www.cardmarket.com/en/Magic/en/Magic/Products/Singles/Masters-25/Arbor-Elf?referrer=scryfall&utm_campaign=card_prices&utm_medium=text&utm_source=scryfall",
+      cardhoarder:
+        "https://www.cardhoarder.com/cards/67234?affiliate_id=scryfall&ref=card-profile&utm_campaign=affiliate&utm_medium=card&utm_source=scryfall"
+    }
   }
 ];
 
