@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import LoginForm from "../components/login-form";
+import {
+  withRouter
+} from 'react-router-dom'
+
 
 class Login extends Component {
   render() {
+
+
     return (
       <section className="section-mgt">
         <div className="container">
@@ -19,11 +25,11 @@ class Login extends Component {
             </div>
           </div>
 
-          <LoginForm />
+          <LoginForm {...this.props} />
         </div>
       </section>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);
