@@ -4,56 +4,53 @@
 // This needs to look through each card. If it's a land-type, we need to create a list of how many of each type we have. There are 10 2 land-types possible.
 // I don't wanna brute force that. That sounds like hell. Instead, let's just make an array of dual land types.
 
-playNum = import("./playNum");
-export default {
-  stats: deck => {
-    //   Our mana object is a count of how much mana we will have available. It will be updated based upon
-    // the number of lands in the deck. At this time, this cannot take into account any creatures with "tap to gain mana"
-    // abilities.
-    let manaObj = {
-      B: 0,
-      G: 0,
-      U: 0,
-      R: 0,
-      W: 0,
-      C: 0,
-      multi: []
-    };
-    const deckLength = deck.length;
-    // The playable array will be an array of arrays. The array at index 0 will be cards that can be paid for with 0 mana. Next will be cards that can
-    // be paid for with 1 mana. etc. Lands are not included in this array.
-    let playableArr = [];
-    // Fill the object up with attributes.
-    for (let i = 0; i < 10; i++) {
-      playableArr.push([]);
-    }
-    for (let i = 0; i < deck.length; i++) {
-      let card = deck[i];
-      let type = card.type_line.toLowerCase();
-      if (type.includes("land")) {
-        //   If a card is a land, we determine its colors. Some lands are for colorless mana, and so have no color identity. We keep track of them with
-        // an integer.
-        let colors = card.color_identity;
-        if (colors.length < 1) {
-          manaObj.C++;
-        } else if (colors.length === 1) {
-          // Standard lands only have 1 color, and we can keep track of them with a simple integer as well.
-          manaObj[colors[0]]++;
-          manaObj.C++;
-          // Add in a colorless mana opportunity as well, since literally any mana can count as colorless
-        } else {
-          manaObj[multi].push(colors);
-        }
+playNum = require("./playNum");
+
+stats = function(deck) {
+  //   Our mana object is a count of how much mana we will have available. It will be updated based upon
+  // the number of lands in the deck. At this time, this cannot take into account any creatures with "tap to gain mana"
+  // abilities.
+  let manaObj = {
+    B: 0,
+    G: 0,
+    U: 0,
+    R: 0,
+    W: 0,
+    C: 0,
+    multi: []
+  };
+  const deckLength = deck.length;
+  // The playable array will be an array of arrays. The array at index 0 will be cards that can be paid for with 0 mana. Next will be cards that can
+  // be paid for with 1 mana. etc. Lands are not included in this array.
+  let playableArr = [];
+  // Fill the object up with attributes.
+  for (let i = 0; i < deck.length; i++) {
+    let card = deck[i];
+    let type = card.type_line.toLowerCase();
+    if (type.includes("land")) {
+      //   If a card is a land, we determine its colors. Some lands are for colorless mana, and so have no color identity. We keep track of them with
+      // an integer.
+      let colors = card.color_identity;
+      if (colors.length < 1) {
+        manaObj.C++;
+      } else if (colors.length === 1) {
+        // Standard lands only have 1 color, and we can keep track of them with a simple integer as well.
+        manaObj[colors[0]]++;
+        manaObj.C++;
+        // Add in a colorless mana opportunity as well, since literally any mana can count as colorless
       } else {
-        //   Our arrays are indexed by the converted mana cost (total mana cost of a card if we treat all colors as being identical.)
-        // Thus array 0 is "free" cards (no mana cost). Array 1 is 1 cost cards, etc.
-        cmc = card.cmc;
-        playableArr[cmc].push(card);
+        manaObj[multi].push(colors);
       }
+    } else {
+      //   Our arrays are indexed by the converted mana cost (total mana cost of a card if we treat all colors as being identical.)
+      // Thus array 0 is "free" cards (no mana cost). Array 1 is 1 cost cards, etc.
+      cmc = card.cmc;
+      playableArr.push(card);
     }
-    let statsDeck = playNum(manaObj, playableArr, deckLength);
-    return statsDeck;
   }
-  //   Thanks to the mana calculator, we have an array of all possible options for how to pay for a card saved in our deck. As such, we can predict
-  // the probability that we will be able to play a card based off of our known mana
+  let statsDeck = playNum(manaObj, playableArr, deckLength);
+  return statsDeck;
 };
+//   Thanks to the mana calculator, we have an array of all possible options for how to pay for a card saved in our deck. As such, we can predict
+// the probability that we will be able to play a card based off of our known mana
+module.exports = stats;
