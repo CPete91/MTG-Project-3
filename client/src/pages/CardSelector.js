@@ -99,8 +99,8 @@ class CardSelector extends Component {
 
   saveDeck = () => {
     API.submitDeck({
-      Deck: this.state.deckArray,
-      userId: 1
+      cards: this.state.deckArray,
+      uid: sessionStorage.getItem("uid")
     });
   };
 
