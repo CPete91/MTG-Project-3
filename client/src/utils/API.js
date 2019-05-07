@@ -6,10 +6,11 @@ export default {
     return axios.get("http://localhost:3001/api/cards", { crossdomain: true });
   },
   signUp: (user) => {
-    return axios.post("http://localhost:3001/signup", user);
+    console.log(user);
+    return axios.post("http://localhost:3001/signup", user, { crossdomain: true });
   },
-  login: () => {
-    return axios.post("http://localhost:3001/login");
+  login: (user) => {
+    return axios.post("http://localhost:3001/login", user, { crossdomain: true });
   },
   getUserHash: (userName) => {
     return axios.get("http://localhost:3001/userhash/" + userName);

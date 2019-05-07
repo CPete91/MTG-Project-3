@@ -1,12 +1,33 @@
 const db = require("../models");
+
+
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+const hasher = (password, username, res) => {
+  console.log("hasher")
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    bcrypt.hash(password, salt, function (err, hash) {
+
+      db.User.create({ userName: username, password: hash }).then(data => res.json({ uid: data._id }));
+
+      //console.log(hash[0]);
+
+    });
+  });
+}
+
 
 module.exports = {
   checkLogIn: function (req, res) {
-    db.User.find({ userName: req.userName }).then(data => {
+    console.log("here");
+    db.User.find({ userName: req.body.userName }).then(data => {
+      console.log(data);
       if (data.length) {
-        bcrypt.compare(req.password, data[0].password, function (err, res) {
-          if (res) {
+        bcrypt.compare(req.body.password, data[0].password, function (err, response) {
+          console.log("response");
+          if (response) {
+            console.log("ur in");
             res.json({ uid: data[0]._id });
 
 
@@ -27,6 +48,8 @@ module.exports = {
   },
 
   newUser: function (req, res) {
+    console.log("wowee: " + req.body.userName);
+
     db.User.find(
       { $or: [{ userName: req.body.userName }, { email: req.body.email }] },
       function (err, data) {
@@ -41,7 +64,11 @@ module.exports = {
               "That username has already been taken. Please select a new username."
           });
         } else {
-          db.User.create(req.body).then(data => res.json({ uid: data._id }));
+          hasher(req.body.password, req.body.userName, res);
+
+          //db.User.create({ userName: req.body.userName, password: hash }).then(data => res.json({ uid: data._id }));
+
+
         }
       }
     );
