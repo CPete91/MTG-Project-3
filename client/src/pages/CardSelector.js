@@ -89,12 +89,18 @@ class CardSelector extends Component {
     }
   };
 
-  saveToDeck = () => {};
+  saveToDeck = card => {
+    let addCard = this.state.deckArray;
+    addCard.push(card);
+    this.setState({ deckArray: addCard });
+
+    console.log(this.state.deckArray);
+  };
 
   saveDeck = () => {
     API.submitDeck({
-      Deck: this.state.deckArray,
-      userId: 1
+      cards: this.state.deckArray,
+      uid: sessionStorage.getItem("uid")
     });
   };
 
