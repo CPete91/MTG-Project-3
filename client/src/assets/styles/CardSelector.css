@@ -5,3 +5,27 @@
   font-family: "MedievalSharp", cursive;
   color: #82693b;
 }
+
+.deck-container {
+  padding-top: 50px;
+}
+
+.arrow-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+}
+
+.arrow-btn {
+  background: transparent;
+  border: none;
+}
+
+.arrow-icon {
+  color: #82693b;
+  font-size: 40px;
+}
+
+.arrow-icon:first-child {
+  margin-left: 20px;
+}
