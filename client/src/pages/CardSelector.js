@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
+import "../assets/styles/CardSelector.css";
 // import deckProbability from "./../utils/deckProbability";
 // import stats from "./../utils/stats";
 
@@ -226,6 +227,10 @@ class CardSelector extends Component {
     console.log("we re-rendered", this.state);
     return (
       <div>
+        <div className="deckInfo">
+          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
+          <div>{this.playerDeck()}</div>
+        </div>
         <Container>
           <select onChange={this.handleChange}>
             <option>A</option>
@@ -246,12 +251,27 @@ class CardSelector extends Component {
             <CardDeck>{this.renderCard()}</CardDeck>
           </div>
 
-          <button name="backClick" onClick={this.handleClick}>
+          <div className="arrow-container">
+            <i
+              class="fas fa-caret-left card-cycle-arrow"
+              name="backClick"
+              onClick={this.handleClick}
+            />
+            <button
+              className="arrow-btn"
+              name="forwardClick"
+              onClick={this.handleClick}
+            >
+              <i class="fas fa-caret-right arrow-icon" />
+            </button>
+          </div>
+
+          {/* <button name="backClick" onClick={this.handleClick}>
             Back
           </button>
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
-          </button>
+          </button> */}
           <button onClick={this.filterReset}>Sort Reset</button>
           <button onClick={this.saveDeck}>Save Deck</button>
         </Container>
