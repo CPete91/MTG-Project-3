@@ -4,9 +4,9 @@
 // This needs to look through each card. If it's a land-type, we need to create a list of how many of each type we have. There are 10 2 land-types possible.
 // I don't wanna brute force that. That sounds like hell. Instead, let's just make an array of dual land types.
 
-playNum = require("./playNum");
+const playNum = require("./playNum");
 
-stats = function(deck) {
+const stats = function(deck) {
   //   Our mana object is a count of how much mana we will have available. It will be updated based upon
   // the number of lands in the deck. At this time, this cannot take into account any creatures with "tap to gain mana"
   // abilities.
@@ -16,8 +16,7 @@ stats = function(deck) {
     U: 0,
     R: 0,
     W: 0,
-    C: 0,
-    multi: []
+    C: 0
   };
   const deckLength = deck.length;
   // The playable array will be an array of arrays. The array at index 0 will be cards that can be paid for with 0 mana. Next will be cards that can
@@ -38,13 +37,8 @@ stats = function(deck) {
         manaObj[colors[0]]++;
         manaObj.C++;
         // Add in a colorless mana opportunity as well, since literally any mana can count as colorless
-      } else {
-        manaObj[multi].push(colors);
       }
     } else {
-      //   Our arrays are indexed by the converted mana cost (total mana cost of a card if we treat all colors as being identical.)
-      // Thus array 0 is "free" cards (no mana cost). Array 1 is 1 cost cards, etc.
-      cmc = card.cmc;
       playableArr.push(card);
     }
   }

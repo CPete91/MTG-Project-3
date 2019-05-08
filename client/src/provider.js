@@ -1,14 +1,32 @@
-import React, { Component } from "React";
+import React, { Component } from "react";
 
-const MyContext = React.createContext();
+import MyContext from "./context";
 
-class Provider extends Component {
+class MyProvider extends Component {
   state = {
     deck: [],
-    deckProb: 0
+    deckProb: []
   };
-
-//   render() {
-//     return;
-//   }
+  render() {
+    return (
+      <MyContext.Provider
+        value={{
+          state: this.state,
+          saveDeck: (deck, deckProb) => {
+            console.log(
+              "save deck firing in provider",
+              deck,
+              "deckPRob",
+              deckProb
+            );
+            this.setState({ deck: deck, deckProb: deckProb });
+          }
+        }}
+      >
+        {this.props.children}
+      </MyContext.Provider>
+    );
+  }
 }
+
+export default MyProvider;
