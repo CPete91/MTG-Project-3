@@ -12,8 +12,15 @@ class MyProvider extends Component {
       <MyContext.Provider
         value={{
           state: this.state,
-          saveDeck: (deck, deckProb) =>
-            this.setState({ deck: deck, deckProb: deckProb })
+          saveDeck: (deck, deckProb) => {
+            console.log(
+              "save deck firing in provider",
+              deck,
+              "deckPRob",
+              deckProb
+            );
+            this.setState({ deck: deck, deckProb: deckProb });
+          }
         }}
       >
         {this.props.children}

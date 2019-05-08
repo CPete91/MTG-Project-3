@@ -224,6 +224,10 @@ class CardSelector extends Component {
     return playerDeck;
   };
 
+  tomTestFunc = stuffPassed => {
+    console.log("STUF PASSED tom test func!!", stuffPassed);
+  };
+
   render() {
     console.log("we re-rendered", this.state);
     return (
@@ -268,18 +272,21 @@ class CardSelector extends Component {
           <button onClick={this.filterReset}>Filter Reset</button>
           <MyContext.Consumer>
             {context => (
-              <button
-                onClick={() => {
-                  let statsDeck = stats(this.state.deckArray);
-                  let deckProb = deckProbability(statsDeck);
-                  context.saveDeck(statsDeck, deckProb);
-                  this.saveDeck();
-                  console.log(context.state.deck);
-                  console.log(statsDeck, deckProb);
-                }}
-              >
-                Save Deck
-              </button>
+              <div>
+                {this.tomTestFunc(context)}
+                <button
+                  onClick={() => {
+                    let statsDeck = stats(this.state.deckArray);
+                    let deckProb = deckProbability(statsDeck);
+                    context.saveDeck(statsDeck, deckProb);
+                    this.saveDeck();
+                    console.log(context.state.deck);
+                    console.log(statsDeck, deckProb);
+                  }}
+                >
+                  Save Deck
+                </button>
+              </div>
             )}
           </MyContext.Consumer>
         </Container>
