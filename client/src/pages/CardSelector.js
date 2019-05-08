@@ -278,17 +278,18 @@ class CardSelector extends Component {
             <CardDeck>{this.renderCard()}</CardDeck>
           </div>
           <div className="arrow-container">
-            <i
-              class="fas fa-caret-left card-cycle-arrow"
+            <button
+              className="fas fa-caret-left arrow-icon arrow-btn "
               name="backClick"
               onClick={this.handleClick}
             />
+
             <button
-              className="arrow-btn"
+              className="fas fa-caret-right arrow-icon arrow-btn "
               name="forwardClick"
               onClick={this.handleClick}
             >
-              <i class="fas fa-caret-right arrow-icon" />
+              {/* <i class="fas fa-caret-right arrow-icon" /> */}
             </button>
           </div>
           {/* <button name="backClick" onClick={this.handleClick}>
@@ -296,33 +297,16 @@ class CardSelector extends Component {
           </button>
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
-<<<<<<< HEAD
-          </button>
-          <button onClick={this.filterReset}>Filter Reset</button>
-          <MyContext.Consumer>
-            {context => (
-              <div>
-                {this.tomTestFunc(context)}
-                <button
-                  onClick={() => {
-                    let statsDeck = stats(this.state.deckArray);
-                    let deckProb = deckProbability(statsDeck);
-                    context.saveDeck(statsDeck, deckProb);
-                    this.saveDeck();
-                    console.log(context.state.deck);
-                    console.log(statsDeck, deckProb);
-                  }}
-                >
-                  Save Deck
-                </button>
-              </div>
-            )}
-          </MyContext.Consumer>
-=======
           </button> */}
-          <button onClick={this.filterReset}>Sort Reset</button>
-          <button onClick={this.saveDeck}>Save Deck</button>
-          >>>>>>> master
+
+          <div className="save-container">
+            <button className="bottom-btn" onClick={this.filterReset}>
+              Reset
+            </button>
+            <button className="bottom-btn" onClick={this.saveDeck}>
+              Save Deck
+            </button>
+          </div>
         </Container>
       </div>
     );
