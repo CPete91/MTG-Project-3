@@ -176,7 +176,11 @@ class CardSelector extends Component {
       }
     });
     console.log("serached !!", searchedCards);
-    this.setState({ searchedCards: searchedCards, showSearch: true });
+    this.setState({
+      searchedCards: searchedCards,
+      showSearch: true,
+      showFiltered: false
+    });
   };
 
   handleSubmit = event => {
