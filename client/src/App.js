@@ -5,10 +5,15 @@ import Login from "./pages/login";
 import Flip from "./pages/flip";
 import CardSelector from "./pages/CardSelector";
 import Test from "./pages/test";
-
+import MyProvider from "./provider";
 import DeckDisplay from "./pages/DeckDisplay";
+import Stats from "./pages/stats";
+
+
 
 function App() {
+  console.log("session thing " + sessionStorage.length);
+
   return (
     <Router>
       <Switch>

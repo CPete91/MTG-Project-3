@@ -5,9 +5,17 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
-import "../assets/styles/CardSelector.css";
+import Navbar from "../components/Navbar";
+import { Route, Redirect } from 'react-router';
+
+
 // import deckProbability from "./../utils/deckProbability";
 // import stats from "./../utils/stats";
+import deckProbability from "./../utils/deckProbability";
+import stats from "./../utils/stats";
+import MyProvider from "./../provider";
+import MyContext from "./../context";
+import "../assets/styles/CardSelector.css";
 
 import {
   Card,
@@ -43,11 +51,15 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-      ? this.state.searchedCards
-      : this.state.cardArray;
+        ? this.state.searchedCards
+        : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
-      for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
+      for (
+        let i = this.state.startIndex;
+        i < this.state.endIndex && i < deckToDisplay.length;
+        i++
+      ) {
         cards.push(
           <CardDisplay
             card={deckToDisplay[i]}
@@ -87,7 +99,10 @@ class CardSelector extends Component {
   };
 
   componentDidMount() {
+    console.log("uid: " + sessionStorage.getItem("uid"));
     this.loadCards();
+
+
   }
 
   // flipCards = () => {
@@ -170,7 +185,11 @@ class CardSelector extends Component {
       }
     });
     console.log("serached !!", searchedCards);
-    this.setState({ searchedCards: searchedCards, showSearch: true });
+    this.setState({
+      searchedCards: searchedCards,
+      showSearch: true,
+      showFiltered: false
+    });
   };
 
   handleSubmit = event => {
@@ -189,7 +208,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function(obj) {
+    var myArray = this.state.deckArray.filter(function (obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -215,27 +234,67 @@ class CardSelector extends Component {
     var playerDeck = [];
     this.state.deckArray.map(singleCard => {
       playerDeck.push(
-        <div>
-          <h3>{singleCard.name}</h3>
+        <div className="cardNames">
+          <p>{singleCard.name}</p>
         </div>
       );
     });
     return playerDeck;
   };
 
+  tomTestFunc = stuffPassed => {
+    console.log("STUF PASSED tom test func!!", stuffPassed);
+  };
+
   render() {
+    console.log("are you logged in: " + this.state.loggedIn);
+
+
+    if (sessionStorage.getItem("uid") == false || sessionStorage.getItem("uid") == "false") {
+
+      return <Redirect to='/' />
+
+    }
+
+
     console.log("we re-rendered", this.state);
     return (
       <div>
+        <Navbar />
+
         <div className="deckInfo">
           <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
-          <div>{this.playerDeck()}</div>
+          <p>{this.playerDeck()}</p>
         </div>
         <Container>
+          <div className="filterNav" />
           <select onChange={this.handleChange}>
             <option>A</option>
             <option>B</option>
             <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+            <option>J</option>
+            <option>K</option>
+            <option>L</option>
+            <option>M</option>
+            <option>N</option>
+            <option>O</option>
+            <option>P</option>
+            <option>Q</option>
+            <option>R</option>
+            <option>S</option>
+            <option>T</option>
+            <option>U</option>
+            <option>V</option>
+            <option>W</option>
+            <option>X</option>
+            <option>Y</option>
+            <option>Z</option>
           </select>
           <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
           <button name="Creature" onClick={this.sortCards}>
@@ -244,13 +303,9 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
-          <div>{this.playerDeck()}</div>
-
           <div className="deck-container">
             <CardDeck>{this.renderCard()}</CardDeck>
           </div>
-
           <div className="arrow-container">
             <button
               className="fas fa-caret-left arrow-icon arrow-btn "
@@ -266,13 +321,13 @@ class CardSelector extends Component {
               {/* <i class="fas fa-caret-right arrow-icon" /> */}
             </button>
           </div>
-
           {/* <button name="backClick" onClick={this.handleClick}>
             Back
           </button>
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
           </button> */}
+
           <div className="save-container">
             <button className="bottom-btn" onClick={this.filterReset}>
               Reset

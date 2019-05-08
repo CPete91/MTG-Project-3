@@ -7,7 +7,7 @@
 // 1 drawing this card (1/deckLength)
 // 2: drawing any of the mana that I need (sum total of appropriate mana types still needed/total number of cards that are not that mana type)
 
-optionProb = function(paymentOption, manaObj, deckLength, cmc) {
+const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
   const keys = Object.keys(manaObj);
   let unfavorableCards = deckLength - 1;
   let favorable = {};
@@ -27,7 +27,7 @@ optionProb = function(paymentOption, manaObj, deckLength, cmc) {
 
     let cardsDrawn = 0;
     let thisProb = 0;
-    for (unfavorable = 0; unfavorable < i; unfavorable++) {
+    for (let unfavorable = 0; unfavorable < i; unfavorable++) {
       if (unfavorable === 0) {
         thisProb = unfavorableCards / deckLength;
         cardsDrawn++;
