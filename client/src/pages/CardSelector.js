@@ -215,8 +215,8 @@ class CardSelector extends Component {
     var playerDeck = [];
     this.state.deckArray.map(singleCard => {
       playerDeck.push(
-        <div>
-          <h3>{singleCard.name}</h3>
+        <div className="cardNames">
+          <p>{singleCard.name}</p>
         </div>
       );
     });
@@ -229,7 +229,7 @@ class CardSelector extends Component {
       <div>
         <div className="deckInfo">
           <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
-          <div>{this.playerDeck()}</div>
+          <p>{this.playerDeck()}</p>
         </div>
         <Container>
           <Form className="form-container">
