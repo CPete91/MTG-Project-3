@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
+import "../assets/styles/CardSelector.css";
 // import deckProbability from "./../utils/deckProbability";
 // import stats from "./../utils/stats";
 
@@ -226,6 +227,10 @@ class CardSelector extends Component {
     console.log("we re-rendered", this.state);
     return (
       <div>
+        <div className="deckInfo">
+          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
+          <div>{this.playerDeck()}</div>
+        </div>
         <Container>
           <Form className="form-container">
             <FormGroup>
@@ -254,8 +259,7 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
-          <div>{this.playerDeck()}</div>
+
           <CardDeck>{this.renderCard()}</CardDeck>
           <button name="backClick" onClick={this.handleClick}>
             Back
