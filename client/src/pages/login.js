@@ -6,6 +6,15 @@ import {
 
 
 class Login extends Component {
+
+
+  componentDidMount() {
+
+    sessionStorage.setItem("uid", false);
+    console.log(sessionStorage.getItem("uid"));
+  }
+
+
   render() {
 
 

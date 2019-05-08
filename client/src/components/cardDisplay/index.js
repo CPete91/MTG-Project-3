@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 
 export function CardDisplay(props) {
+
   return (
     <Card>
       <CardImg
