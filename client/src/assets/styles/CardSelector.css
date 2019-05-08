@@ -1,5 +1,9 @@
 .deckInfo {
   float: left;
+  padding: 1em;
+  border: 8px solid #82693b;
+  font-family: "MedievalSharp", cursive;
+  color: #82693b;
 }
 
 .deck-container {
