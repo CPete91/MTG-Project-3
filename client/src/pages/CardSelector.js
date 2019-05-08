@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CardDisplay from "../components/cardDisplay";
+// import SearchLetterField from "../components/searchByLetterInput";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
@@ -21,23 +22,31 @@ import {
   Container
 } from "reactstrap";
 
+import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
+
 class CardSelector extends Component {
   state = {
     cardArray: [],
     deckArray: [],
     startIndex: 0,
-    endIndex: 6,
+    endIndex: 4,
+    value: "",
     showFiltered: false,
+    showSearch: false,
     filterTopic: "",
     cardSelectorPhase: true,
-    cardsFlipped: false
+    cardsFlipped: false,
+    searchedCards: []
   };
 
   renderCard = () => {
     var cards = [];
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
+      : this.state.showSearch
+      ? this.state.searchedCards
       : this.state.cardArray;
+
     if (deckToDisplay.length > 0) {
       for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
         cards.push(
@@ -56,11 +65,11 @@ class CardSelector extends Component {
     console.log("INSIDE MAKE FILTERED ARRAY", this.state.filterTopic);
     var cards = [];
     this.state.cardArray.map(singleCard => {
-      console.log(
-        "right before the if",
-        this.state.filterTopic,
-        singleCard.type_line.indexOf(this.state.filterTopic)
-      );
+      // console.log(
+      //   "right before the if",
+      //   this.state.filterTopic,
+      //   singleCard.type_line.indexOf(this.state.filterTopic)
+      // );
       if (singleCard.type_line.indexOf(this.state.filterTopic) >= 0) {
         console.log("inside the filtered if");
         cards.push(singleCard);
@@ -71,9 +80,9 @@ class CardSelector extends Component {
   };
 
   loadCards = () => {
-    console.log("yesssss");
+    // console.log("yesssss");
     API.getCards().then(data => {
-      console.log(data, "DATA WE GT BACK!!!!!!!!");
+      // console.log(data, "DATA WE GT BACK!!!!!!!!");
       this.setState({ cardArray: data.data });
     });
   };
@@ -100,7 +109,7 @@ class CardSelector extends Component {
 
   flipCards = () => {
     if (this.state.cardsFlipped === false) {
-      console.log("are we flipped?");
+      // console.log("are we flipped?");
       function compare(a, b) {
         if (a.name < b.name) {
           return 1;
@@ -135,18 +144,39 @@ class CardSelector extends Component {
   };
 
   handleClick = event => {
-    console.log("we got clicked!");
+    // console.log("we got clicked!");
     if (event.target.name === "forwardClick") {
       this.setState({
-        startIndex: this.state.startIndex + 6,
-        endIndex: this.state.endIndex + 6
+        startIndex: this.state.startIndex + 4,
+        endIndex: this.state.endIndex + 4
       });
     } else if (event.target.name === "backClick" && this.state.startIndex > 0) {
       this.setState({
-        startIndex: this.state.startIndex - 6,
-        endIndex: this.state.endIndex - 6
+        startIndex: this.state.startIndex - 4,
+        endIndex: this.state.endIndex - 4
       });
     }
+  };
+
+  handleChange = event => {
+    // console.log("letter to search!!", event.target.value);
+    var searchedCards = [];
+    this.state.cardArray.map(data => {
+      // console.log("INSIDE MAP", event.target.value, data.name.charAt(0));
+      if (
+        data.name.charAt(0).toLowerCase() == event.target.value.toLowerCase()
+      ) {
+        // console.log("INSIDE IFF");
+        searchedCards.push(data);
+      }
+    });
+    console.log("serached !!", searchedCards);
+    this.setState({ searchedCards: searchedCards, showSearch: true });
+  };
+
+  handleSubmit = event => {
+    // alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
   };
 
   saveToDeck = card => {
@@ -155,11 +185,11 @@ class CardSelector extends Component {
     addCard.push(card);
     this.setState({ deckArray: addCard });
 
-    console.log(this.state.deckArray);
+    // console.log(this.state.deckArray);
   };
 
   removeFromDeck = name => {
-    console.log(name);
+    // console.log(name);
     var myArray = this.state.deckArray.filter(function(obj) {
       return obj.name !== name;
     });
@@ -175,7 +205,7 @@ class CardSelector extends Component {
   };
 
   filterReset = () => {
-    this.setState({ showFiltered: false });
+    this.setState({ showFiltered: false, showSearch: false });
   };
 
   sortCards = e => {
@@ -199,6 +229,26 @@ class CardSelector extends Component {
     return (
       <div>
         <Container>
+          <Form className="form-container">
+            <FormGroup>
+              <Label className="form-label" for="search">
+                Search Card By Letter
+              </Label>
+              <Input
+                name="search-letter"
+                type="text"
+                maxLength="1"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+          </Form>
+
+          <select onChange={this.handleChange}>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
           <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
           <button name="Creature" onClick={this.sortCards}>
             Sort for Creatures
