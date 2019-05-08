@@ -232,10 +232,34 @@ class CardSelector extends Component {
           <p>{this.playerDeck()}</p>
         </div>
         <Container>
+          <div className="filterNav" />
           <select onChange={this.handleChange}>
             <option>A</option>
             <option>B</option>
             <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+            <option>J</option>
+            <option>K</option>
+            <option>L</option>
+            <option>M</option>
+            <option>N</option>
+            <option>O</option>
+            <option>P</option>
+            <option>Q</option>
+            <option>R</option>
+            <option>S</option>
+            <option>T</option>
+            <option>U</option>
+            <option>V</option>
+            <option>W</option>
+            <option>X</option>
+            <option>Y</option>
+            <option>Z</option>
           </select>
           <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
           <button name="Creature" onClick={this.sortCards}>
@@ -244,8 +268,6 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
-          <div>{this.playerDeck()}</div>
 
           <div className="deck-container">
             <CardDeck>{this.renderCard()}</CardDeck>
