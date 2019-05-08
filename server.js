@@ -9,7 +9,17 @@ const PORT = process.env.PORT || 3001;
 
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
+<<<<<<< HEAD
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+=======
+
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    process.env.PORT
+      ? "https://polar-dawn-49546.herokuapp.com/"
+      : "http://localhost:3000"
+  );
+>>>>>>> master
 
   // Request methods you wish to allow
   res.setHeader(
