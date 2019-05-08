@@ -6,8 +6,7 @@ import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
 import Navbar from "../components/Navbar";
-import { Route, Redirect } from 'react-router';
-
+import { Route, Redirect } from "react-router";
 
 // import deckProbability from "./../utils/deckProbability";
 // import stats from "./../utils/stats";
@@ -51,8 +50,8 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-        ? this.state.searchedCards
-        : this.state.cardArray;
+      ? this.state.searchedCards
+      : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
       for (
@@ -101,8 +100,6 @@ class CardSelector extends Component {
   componentDidMount() {
     console.log("uid: " + sessionStorage.getItem("uid"));
     this.loadCards();
-
-
   }
 
   // flipCards = () => {
@@ -208,7 +205,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function (obj) {
+    var myArray = this.state.deckArray.filter(function(obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -249,13 +246,12 @@ class CardSelector extends Component {
   render() {
     console.log("are you logged in: " + this.state.loggedIn);
 
-
-    if (sessionStorage.getItem("uid") == false || sessionStorage.getItem("uid") == "false") {
-
-      return <Redirect to='/' />
-
+    if (
+      sessionStorage.getItem("uid") == false ||
+      sessionStorage.getItem("uid") == "false"
+    ) {
+      return <Redirect to="/" />;
     }
-
 
     console.log("we re-rendered", this.state);
     return (
@@ -303,38 +299,33 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-          <div className="deck-container">
-            <CardDeck>{this.renderCard()}</CardDeck>
-          </div>
-          <div className="arrow-container">
-            <button
-              className="fas fa-caret-left arrow-icon arrow-btn "
-              name="backClick"
-              onClick={this.handleClick}
-            />
 
-            <button
-              className="fas fa-caret-right arrow-icon arrow-btn "
-              name="forwardClick"
-              onClick={this.handleClick}
-            >
-              {/* <i class="fas fa-caret-right arrow-icon" /> */}
-            </button>
-          </div>
-          {/* <button name="backClick" onClick={this.handleClick}>
-            Back
-          </button>
-          <button name="forwardClick" onClick={this.handleClick}>
-            Forward
-          </button> */}
+          <div className="deck-content-wrapper">
+            <div className="deck-container">
+              <CardDeck>{this.renderCard()}</CardDeck>
+            </div>
+            <div className="arrow-container">
+              <button
+                className="fas fa-caret-left arrow-icon arrow-btn "
+                name="backClick"
+                onClick={this.handleClick}
+              />
 
-          <div className="save-container">
-            <button className="bottom-btn" onClick={this.filterReset}>
-              Reset
-            </button>
-            <button className="bottom-btn" onClick={this.saveDeck}>
-              Save Deck
-            </button>
+              <button
+                className="fas fa-caret-right arrow-icon arrow-btn "
+                name="forwardClick"
+                onClick={this.handleClick}
+              />
+            </div>
+
+            <div className="save-container">
+              <button className="bottom-btn" onClick={this.filterReset}>
+                Reset
+              </button>
+              <button className="bottom-btn" onClick={this.saveDeck}>
+                Save Deck
+              </button>
+            </div>
           </div>
         </Container>
       </div>

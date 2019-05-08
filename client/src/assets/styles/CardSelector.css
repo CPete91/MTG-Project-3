@@ -4,9 +4,15 @@
   border: 8px solid #82693b;
   font-family: "MedievalSharp", cursive;
   color: #82693b;
+
+  margin-top: 50px;
 }
 
 /* Deck Styles */
+
+/* .deck-content-wrapper {
+  margin-left: 150px;
+} */
 
 .deck-container {
   padding-top: 50px;
