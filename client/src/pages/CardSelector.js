@@ -5,12 +5,20 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
+<<<<<<< HEAD
 import Navbar from "../components/Navbar";
 import { Route, Redirect } from 'react-router';
 
 
 // import deckProbability from "./../utils/deckProbability";
 // import stats from "./../utils/stats";
+=======
+import deckProbability from "./../utils/deckProbability";
+import stats from "./../utils/stats";
+import MyProvider from "./../provider";
+import MyContext from "./../context";
+import "../assets/styles/CardSelector.css";
+>>>>>>> master
 
 import {
   Card,
@@ -31,19 +39,24 @@ class CardSelector extends Component {
     cardArray: [],
     deckArray: [],
     startIndex: 0,
-    endIndex: 6,
+    endIndex: 4,
     value: "",
     showFiltered: false,
+    showSearch: false,
     filterTopic: "",
     cardSelectorPhase: true,
-    cardsFlipped: false
+    cardsFlipped: false,
+    searchedCards: []
   };
 
   renderCard = () => {
     var cards = [];
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
-      : this.state.cardArray;
+      : this.state.showSearch
+        ? this.state.searchedCards
+        : this.state.cardArray;
+
     if (deckToDisplay.length > 0) {
       for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
         cards.push(
@@ -62,11 +75,11 @@ class CardSelector extends Component {
     console.log("INSIDE MAKE FILTERED ARRAY", this.state.filterTopic);
     var cards = [];
     this.state.cardArray.map(singleCard => {
-      console.log(
-        "right before the if",
-        this.state.filterTopic,
-        singleCard.type_line.indexOf(this.state.filterTopic)
-      );
+      // console.log(
+      //   "right before the if",
+      //   this.state.filterTopic,
+      //   singleCard.type_line.indexOf(this.state.filterTopic)
+      // );
       if (singleCard.type_line.indexOf(this.state.filterTopic) >= 0) {
         console.log("inside the filtered if");
         cards.push(singleCard);
@@ -77,9 +90,9 @@ class CardSelector extends Component {
   };
 
   loadCards = () => {
-    console.log("yesssss");
+    // console.log("yesssss");
     API.getCards().then(data => {
-      console.log(data, "DATA WE GT BACK!!!!!!!!");
+      // console.log(data, "DATA WE GT BACK!!!!!!!!");
       this.setState({ cardArray: data.data });
     });
   };
@@ -109,7 +122,7 @@ class CardSelector extends Component {
 
   flipCards = () => {
     if (this.state.cardsFlipped === false) {
-      console.log("are we flipped?");
+      // console.log("are we flipped?");
       function compare(a, b) {
         if (a.name < b.name) {
           return 1;
@@ -144,34 +157,34 @@ class CardSelector extends Component {
   };
 
   handleClick = event => {
-    console.log("we got clicked!");
+    // console.log("we got clicked!");
     if (event.target.name === "forwardClick") {
       this.setState({
-        startIndex: this.state.startIndex + 6,
-        endIndex: this.state.endIndex + 6
+        startIndex: this.state.startIndex + 4,
+        endIndex: this.state.endIndex + 4
       });
     } else if (event.target.name === "backClick" && this.state.startIndex > 0) {
       this.setState({
-        startIndex: this.state.startIndex - 6,
-        endIndex: this.state.endIndex - 6
+        startIndex: this.state.startIndex - 4,
+        endIndex: this.state.endIndex - 4
       });
     }
   };
 
   handleChange = event => {
-    console.log("letter to search!!", event.target.value);
+    // console.log("letter to search!!", event.target.value);
     var searchedCards = [];
     this.state.cardArray.map(data => {
-      console.log("INSIDE MAP", event.target.value, data.name.charAt(0));
+      // console.log("INSIDE MAP", event.target.value, data.name.charAt(0));
       if (
         data.name.charAt(0).toLowerCase() == event.target.value.toLowerCase()
       ) {
-        console.log("INSIDE IFF");
+        // console.log("INSIDE IFF");
         searchedCards.push(data);
       }
     });
     console.log("serached !!", searchedCards);
-    // this.setState({ value: event.target.value });
+    this.setState({ searchedCards: searchedCards, showSearch: true });
   };
 
   handleSubmit = event => {
@@ -185,11 +198,11 @@ class CardSelector extends Component {
     addCard.push(card);
     this.setState({ deckArray: addCard });
 
-    console.log(this.state.deckArray);
+    // console.log(this.state.deckArray);
   };
 
   removeFromDeck = name => {
-    console.log(name);
+    // console.log(name);
     var myArray = this.state.deckArray.filter(function (obj) {
       return obj.name !== name;
     });
@@ -205,7 +218,7 @@ class CardSelector extends Component {
   };
 
   filterReset = () => {
-    this.setState({ showFiltered: false });
+    this.setState({ showFiltered: false, showSearch: false });
   };
 
   sortCards = e => {
@@ -216,12 +229,16 @@ class CardSelector extends Component {
     var playerDeck = [];
     this.state.deckArray.map(singleCard => {
       playerDeck.push(
-        <div>
-          <h3>{singleCard.name}</h3>
+        <div className="cardNames">
+          <p>{singleCard.name}</p>
         </div>
       );
     });
     return playerDeck;
+  };
+
+  tomTestFunc = stuffPassed => {
+    console.log("STUF PASSED tom test func!!", stuffPassed);
   };
 
   render() {
@@ -240,21 +257,40 @@ class CardSelector extends Component {
       <div>
         <Navbar />
 
+        <div className="deckInfo">
+          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
+          <p>{this.playerDeck()}</p>
+        </div>
         <Container>
-          <Form className="form-container">
-            <FormGroup>
-              <Label className="form-label" for="search">
-                Search Card By Letter
-              </Label>
-              <Input
-                name="search-letter"
-                type="text"
-                maxLength="1"
-                value={this.state.value}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-          </Form>
+          <div className="filterNav" />
+          <select onChange={this.handleChange}>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+            <option>F</option>
+            <option>G</option>
+            <option>H</option>
+            <option>I</option>
+            <option>J</option>
+            <option>K</option>
+            <option>L</option>
+            <option>M</option>
+            <option>N</option>
+            <option>O</option>
+            <option>P</option>
+            <option>Q</option>
+            <option>R</option>
+            <option>S</option>
+            <option>T</option>
+            <option>U</option>
+            <option>V</option>
+            <option>W</option>
+            <option>X</option>
+            <option>Y</option>
+            <option>Z</option>
+          </select>
           <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
           <button name="Creature" onClick={this.sortCards}>
             Sort for Creatures
@@ -262,17 +298,39 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
-          <div>{this.playerDeck()}</div>
-          <CardDeck>{this.renderCard()}</CardDeck>
-          <button name="backClick" onClick={this.handleClick}>
+          <div className="deck-container">
+            <CardDeck>{this.renderCard()}</CardDeck>
+          </div>
+          <div className="arrow-container">
+            <button
+              className="fas fa-caret-left arrow-icon arrow-btn "
+              name="backClick"
+              onClick={this.handleClick}
+            />
+
+            <button
+              className="fas fa-caret-right arrow-icon arrow-btn "
+              name="forwardClick"
+              onClick={this.handleClick}
+            >
+              {/* <i class="fas fa-caret-right arrow-icon" /> */}
+            </button>
+          </div>
+          {/* <button name="backClick" onClick={this.handleClick}>
             Back
           </button>
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
-          </button>
-          <button onClick={this.filterReset}>Filter Reset</button>
-          <button onClick={this.saveDeck}>Save Deck</button>
+          </button> */}
+
+          <div className="save-container">
+            <button className="bottom-btn" onClick={this.filterReset}>
+              Reset
+            </button>
+            <button className="bottom-btn" onClick={this.saveDeck}>
+              Save Deck
+            </button>
+          </div>
         </Container>
       </div>
     );

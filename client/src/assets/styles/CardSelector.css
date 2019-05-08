@@ -1,0 +1,60 @@
+.deckInfo {
+  float: left;
+  padding: 1em;
+  border: 8px solid #82693b;
+  font-family: "MedievalSharp", cursive;
+  color: #82693b;
+}
+
+/* Deck Styles */
+
+.deck-container {
+  padding-top: 50px;
+}
+
+/* Bottom Nav and Buttons */
+.arrow-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+}
+
+.arrow-btn {
+  background: transparent;
+  border: none;
+}
+
+.arrow-btn:last-child {
+  margin-left: 20px;
+}
+
+/* .arrow-btn {
+  border: 2px solid #82693b;
+} */
+
+.arrow-icon {
+  color: #82693b;
+  font-size: 80px;
+}
+
+.save-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.bottom-btn {
+  margin-left: 20px;
+  font-family: "Dark Crystal";
+  font-size: 25px;
+  color: #82693b;
+  background-color: #010101;
+  border: 8px solid #82693b;
+  text-align: center;
+  height: 50px;
+  width: 200px;
+}
+
+.bottom-btn:last-child {
+  margin-left: 10px;
+}

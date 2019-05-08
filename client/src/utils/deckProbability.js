@@ -1,7 +1,7 @@
 // This function takes in an entire deck of cards that have already been analyzed for their probability of being playable on turns 1-10.
 // It returns an array of probabilities that ANY card can be played on turns 1-10.
 
-deckProbability = function(deck) {
+const deckProbability = function(deck) {
   let totalProbability = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   for (let i = 0; i < 10; i++) {
     deck.forEach(card => {
