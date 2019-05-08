@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Deck from "../components/deck";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect } from 'react-router';
+import Navbar from "../components/Navbar";
 
 
 // 
@@ -71,6 +72,22 @@ class DeckDisplay extends Component {
 
     }
 
+    // handleClick = event => {
+    // console.log("we got clicked!");
+    // if (event.target.name === "forwardClick") {
+    // this.setState({
+    // startIndex: this.state.startIndex + 6,
+    // endIndex: this.state.endIndex + 6
+    // });
+    // } else if (event.target.name === "backClick" && this.state.startIndex > 0) {
+    // this.setState({
+    // startIndex: this.state.startIndex - 6,
+    // endIndex: this.state.endIndex - 6
+    // });
+    // }
+    // };
+
+
     componentDidMount() {
 
         this.loadDecks();
@@ -83,27 +100,42 @@ class DeckDisplay extends Component {
     }
 
     render() {
-        if (this.state.toCardSelector === true) {
-            return <Redirect to='/cardselector' />
+
+        if (sessionStorage.getItem("uid") == false || sessionStorage.getItem("uid") == "false") {
+
+            return <Redirect to='/' />
 
         }
 
-        return (
-            <div>
-                <Container>
-                    <button onClick={e => { this.handleNewDeck(e) }}> New Deck</button>
-
-                    <CardDeck>{this.renderDecks()}</CardDeck>
 
 
 
-                </Container>
+        if (this.state.toCardSelector === true) {
+            return <Redirect to='/cardselector' />
+
+        } else {
+
+            return (
+                <div>
+                    <Navbar />
+                    <Container>
+
+                        <button onClick={e => { this.handleNewDeck(e) }}> New Deck</button>
+
+                        <CardDeck>{this.renderDecks()}</CardDeck>
 
 
 
-            </div>
 
-        );
+
+                    </Container>
+
+
+
+                </div>
+
+            );
+        }
     }
 
 }

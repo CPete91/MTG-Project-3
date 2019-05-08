@@ -8,7 +8,11 @@ import Test from "./pages/test";
 
 import DeckDisplay from "./pages/DeckDisplay";
 
+
+
 function App() {
+  console.log("session thing " + sessionStorage.length);
+
   return (
     <Router>
       <Switch>
