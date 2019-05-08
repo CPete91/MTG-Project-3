@@ -14,17 +14,30 @@ import {
 export function CardDisplay(props) {
   return (
     <Card>
-      <CardImg src={props.card.image_uris.normal} alt={props.card.name} />
+      <CardImg
+        src={
+          props.card.image_uris
+            ? props.card.image_uris.normal
+            : "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
+        }
+        alt={props.card.name}
+      />
       <CardBody>
         <CardTitle>{props.card.name}</CardTitle>
         <Button
           onClick={() => {
-            props.onClickCommand(props.card);
+            props.addCardToDeck(props.card);
           }}
         >
           Add to Deck
         </Button>
-        <Button>Remove from Deck</Button>
+        <Button
+          onClick={() => {
+            props.removeFromDeck(props.card.name);
+          }}
+        >
+          Remove From Deck
+        </Button>
       </CardBody>
     </Card>
   );
