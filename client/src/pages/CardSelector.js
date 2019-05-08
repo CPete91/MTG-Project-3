@@ -49,7 +49,11 @@ class CardSelector extends Component {
       : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
-      for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
+      for (
+        let i = this.state.startIndex;
+        i < this.state.endIndex && i < deckToDisplay.length;
+        i++
+      ) {
         cards.push(
           <CardDisplay
             card={deckToDisplay[i]}
@@ -172,7 +176,11 @@ class CardSelector extends Component {
       }
     });
     console.log("serached !!", searchedCards);
-    this.setState({ searchedCards: searchedCards, showSearch: true });
+    this.setState({
+      searchedCards: searchedCards,
+      showSearch: true,
+      showFiltered: false
+    });
   };
 
   handleSubmit = event => {
