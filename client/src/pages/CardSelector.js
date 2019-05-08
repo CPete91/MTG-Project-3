@@ -30,16 +30,21 @@ class CardSelector extends Component {
     endIndex: 6,
     value: "",
     showFiltered: false,
+    showSearch: false,
     filterTopic: "",
     cardSelectorPhase: true,
-    cardsFlipped: false
+    cardsFlipped: false,
+    searchedCards: []
   };
 
   renderCard = () => {
     var cards = [];
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
+      : this.state.showSearch
+      ? this.state.searchedCards
       : this.state.cardArray;
+
     if (deckToDisplay.length > 0) {
       for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
         cards.push(
@@ -164,7 +169,7 @@ class CardSelector extends Component {
       }
     });
     console.log("serached !!", searchedCards);
-    // this.setState({ value: event.target.value });
+    this.setState({ searchedCards: searchedCards, showSearch: true });
   };
 
   handleSubmit = event => {
@@ -198,7 +203,7 @@ class CardSelector extends Component {
   };
 
   filterReset = () => {
-    this.setState({ showFiltered: false });
+    this.setState({ showFiltered: false, showSearch: false });
   };
 
   sortCards = e => {
@@ -236,6 +241,12 @@ class CardSelector extends Component {
               />
             </FormGroup>
           </Form>
+
+          <select onChange={this.handleChange}>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
           <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
           <button name="Creature" onClick={this.sortCards}>
             Sort for Creatures
