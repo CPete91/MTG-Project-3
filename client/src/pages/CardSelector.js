@@ -24,13 +24,10 @@ class CardSelector extends Component {
     deckArray: [],
     startIndex: 0,
     endIndex: 6,
-<<<<<<< HEAD
-    value: ""
-=======
+    value: "",
     showFiltered: false,
     filterTopic: "",
     cardsFlipped: false
->>>>>>> master
   };
 
   renderCard = () => {
@@ -157,6 +154,27 @@ class CardSelector extends Component {
     }
   };
 
+  handleChange = event => {
+    console.log("letter to search!!", event.target.value);
+    var searchedCards = [];
+    this.state.cardArray.map(data => {
+      console.log("INSIDE MAP", event.target.value, data.name.charAt(0));
+      if (
+        data.name.charAt(0).toLowerCase() == event.target.value.toLowerCase()
+      ) {
+        console.log("INSIDE IFF");
+        searchedCards.push(data);
+      }
+    });
+    console.log("serached !!", searchedCards);
+    // this.setState({ value: event.target.value });
+  };
+
+  handleSubmit = event => {
+    // alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  };
+
   saveToDeck = card => {
     let addCard = this.state.deckArray;
     addCard.push(card);
@@ -220,7 +238,6 @@ class CardSelector extends Component {
               />
             </FormGroup>
           </Form>
-          <button onClick={this.handleSort}>sort</button>
           <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
           <button name="Creature" onClick={this.sortCards}>
             Sort for Creatures
