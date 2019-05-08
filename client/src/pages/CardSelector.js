@@ -215,7 +215,7 @@ class CardSelector extends Component {
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
           </button>
-          <button onClick={this.filterReset}>Filter Reset</button>
+          <button onClick={this.filterReset}>Sort Reset</button>
           <button onClick={this.saveDeck}>Save Deck</button>
         </Container>
       </div>
