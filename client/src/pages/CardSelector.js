@@ -27,7 +27,8 @@ class CardSelector extends Component {
     endIndex: 6,
     showFiltered: false,
     filterTopic: "",
-    cardSelectorPhase: true
+    cardSelectorPhase: true,
+    cardsFlipped: false
   };
 
   renderCard = () => {
@@ -79,20 +80,56 @@ class CardSelector extends Component {
     this.loadCards();
   }
 
-  handleSort = () => {
-    function compare(a, b) {
-      if (a.name < b.name) {
-        return 1;
+  // flipCards = () => {
+  //   function compare(a, b) {
+  //     if (a.name < b.name) {
+  //       return 1;
+  //     }
+  //     if (a.name > b.name) {
+  //       return -1;
+  //     }
+  //     return 0;
+  //   }
+  //   var sorted = [].concat(this.state.cardArray).sort(compare);
+  //   this.setState({
+  //     cardArray: sorted
+  //   });
+  // };
+
+  flipCards = () => {
+    if (this.state.cardsFlipped === false) {
+      console.log("are we flipped?");
+      function compare(a, b) {
+        if (a.name < b.name) {
+          return 1;
+        }
+        if (a.name > b.name) {
+          return -1;
+        }
+        return 0;
       }
-      if (a.name > b.name) {
-        return -1;
+      var sorted = [].concat(this.state.cardArray).sort(compare);
+      this.setState({
+        cardArray: sorted,
+        showFiltered: true,
+        cardsFlipped: true
+      });
+    } else if (this.state.cardsFlipped === true) {
+      function compare(a, b) {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
       }
-      return 0;
+      var sorted = [].concat(this.state.cardArray).sort(compare);
+      this.setState({
+        cardsFlipped: false,
+        cardArray: sorted
+      });
     }
-    var sorted = [].concat(this.state.cardArray).sort(compare);
-    this.setState({
-      cardArray: sorted
-    });
   };
 
   handleClick = event => {
@@ -139,7 +176,7 @@ class CardSelector extends Component {
     this.setState({ showFiltered: false });
   };
 
-  sortCreatures = e => {
+  sortCards = e => {
     this.setState({ showFiltered: true, filterTopic: e.target.name });
   };
 
@@ -160,11 +197,11 @@ class CardSelector extends Component {
     return (
       <div>
         <Container>
-          <button onClick={this.handleSort}>sort</button>
-          <button name="Creature" onClick={this.sortCreatures}>
+          <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
+          <button name="Creature" onClick={this.sortCards}>
             Sort for Creatures
           </button>
-          <button name="Instant" onClick={this.sortCreatures}>
+          <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
           <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
