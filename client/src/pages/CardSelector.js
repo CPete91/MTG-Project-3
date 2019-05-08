@@ -227,21 +227,6 @@ class CardSelector extends Component {
     return (
       <div>
         <Container>
-          <Form className="form-container">
-            <FormGroup>
-              <Label className="form-label" for="search">
-                Search Card By Letter
-              </Label>
-              <Input
-                name="search-letter"
-                type="text"
-                maxLength="1"
-                value={this.state.value}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-          </Form>
-
           <select onChange={this.handleChange}>
             <option>A</option>
             <option>B</option>
@@ -256,7 +241,11 @@ class CardSelector extends Component {
           </button>
           <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
           <div>{this.playerDeck()}</div>
-          <CardDeck>{this.renderCard()}</CardDeck>
+
+          <div className="deck-container">
+            <CardDeck>{this.renderCard()}</CardDeck>
+          </div>
+
           <button name="backClick" onClick={this.handleClick}>
             Back
           </button>
