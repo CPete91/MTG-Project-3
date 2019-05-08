@@ -7,6 +7,7 @@ import CardSelector from "./pages/CardSelector";
 import Test from "./pages/test";
 import MyProvider from "./provider";
 import DeckDisplay from "./pages/DeckDisplay";
+import Stats from "./pages/stats";
 
 class App extends React.Component {
   render() {
@@ -18,7 +19,7 @@ class App extends React.Component {
             <Route exact path="/cardselector" component={CardSelector} />
             <Route exact path="/flip" component={Flip} />
             <Route exact path="/deck_display" component={DeckDisplay} />
-            <Route exact path="/test" component={Test} />
+            <Route exact path="/stats" component={Stats} />
           </Switch>
         </Router>
       </MyProvider>

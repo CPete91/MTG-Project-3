@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
-// import deckProbability from "./../utils/deckProbability";
-// import stats from "./../utils/stats";
+import deckProbability from "./../utils/deckProbability";
+import stats from "./../utils/stats";
+import MyProvider from "./../provider";
+import MyContext from "./../context";
 
 import {
   Card,
@@ -214,7 +216,22 @@ class CardSelector extends Component {
             Forward
           </button>
           <button onClick={this.filterReset}>Filter Reset</button>
-          <button onClick={this.saveDeck}>Save Deck</button>
+          <MyContext.Consumer>
+            {context => (
+              <button
+                onClick={() => {
+                  let statsDeck = stats(this.state.deckArray);
+                  let deckProb = deckProbability(statsDeck);
+                  context.saveDeck(statsDeck, deckProb);
+                  this.saveDeck();
+                  console.log(context.state.deck);
+                  console.log(statsDeck, deckProb);
+                }}
+              >
+                Save Deck
+              </button>
+            )}
+          </MyContext.Consumer>
         </Container>
       </div>
     );

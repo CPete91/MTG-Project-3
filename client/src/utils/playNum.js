@@ -3,11 +3,8 @@
 
 const optionProb = require("./optionProb");
 
-playNum = function(manaObj, cardArray, deckLength) {
-  const keysArr = Object.keys(manaObj);
+const playNum = function(manaObj, cardArray, deckLength) {
   for (let i = 0; i < cardArray.length; i++) {
-    let playable = [];
-
     let totalProb = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     for (let j = 0; j < cardArray[i].options.length; j++) {
