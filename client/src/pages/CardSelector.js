@@ -252,17 +252,18 @@ class CardSelector extends Component {
           </div>
 
           <div className="arrow-container">
-            <i
-              class="fas fa-caret-left card-cycle-arrow"
+            <button
+              className="fas fa-caret-left arrow-icon arrow-btn "
               name="backClick"
               onClick={this.handleClick}
             />
+
             <button
-              className="arrow-btn"
+              className="fas fa-caret-right arrow-icon arrow-btn "
               name="forwardClick"
               onClick={this.handleClick}
             >
-              <i class="fas fa-caret-right arrow-icon" />
+              {/* <i class="fas fa-caret-right arrow-icon" /> */}
             </button>
           </div>
 
@@ -272,8 +273,14 @@ class CardSelector extends Component {
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
           </button> */}
-          <button onClick={this.filterReset}>Sort Reset</button>
-          <button onClick={this.saveDeck}>Save Deck</button>
+          <div className="save-container">
+            <button className="bottom-btn" onClick={this.filterReset}>
+              Reset
+            </button>
+            <button className="bottom-btn" onClick={this.saveDeck}>
+              Save Deck
+            </button>
+          </div>
         </Container>
       </div>
     );
