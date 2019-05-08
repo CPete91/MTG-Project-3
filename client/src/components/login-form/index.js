@@ -71,7 +71,7 @@ class LoginForm extends React.Component {
 
   render() {
     if (this.state.toDashboard === true) {
-      return <Redirect to='/cardselector' />
+      return <Redirect to='/deckdisplay' />
     }
 
     return (
