@@ -20,6 +20,9 @@ export default {
   // saves deckArray to database
   submitDeck: deckData => {
     return axios.post("/api/decks", deckData);
+  },
+  getUserDecks: uid => {
+    return axios.get("/api/decks/" + uid, { crossdomain: true });
   }
 };
 
