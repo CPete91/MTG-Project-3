@@ -232,21 +232,6 @@ class CardSelector extends Component {
           <div>{this.playerDeck()}</div>
         </div>
         <Container>
-          <Form className="form-container">
-            <FormGroup>
-              <Label className="form-label" for="search">
-                Search Card By Letter
-              </Label>
-              <Input
-                name="search-letter"
-                type="text"
-                maxLength="1"
-                value={this.state.value}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-          </Form>
-
           <select onChange={this.handleChange}>
             <option>A</option>
             <option>B</option>
@@ -259,14 +244,34 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
+          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
+          <div>{this.playerDeck()}</div>
 
-          <CardDeck>{this.renderCard()}</CardDeck>
-          <button name="backClick" onClick={this.handleClick}>
+          <div className="deck-container">
+            <CardDeck>{this.renderCard()}</CardDeck>
+          </div>
+
+          <div className="arrow-container">
+            <i
+              class="fas fa-caret-left card-cycle-arrow"
+              name="backClick"
+              onClick={this.handleClick}
+            />
+            <button
+              className="arrow-btn"
+              name="forwardClick"
+              onClick={this.handleClick}
+            >
+              <i class="fas fa-caret-right arrow-icon" />
+            </button>
+          </div>
+
+          {/* <button name="backClick" onClick={this.handleClick}>
             Back
           </button>
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
-          </button>
+          </button> */}
           <button onClick={this.filterReset}>Sort Reset</button>
           <button onClick={this.saveDeck}>Save Deck</button>
         </Container>
