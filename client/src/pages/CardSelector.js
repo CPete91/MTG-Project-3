@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import CardDisplay from "../components/cardDisplay";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
+import Stats from "./../components/stats";
+import manaCalculator from "./../utils/manaCalculator";
+// import deckProbability from "./../utils/deckProbability";
+// import stats from "./../utils/stats";
 
 import {
   Card,
@@ -22,7 +26,8 @@ class CardSelector extends Component {
     startIndex: 0,
     endIndex: 6,
     showFiltered: false,
-    filterTopic: ""
+    filterTopic: "",
+    cardSelectorPhase: true
   };
 
   renderCard = () => {
@@ -68,14 +73,6 @@ class CardSelector extends Component {
       console.log(data, "DATA WE GT BACK!!!!!!!!");
       this.setState({ cardArray: data.data });
     });
-
-    // API.getCards()
-    //   .then(res =>
-    //     this.setState({
-    //       cardArray: res.data
-    //     })
-    //   )
-    //   .catch(err => console.log(err));
   };
 
   componentDidMount() {
@@ -114,6 +111,7 @@ class CardSelector extends Component {
   };
 
   saveToDeck = card => {
+    card = manaCalculator(card);
     let addCard = this.state.deckArray;
     addCard.push(card);
     this.setState({ deckArray: addCard });
