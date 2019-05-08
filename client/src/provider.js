@@ -1,14 +1,23 @@
-import React, { Component } from "React";
+import React, { Component } from "react";
 
 const MyContext = React.createContext();
 
-class Provider extends Component {
+class MyProvider extends Component {
   state = {
-    deck: [],
-    deckProb: 0
+    deck: []
   };
-
-//   render() {
-//     return;
-//   }
+  render() {
+    return (
+      <MyContext.Provider
+        value={{
+          state: this.state,
+          saveDeck: deck => this.setState({ deck: deck })
+        }}
+      >
+        {this.props.children}
+      </MyContext.Provider>
+    );
+  }
 }
+
+export default MyProvider;
