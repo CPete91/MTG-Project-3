@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
+import deckProbability from "./../utils/deckProbability";
+import stats from "./../utils/stats";
+import MyProvider from "./../provider";
+import MyContext from "./../context";
 import "../assets/styles/CardSelector.css";
-// import deckProbability from "./../utils/deckProbability";
-// import stats from "./../utils/stats";
 
 import {
   Card,
@@ -223,6 +225,10 @@ class CardSelector extends Component {
     return playerDeck;
   };
 
+  tomTestFunc = stuffPassed => {
+    console.log("STUF PASSED tom test func!!", stuffPassed);
+  };
+
   render() {
     console.log("we re-rendered", this.state);
     return (
@@ -268,11 +274,9 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-
           <div className="deck-container">
             <CardDeck>{this.renderCard()}</CardDeck>
           </div>
-
           <div className="arrow-container">
             <button
               className="fas fa-caret-left arrow-icon arrow-btn "
@@ -288,13 +292,13 @@ class CardSelector extends Component {
               {/* <i class="fas fa-caret-right arrow-icon" /> */}
             </button>
           </div>
-
           {/* <button name="backClick" onClick={this.handleClick}>
             Back
           </button>
           <button name="forwardClick" onClick={this.handleClick}>
             Forward
           </button> */}
+
           <div className="save-container">
             <button className="bottom-btn" onClick={this.filterReset}>
               Reset
