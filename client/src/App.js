@@ -9,7 +9,6 @@ import MyProvider from "./provider";
 import DeckDisplay from "./pages/DeckDisplay";
 import Stats from "./pages/stats";
 
-<<<<<<< HEAD
 
 
 function App() {
@@ -26,24 +25,6 @@ function App() {
       </Switch>
     </Router>
   );
-=======
-class App extends React.Component {
-  render() {
-    return (
-      <MyProvider>
-        <Router>
-          <Switch>
-            <Route exact path="/" render={props => <Login {...props} />} />
-            <Route exact path="/cardselector" component={CardSelector} />
-            <Route exact path="/flip" component={Flip} />
-            <Route exact path="/deck_display" component={DeckDisplay} />
-            <Route exact path="/stats" component={Stats} />
-          </Switch>
-        </Router>
-      </MyProvider>
-    );
-  }
->>>>>>> master
 }
 
 export default App;

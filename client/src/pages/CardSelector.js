@@ -5,20 +5,17 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
-<<<<<<< HEAD
 import Navbar from "../components/Navbar";
 import { Route, Redirect } from 'react-router';
 
 
 // import deckProbability from "./../utils/deckProbability";
 // import stats from "./../utils/stats";
-=======
 import deckProbability from "./../utils/deckProbability";
 import stats from "./../utils/stats";
 import MyProvider from "./../provider";
 import MyContext from "./../context";
 import "../assets/styles/CardSelector.css";
->>>>>>> master
 
 import {
   Card,
