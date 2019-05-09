@@ -42,7 +42,8 @@ class CardSelector extends Component {
     filterTopic: "",
     cardSelectorPhase: true,
     cardsFlipped: false,
-    searchedCards: []
+    searchedCards: [],
+    toDeckDisplay: false
   };
 
   renderCard = () => {
@@ -50,8 +51,8 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-      ? this.state.searchedCards
-      : this.state.cardArray;
+        ? this.state.searchedCards
+        : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
       for (
@@ -98,8 +99,19 @@ class CardSelector extends Component {
   };
 
   componentDidMount() {
-    console.log("uid: " + sessionStorage.getItem("uid"));
-    this.loadCards();
+
+    if (sessionStorage.getItem("deck") == false || sessionStorage.getItem("deck") == "false") {
+      this.setState({ deckArray: [] });
+      this.loadCards();
+    } else {
+      API.getDeck(sessionStorage.getItem("deck")).then(data => {
+        console.log("received selected deck " + data.data[0].cards);
+        //console.log("edited deck" + sessionStorage.getItem("deck"));
+        //console.log("uid: " + sessionStorage.getItem("uid"));
+        this.setState({ deckArray: data.data[0].cards });
+        this.loadCards();
+      });
+    }
   }
 
   // flipCards = () => {
@@ -205,7 +217,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function(obj) {
+    var myArray = this.state.deckArray.filter(function (obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -213,10 +225,33 @@ class CardSelector extends Component {
   };
 
   saveDeck = () => {
-    API.submitDeck({
-      cards: this.state.deckArray,
-      uid: sessionStorage.getItem("uid")
-    });
+    if (sessionStorage.getItem("deck") == false || sessionStorage.getItem("deck") == "false") {
+
+      API.submitDeck({
+        cards: this.state.deckArray,
+        uid: sessionStorage.getItem("uid")
+      }).then(data => {
+        this.setState({ toDeckDisplay: true });
+
+      });
+    } else {
+
+      if (this.state.deckArray.length > 0) {
+        API.editDeck({ _id: sessionStorage.getItem("deck"), cards: this.state.deckArray })
+          .then(data => {
+            this.setState({ toDeckDisplay: true });
+
+          });
+      } else {
+        API.deleteDeck({ _id: sessionStorage.getItem("deck") })
+          .then(data => {
+            this.setState({ toDeckDisplay: true });
+
+          });
+
+      }
+
+    }
   };
 
   filterReset = () => {
@@ -251,6 +286,12 @@ class CardSelector extends Component {
       sessionStorage.getItem("uid") == "false"
     ) {
       return <Redirect to="/" />;
+    }
+
+    if (
+      this.state.toDeckDisplay
+    ) {
+      return <Redirect to="/deckdisplay" />
     }
 
     console.log("we re-rendered", this.state);

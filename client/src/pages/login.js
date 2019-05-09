@@ -11,6 +11,7 @@ class Login extends Component {
   componentDidMount() {
 
     sessionStorage.setItem("uid", false);
+    sessionStorage.setItem("deck", false);
     console.log(sessionStorage.getItem("uid"));
   }
 

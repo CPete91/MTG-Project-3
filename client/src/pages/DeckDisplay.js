@@ -59,7 +59,7 @@ class DeckDisplay extends Component {
         if (this.state.decks.length > 0) {
             for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
                 decks.push(
-                    <Deck deck={this.state.decks[i]}></Deck>
+                    <Deck handleEdit={this.handleEdit.bind(this)} deck={this.state.decks[i]}></Deck>
 
                 )
                 console.log(this.state.decks);
@@ -71,6 +71,8 @@ class DeckDisplay extends Component {
         return decks;
 
     }
+
+
 
     // handleClick = event => {
     // console.log("we got clicked!");
@@ -90,12 +92,25 @@ class DeckDisplay extends Component {
 
     componentDidMount() {
 
+
         this.loadDecks();
+
+
+
     }
 
     handleNewDeck(e) {
         e.preventDefault();
+        sessionStorage.setItem("deck", false);
         this.setState({ toCardSelector: true });
+
+    }
+
+    handleEdit(e, selDeck) {
+        e.preventDefault();
+        sessionStorage.setItem("deck", selDeck._id);
+        this.setState({ toCardSelector: true });
+
 
     }
 
