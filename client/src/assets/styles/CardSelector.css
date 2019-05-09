@@ -37,15 +37,21 @@
   background-color: #82693b;
   border: 8px solid #010101;
   border-radius: 25px;
-  margin-bottom: 20px;
 }
-.card-btn:first-child {
+/* .card-btn:first-child {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-}
+} */
 
 .card-btn:last-child {
+  margin-top: 5px;
+}
+
+.add-btn {
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
 }
 
 /* Bottom Nav and Buttons */

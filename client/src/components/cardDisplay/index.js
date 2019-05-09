@@ -24,7 +24,7 @@ export function CardDisplay(props) {
       <CardBody className="card-body-styles">
         <CardTitle>{props.card.name}</CardTitle>
         <button
-          className="card-btn"
+          className="card-btn add-btn"
           onClick={() => {
             props.addCardToDeck(props.card);
           }}
