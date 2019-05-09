@@ -74,6 +74,7 @@
 .card-body-styles {
   font-family: "Dark Crystal";
   font-size: 1vw;
+  text-align: center;
   color: #82693b;
   background-color: #010101;
   border: 4px solid #82693b;
