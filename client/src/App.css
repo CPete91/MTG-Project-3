@@ -101,8 +101,8 @@ input:focus {
 }
 
 .form-btn:hover {
-  animation: shake 2s;
-  animation-iteration-count: infinite;
+  animation: pulse 1s !important;
+  animation-iteration-count: 1s !important;
   box-shadow: 0 12px 6px -6px #82693b4d;
 }
 
