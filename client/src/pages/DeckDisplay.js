@@ -133,9 +133,10 @@ class DeckDisplay extends Component {
             return (
                 <div>
                     <Navbar />
+                    <h1 className="mgt-h1 fadeIn">Choose Your Deck</h1>
+
                     <Container>
 
-                        <button onClick={e => { this.handleNewDeck(e) }}> New Deck</button>
 
                         <CardDeck>{this.renderDecks()}</CardDeck>
 
@@ -144,6 +145,10 @@ class DeckDisplay extends Component {
 
 
                     </Container>
+
+
+                    <button id="new-deck-btn" className="bottom-btn" onClick={e => { this.handleNewDeck(e) }}> New Deck</button>
+
 
 
 

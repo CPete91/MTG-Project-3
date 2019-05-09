@@ -31,7 +31,7 @@ export function Deck(props) {
                 alt={props.deck.cards[0].name} />
             <CardBody>
 
-
+                <p>{props.deck.name}</p>
                 <Button onClick={e => props.handleEdit(e, props.deck)}>Edit Deck</Button>
 
             </CardBody>
