@@ -18,6 +18,7 @@ import "../assets/styles/CardSelector.css";
 
 import {
   Card,
+  Col,
   Button,
   CardImg,
   CardTitle,
@@ -25,10 +26,14 @@ import {
   CardDeck,
   CardSubtitle,
   CardBody,
-  Container
+  Container,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Row
 } from "reactstrap";
-
-import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 class CardSelector extends Component {
   state = {
@@ -189,6 +194,12 @@ class CardSelector extends Component {
     });
   };
 
+  sortCards = event => {
+    console.log("NAMMMMMMMMEEEEEEEE", event.target.name, event.target.value);
+
+    this.setState({ showFiltered: true, filterTopic: event.target.value });
+  };
+
   handleSubmit = event => {
     // alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
@@ -221,10 +232,6 @@ class CardSelector extends Component {
 
   filterReset = () => {
     this.setState({ showFiltered: false, showSearch: false });
-  };
-
-  sortCards = e => {
-    this.setState({ showFiltered: true, filterTopic: e.target.name });
   };
 
   playerDeck = () => {
@@ -293,12 +300,37 @@ class CardSelector extends Component {
             <option>Z</option>
           </select>
           <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
+          <select onChange={this.sortCards}>
+            <option name="Artifact">Artifact</option>
+            <option name="Creature">Creature</option>
+            <option>Enchantment</option>
+            <option>Sort for Instant</option>
+            <option>Sort for Land</option>
+            <option>Sort for Planeswalker</option>
+            <option>Sort for Sorcery</option>
+          </select>
+
+          {/* <button name="Artifact" onClick={this.sortCards}>
+            Artifacts
+          </button>
           <button name="Creature" onClick={this.sortCards}>
-            Sort for Creatures
+            Creatures
+          </button>
+          <button name="Enchantment" onClick={this.sortCards}>
+            Enchantments
           </button>
           <button name="Instant" onClick={this.sortCards}>
-            Sort Instant
+            Instant
           </button>
+          <button name="Land" onClick={this.sortCards}>
+            Lands
+          </button>
+          <button name="Planeswalker" onClick={this.sortCards}>
+            Planeswalkers
+          </button>
+          <button name="Sorcery" onClick={this.sortCards}>
+            Sorcery
+          </button> */}
 
           <div className="deck-content-wrapper">
             <div className="deck-container">
@@ -325,6 +357,32 @@ class CardSelector extends Component {
               <button className="bottom-btn" onClick={this.saveDeck}>
                 Save Deck
               </button>
+            </div>
+            <div className="deckNaming">
+              <FormGroup row>
+                <Label for="deckName" sm={2}>
+                  Deck Name
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    name="deckName"
+                    id="deckname"
+                    placeholder="Sam's Rad Deck"
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="exampleText" sm={2}>
+                  Deck Description
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    type="textarea"
+                    name="deckDescription"
+                    id="deckDescription"
+                  />
+                </Col>
+              </FormGroup>
             </div>
           </div>
         </Container>
