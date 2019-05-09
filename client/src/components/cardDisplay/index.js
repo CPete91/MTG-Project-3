@@ -10,17 +10,14 @@ import {
   CardBody,
   CardSubtitle
 } from "reactstrap";
+import { style } from "react-toastify";
 
 export function CardDisplay(props) {
-
+  const holdImg = "https://static.thenounproject.com/png/54756-200.png";
   return (
     <Card>
       <CardImg
-        src={
-          props.card.image_uris
-            ? props.card.image_uris.normal
-            : "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
-        }
+        src={props.card.image_uris ? props.card.image_uris.normal : holdImg}
         alt={props.card.name}
       />
       <CardBody>
