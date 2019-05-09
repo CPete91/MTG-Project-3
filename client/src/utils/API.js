@@ -23,6 +23,18 @@ export default {
   },
   getUserDecks: uid => {
     return axios.get("/api/decks/" + uid, { crossdomain: true });
+  },
+  getDeck: id => {
+    return axios.get("/api/deck/" + id, { crossdomain: true });
+
+  },
+  editDeck: deckData => {
+    return axios.post("/api/decks/edit/", deckData);
+
+  },
+  deleteDeck: deckData => {
+    return axios.post("/api/decks/delete/", deckData);
+
   }
 };
 

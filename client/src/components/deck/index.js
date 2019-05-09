@@ -10,11 +10,16 @@ import {
     CardBody,
     CardSubtitle
 } from "reactstrap";
+import { checkPropTypes } from "prop-types";
 
 
 
 export function Deck(props) {
     console.log(props);
+
+
+
+
 
     return (
 
@@ -27,7 +32,7 @@ export function Deck(props) {
             <CardBody>
 
 
-                <Button>Edit Deck</Button>
+                <Button onClick={e => props.handleEdit(e, props.deck)}>Edit Deck</Button>
 
             </CardBody>
         </Card>
