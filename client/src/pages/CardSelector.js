@@ -380,6 +380,7 @@ class CardSelector extends Component {
                     type="textarea"
                     name="deckDescription"
                     id="deckDescription"
+                    placeholder="A "
                   />
                 </Col>
               </FormGroup>
