@@ -19,22 +19,11 @@ import {
 } from "reactstrap";
 
 class CardSelector extends Component {
-  state = {
-    cardArray: [],
-    deckArray: [],
-    startIndex: 0,
-    endIndex: 6,
-    showFiltered: false,
-    filterTopic: "",
-    cardSelectorPhase: true,
-    cardsFlipped: false
-  };
-
   render() {
     console.log("we re-rendered", this.state);
     return (
       <div>
-        <Stats dataArray={localStorage.getItem("statsDeck")} />
+        <Stats dataArray={localStorage.getItem("deck")} />
         <Stats dataArray={localStorage.getItem("deckProb")} />
       </div>
     );

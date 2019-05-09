@@ -18,7 +18,7 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
       // Set up a favorable object. This has attributes of different mana type that are required to play a card.
     }
   });
-  console.log("favorable", favorable);
+  // console.log("favorable", favorable);
   let probabilityArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   // Our chart will take in an array of probabilities. We populate this with the probability of each respective play.
   let probability = 0;
@@ -42,9 +42,9 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
     let keys = Object.keys(favorable);
 
     let manaDrawn = 0;
-    console.log("Cards drawn before loop", cardsDrawn);
+    // console.log("Cards drawn before loop", cardsDrawn);
     keys.forEach(key => {
-      console.log(key, favorable[key]);
+      // console.log(key, favorable[key]);
       for (let j = 0; j <= paymentOption[key]; j++) {
         if (key === "C" && thisProb > 0) {
           thisProb =
@@ -68,18 +68,18 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
           manaDrawn--;
         }
 
-        console.log(
-          "key",
-          key,
-          "decklength",
-          deckLength,
-          "Cards Drawn",
-          cardsDrawn,
-          "mana Drawn",
-          manaDrawn,
-          "This Prob",
-          thisProb
-        );
+        // console.log(
+        //   "key",
+        //   key,
+        //   "decklength",
+        //   deckLength,
+        //   "Cards Drawn",
+        //   cardsDrawn,
+        //   "mana Drawn",
+        //   manaDrawn,
+        //   "This Prob",
+        //   thisProb
+        // );
       }
       // Calculate the probability of drawing the cards we want. Assume that we draw them all in a clump,
       // because it turns out that I took AP statistics a decade ago, and I forgot how to calculate the odds

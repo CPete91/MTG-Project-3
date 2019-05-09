@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Stats from "./../components/stats";
 import manaCalculator from "./../utils/manaCalculator";
+import Navbar from "../components/Navbar";
+import { Route, Redirect } from "react-router";
+
+// import deckProbability from "./../utils/deckProbability";
+// import stats from "./../utils/stats";
 import deckProbability from "./../utils/deckProbability";
 import stats from "./../utils/stats";
 import MyProvider from "./../provider";
@@ -49,7 +54,11 @@ class CardSelector extends Component {
       : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
-      for (let i = this.state.startIndex; i < this.state.endIndex; i++) {
+      for (
+        let i = this.state.startIndex;
+        i < this.state.endIndex && i < deckToDisplay.length;
+        i++
+      ) {
         cards.push(
           <CardDisplay
             card={deckToDisplay[i]}
@@ -89,6 +98,7 @@ class CardSelector extends Component {
   };
 
   componentDidMount() {
+    console.log("uid: " + sessionStorage.getItem("uid"));
     this.loadCards();
   }
 
@@ -172,7 +182,11 @@ class CardSelector extends Component {
       }
     });
     console.log("serached !!", searchedCards);
-    this.setState({ searchedCards: searchedCards, showSearch: true });
+    this.setState({
+      searchedCards: searchedCards,
+      showSearch: true,
+      showFiltered: false
+    });
   };
 
   handleSubmit = event => {
@@ -203,6 +217,16 @@ class CardSelector extends Component {
       cards: this.state.deckArray,
       uid: sessionStorage.getItem("uid")
     });
+    let statsDeck = stats(this.state.deckArray);
+    let deckProb = deckProbability(statsDeck);
+    localStorage.setItem(
+      "deck",
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "deckProb",
+      deckProb
+    );
+    console.log(statsDeck[0]);
+    console.log(deckProb);
   };
 
   filterReset = () => {
@@ -230,9 +254,20 @@ class CardSelector extends Component {
   };
 
   render() {
+    console.log("are you logged in: " + this.state.loggedIn);
+
+    if (
+      sessionStorage.getItem("uid") == false ||
+      sessionStorage.getItem("uid") == "false"
+    ) {
+      return <Redirect to="/" />;
+    }
+
     console.log("we re-rendered", this.state);
     return (
       <div>
+        <Navbar />
+
         <div className="deckInfo">
           <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
           <p>{this.playerDeck()}</p>
@@ -274,52 +309,33 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-          <div className="deck-container">
-            <CardDeck>{this.renderCard()}</CardDeck>
-          </div>
-          <div className="arrow-container">
-            <button
-              className="fas fa-caret-left arrow-icon arrow-btn "
-              name="backClick"
-              onClick={this.handleClick}
-            />
 
-            <button
-              className="fas fa-caret-right arrow-icon arrow-btn "
-              name="forwardClick"
-              onClick={this.handleClick}
-            />
-          </div>
-
-          <div className="save-container">
-            <button className="bottom-btn" onClick={this.filterReset}>
-              Reset
-            </button>
-            {/* <MyContext.Consumer>
-              {context => ( */}
-            <div>
-              {/* {this.tomTestFunc(context)} */}
+          <div className="deck-content-wrapper">
+            <div className="deck-container">
+              <CardDeck>{this.renderCard()}</CardDeck>
+            </div>
+            <div className="arrow-container">
               <button
-                className="bottom-btn"
-                onClick={() => {
-                  let statsDeck = stats(this.state.deckArray);
-                  let deckProb = deckProbability(statsDeck);
-                  // context.saveDeck(statsDeck, deckProb);
-                  localStorage.setItem("statsDeck", statsDeck);
-                  localStorage.setItem("deckProb", deckProb);
-                  this.saveDeck();
-                  console.log(
-                    "stats Deck",
-                    localStorage.getItem("statsDeck")[0]
-                  );
-                  console.log("deck prob", localStorage.getItem("deckProb"));
-                }}
-              >
+                className="fas fa-caret-left arrow-icon arrow-btn "
+                name="backClick"
+                onClick={this.handleClick}
+              />
+
+              <button
+                className="fas fa-caret-right arrow-icon arrow-btn "
+                name="forwardClick"
+                onClick={this.handleClick}
+              />
+            </div>
+
+            <div className="save-container">
+              <button className="bottom-btn" onClick={this.filterReset}>
+                Reset
+              </button>
+              <button className="bottom-btn" onClick={this.saveDeck}>
                 Save Deck
               </button>
             </div>
-            {/* )}
-            </MyContext.Consumer> */}
           </div>
         </Container>
       </div>
