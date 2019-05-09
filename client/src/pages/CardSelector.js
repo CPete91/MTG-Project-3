@@ -344,46 +344,47 @@ class CardSelector extends Component {
           <p>{this.playerDeck()}</p>
         </div>
         <Container>
-          <div className="filterNav" />
-          <select onChange={this.handleChange}>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
-            <option>D</option>
-            <option>E</option>
-            <option>F</option>
-            <option>G</option>
-            <option>H</option>
-            <option>I</option>
-            <option>J</option>
-            <option>K</option>
-            <option>L</option>
-            <option>M</option>
-            <option>N</option>
-            <option>O</option>
-            <option>P</option>
-            <option>Q</option>
-            <option>R</option>
-            <option>S</option>
-            <option>T</option>
-            <option>U</option>
-            <option>V</option>
-            <option>W</option>
-            <option>X</option>
-            <option>Y</option>
-            <option>Z</option>
-          </select>
-          <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
-          <select onChange={this.sortCards}>
-            <option name="Artifact">Artifact</option>
-            <option name="Creature">Creature</option>
-            <option>Enchantment</option>
-            <option>Instant</option>
-            <option>Land</option>
-            <option>Planeswalker</option>
-            <option>Sorcery</option>
-          </select>
-
+          <div className="filterNav d-flex justify-content-center">
+            <h4>Sort by Letter: </h4>
+            <select onChange={this.handleChange}>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+              <option>E</option>
+              <option>F</option>
+              <option>G</option>
+              <option>H</option>
+              <option>I</option>
+              <option>J</option>
+              <option>K</option>
+              <option>L</option>
+              <option>M</option>
+              <option>N</option>
+              <option>O</option>
+              <option>P</option>
+              <option>Q</option>
+              <option>R</option>
+              <option>S</option>
+              <option>T</option>
+              <option>U</option>
+              <option>V</option>
+              <option>W</option>
+              <option>X</option>
+              <option>Y</option>
+              <option>Z</option>
+            </select>
+            <select onChange={this.sortCards}>
+              <option name="Artifact">Artifact</option>
+              <option name="Creature">Creature</option>
+              <option>Enchantment</option>
+              <option>Instant</option>
+              <option>Land</option>
+              <option>Planeswalker</option>
+              <option>Sorcery</option>
+            </select>
+            <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
+          </div>
           {/* <button name="Artifact" onClick={this.sortCards}>
             Artifacts
           </button>
@@ -405,7 +406,6 @@ class CardSelector extends Component {
           <button name="Sorcery" onClick={this.sortCards}>
             Sorcery
           </button> */}
-
           <div className="deck-content-wrapper">
             <div className="deck-container">
               <CardDeck>{this.renderCard()}</CardDeck>
@@ -423,7 +423,6 @@ class CardSelector extends Component {
                 onClick={this.handleClick}
               />
             </div>
-
             <div className="save-container">
               <button className="bottom-btn" onClick={this.filterReset}>
                 Reset
