@@ -36,6 +36,42 @@
   padding-top: 50px;
 }
 
+/* Card styles */
+
+.card-img {
+  /* background-color: #010101; */
+  border: 4px solid #82693b;
+}
+.card-body-styles {
+  font-family: "Dark Crystal";
+  font-size: 20px;
+  color: #82693b;
+  background-color: #010101;
+  border: 4px solid #82693b;
+}
+
+.card-btn {
+  color: #010101;
+  background-color: #82693b;
+  border: 8px solid #010101;
+  border-radius: 25px;
+}
+/* .card-btn:first-child {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+} */
+
+.card-btn:last-child {
+  margin-top: 5px;
+}
+
+.add-btn {
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+}
+
 /* Bottom Nav and Buttons */
 .arrow-container {
   display: flex;
