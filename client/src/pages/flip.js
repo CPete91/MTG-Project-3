@@ -4,7 +4,12 @@ class Flip extends Component {
   render() {
     return (
       <div className="flip-container">
-        <FlipPage>
+        <FlipPage
+          className="flip-page"
+          orientation={"horizontal"}
+          height={"500"}
+          width={"500"}
+        >
           <img
             className="flip-img"
             src={require("../assets/img/mgt-logo.png")}
