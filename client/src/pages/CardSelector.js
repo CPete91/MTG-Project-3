@@ -48,7 +48,10 @@ class CardSelector extends Component {
     cardSelectorPhase: true,
     cardsFlipped: false,
     searchedCards: [],
-    toStatsPage: false
+    toDeckDisplay: false,
+    toStatsPage: false,
+    name: "",
+    description: ""
   };
 
   renderCard = () => {
@@ -56,8 +59,8 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-      ? this.state.searchedCards
-      : this.state.cardArray;
+        ? this.state.searchedCards
+        : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
       for (
@@ -104,8 +107,24 @@ class CardSelector extends Component {
   };
 
   componentDidMount() {
-    console.log("uid: " + sessionStorage.getItem("uid"));
-    this.loadCards();
+    if (
+      sessionStorage.getItem("deck") == false ||
+      sessionStorage.getItem("deck") == "false"
+    ) {
+      this.setState({ deckArray: [] });
+      this.loadCards();
+    } else {
+      API.getDeck(sessionStorage.getItem("deck")).then(data => {
+        console.log("received selected deck " + data.data[0].cards);
+        //console.log("edited deck" + sessionStorage.getItem("deck"));
+        //console.log("uid: " + sessionStorage.getItem("uid"));
+        this.setState({ deckArray: data.data[0].cards });
+        this.setState({ name: data.data[0].name });
+        this.setState({ description: data.data[0].description });
+
+        this.loadCards();
+      });
+    }
   }
 
   // flipCards = () => {
@@ -174,6 +193,15 @@ class CardSelector extends Component {
       });
     }
   };
+  handleNameChange = event => {
+    this.setState({ name: event.target.value });
+  }
+
+  handleDescriptionChange = event => {
+    this.setState({ description: event.target.value });
+
+
+  }
 
   handleChange = event => {
     // console.log("letter to search!!", event.target.value);
@@ -217,7 +245,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function(obj) {
+    var myArray = this.state.deckArray.filter(function (obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -225,25 +253,48 @@ class CardSelector extends Component {
   };
 
   saveDeck = () => {
-    API.submitDeck({
-      cards: this.state.deckArray,
-      uid: sessionStorage.getItem("uid")
-    });
-    let statsDeck = stats(this.state.deckArray);
-    let deckProb = deckProbability(statsDeck);
-    localStorage.setItem(
-      "deckProb",
-      deckProb
-    );
-    console.log(statsDeck[0]);
-    console.log(deckProb);
+    if (
+      sessionStorage.getItem("deck") == false ||
+      sessionStorage.getItem("deck") == "false"
+    ) {
+      API.submitDeck({
+        cards: this.state.deckArray,
+        uid: sessionStorage.getItem("uid"),
+        name: this.state.name,
+        description: this.state.description
+      }).then(data => {
+        this.setState({ toDeckDisplay: true });
+      });
+    } else {
+      if (this.state.deckArray.length > 0) {
+        API.editDeck({
+          _id: sessionStorage.getItem("deck"),
+          cards: this.state.deckArray,
+          name: this.state.name,
+          description: this.state.description
+        }
+
+
+        )
+          .then(data => {
+            this.setState({ toDeckDisplay: true });
+
+          });
+      } else {
+        API.deleteDeck({ _id: sessionStorage.getItem("deck") }).then(data => {
+          this.setState({ toDeckDisplay: true });
+        });
+      }
+    }
   };
 
-  seeStats = ()=>{
+  seeStats = () => {
+    let statsDeck = stats(this.state.deckArray);
+    let deckProb = deckProbability(statsDeck);
+    localStorage.setItem("deckProb", deckProb);
     this.saveDeck();
-    this.setState({toStatsPage: true});
-
-  }
+    this.setState({ toStatsPage: true });
+  };
 
   filterReset = () => {
     this.setState({ showFiltered: false, showSearch: false });
@@ -275,9 +326,12 @@ class CardSelector extends Component {
       return <Redirect to="/" />;
     }
 
-    if(this.state.toStatsPage){
-      return <Redirect to="/stats" />;
+    if (this.state.toDeckDisplay) {
+      return <Redirect to="/deckdisplay" />;
+    }
 
+    if (this.state.toStatsPage) {
+      return <Redirect to="/stats" />;
     }
 
     console.log("we re-rendered", this.state);
@@ -324,10 +378,10 @@ class CardSelector extends Component {
             <option name="Artifact">Artifact</option>
             <option name="Creature">Creature</option>
             <option>Enchantment</option>
-            <option>Sort for Instant</option>
-            <option>Sort for Land</option>
-            <option>Sort for Planeswalker</option>
-            <option>Sort for Sorcery</option>
+            <option>Instant</option>
+            <option>Land</option>
+            <option>Planeswalker</option>
+            <option>Sorcery</option>
           </select>
 
           {/* <button name="Artifact" onClick={this.sortCards}>
@@ -378,7 +432,7 @@ class CardSelector extends Component {
                 Save Deck
               </button>
               <button className="bottom-btn" onClick={this.seeStats}>
-              See Stats
+                See Stats
               </button>
             </div>
             <div className="deckNaming">
@@ -390,7 +444,8 @@ class CardSelector extends Component {
                   <Input
                     name="deckName"
                     id="deckname"
-                    placeholder="Sam's Rad Deck"
+                    placeholder={this.state.name}
+                    onChange={e => { this.handleNameChange(e) }}
                   />
                 </Col>
               </FormGroup>
@@ -403,7 +458,8 @@ class CardSelector extends Component {
                     type="textarea"
                     name="deckDescription"
                     id="deckDescription"
-                    placeholder="A "
+                    placeholder={this.state.description}
+                    onChange={e => { this.handleDescriptionChange(e) }}
                   />
                 </Col>
               </FormGroup>
