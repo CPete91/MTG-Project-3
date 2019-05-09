@@ -27,21 +27,24 @@ const stats = function(deck) {
     let card = deck[i];
     let type = card.type_line.toLowerCase();
     if (type.includes("land")) {
+      console.log("I see a land");
       //   If a card is a land, we determine its colors. Some lands are for colorless mana, and so have no color identity. We keep track of them with
       // an integer.
       let colors = card.color_identity;
       if (colors.length < 1) {
         manaObj.C++;
-      } else if (colors.length === 1) {
+      } else {
         // Standard lands only have 1 color, and we can keep track of them with a simple integer as well.
         manaObj[colors[0]]++;
         manaObj.C++;
+        console.log("I logged a", colors);
         // Add in a colorless mana opportunity as well, since literally any mana can count as colorless
       }
     } else {
       playableArr.push(card);
     }
   }
+  console.log(manaObj);
   let statsDeck = playNum(manaObj, playableArr, deckLength);
   return statsDeck;
 };

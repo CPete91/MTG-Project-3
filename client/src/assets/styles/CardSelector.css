@@ -4,10 +4,28 @@
   border: 8px solid #82693b;
   font-family: "MedievalSharp", cursive;
   color: #82693b;
-
-  margin-top: 50px;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 600px;
+  width: 300px;
+  margin-top: 4em;
 }
 
+.deckInfo::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.deckNaming {
+  font-family: "MedievalSharp", cursive;
+  color: #82693b;
+  font-size: 23px;
+  border: 8px solid #82693b;
+  background-color: #010101;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 1em;
+}
 /* Deck Styles */
 
 /* .deck-content-wrapper {

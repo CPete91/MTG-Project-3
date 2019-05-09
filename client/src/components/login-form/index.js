@@ -1,15 +1,12 @@
 import React from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import API from "../../utils/API";
-import { Route, Redirect } from 'react-router'
-
-
+import { Route, Redirect } from "react-router";
 
 class LoginForm extends React.Component {
-
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '', toDashboard: false };
+    this.state = { username: "", password: "", toDashboard: false };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
@@ -36,42 +33,29 @@ class LoginForm extends React.Component {
         console.log(sessionStorage.getItem("uid"));
         this.setState({ toDashboard: true });
       } else {
-        console.log(data.data.err)
+        console.log(data.data.err);
       }
-
-
-
-
     });
-  }
-
+  };
 
   checker = (password, username, e) => {
     e.preventDefault();
 
-
     API.login({ userName: username, password: password }).then(data => {
-
       if (data.data.uid) {
         console.log(data);
         sessionStorage.setItem("uid", data.data.uid);
         console.log(sessionStorage.getItem("uid"));
 
         this.setState({ toDashboard: true });
-
       } else {
-
       }
-
     });
-  }
-
-
-
+  };
 
   render() {
     if (this.state.toDashboard === true) {
-      return <Redirect to='/deckdisplay' />
+      return <Redirect to="/deckdisplay" />;
     }
 
     return (
@@ -82,13 +66,22 @@ class LoginForm extends React.Component {
             <Label className="form-label" for="email">
               Email
             </Label>
-            <Input type="email" name="email" id="email" placeholder="" value={this.state.username} onChange={this.handleEmailChange} />
+            <Input
+              className="input-styles"
+              type="email"
+              name="email"
+              id="email"
+              placeholder=""
+              value={this.state.username}
+              onChange={this.handleEmailChange}
+            />
           </FormGroup>
           <FormGroup>
             <Label className="form-label" for="password">
               Password
             </Label>
             <Input
+              className="input-styles"
               type="password"
               name="password"
               id="password"
@@ -98,8 +91,22 @@ class LoginForm extends React.Component {
             />
           </FormGroup>
           <div className="btn-wrapper">
-            <button className="form-btn " onClick={e => { this.checker(this.state.password, this.state.username, e) }}>Log In</button>
-            <button className="form-btn " onClick={e => { this.signUp(this.state.password, this.state.username, e) }}>Sign Up</button>
+            <button
+              className="form-btn "
+              onClick={e => {
+                this.checker(this.state.password, this.state.username, e);
+              }}
+            >
+              Log In
+            </button>
+            <button
+              className="form-btn "
+              onClick={e => {
+                this.signUp(this.state.password, this.state.username, e);
+              }}
+            >
+              Sign Up
+            </button>
           </div>
         </Form>
       </div>

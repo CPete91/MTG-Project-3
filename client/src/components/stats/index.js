@@ -3,7 +3,7 @@ import { Bar } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
 
 export function Stats(props) {
-  console.log(props);
+  console.log(props.data);
   let cardData = {
     dataBar: {
       labels: [
@@ -20,8 +20,8 @@ export function Stats(props) {
       ],
       datasets: [
         {
-          label: "Probability of a Viable Play",
-          data: props.dataArray,
+          label: "Probability of a Viable Play per Turn for this Deck",
+          data: props.data.split(","),
           backgroundColor: "rgba(245, 74, 85, 1)",
           borderWidth: 1
         }
@@ -54,6 +54,7 @@ export function Stats(props) {
       }
     }
   };
+  console.log(cardData)
   return (
     <MDBContainer>
       <h3 className="mt-5">Probability of Plays on Each Turn</h3>
