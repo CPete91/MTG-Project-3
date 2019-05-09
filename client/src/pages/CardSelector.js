@@ -220,8 +220,6 @@ class CardSelector extends Component {
     let statsDeck = stats(this.state.deckArray);
     let deckProb = deckProbability(statsDeck);
     localStorage.setItem(
-      "deck",
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       "deckProb",
       deckProb
     );

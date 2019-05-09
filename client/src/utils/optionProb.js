@@ -45,7 +45,7 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
     // console.log("Cards drawn before loop", cardsDrawn);
     keys.forEach(key => {
       // console.log(key, favorable[key]);
-      for (let j = 0; j <= paymentOption[key]; j++) {
+      for (let j = 0; j <= paymentOption[key] && j<deckLength; j++) {
         if (key === "C" && thisProb > 0) {
           thisProb =
             (thisProb * (favorable[key] - manaDrawn)) /
@@ -67,19 +67,21 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
           cardsDrawn--;
           manaDrawn--;
         }
-
-        // console.log(
-        //   "key",
-        //   key,
-        //   "decklength",
-        //   deckLength,
-        //   "Cards Drawn",
-        //   cardsDrawn,
-        //   "mana Drawn",
-        //   manaDrawn,
-        //   "This Prob",
-        //   thisProb
-        // );
+        if(thisProb<0 || thisProb === NaN){
+          thisProb =0
+        }
+        console.log(
+          "key",
+          key,
+          "decklength",
+          deckLength,
+          "Cards Drawn",
+          cardsDrawn,
+          "mana Drawn",
+          manaDrawn,
+          "This Prob",
+          thisProb
+        );
       }
       // Calculate the probability of drawing the cards we want. Assume that we draw them all in a clump,
       // because it turns out that I took AP statistics a decade ago, and I forgot how to calculate the odds

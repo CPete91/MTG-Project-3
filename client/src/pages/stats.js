@@ -23,8 +23,8 @@ class CardSelector extends Component {
     console.log("we re-rendered", this.state);
     return (
       <div>
-        <Stats dataArray={localStorage.getItem("deck")} />
-        <Stats dataArray={localStorage.getItem("deckProb")} />
+        {/* <Stats data={localStorage.getItem("deck")} /> */}
+        <Stats data={localStorage.getItem("deckProb")} />
       </div>
     );
   }
