@@ -67,7 +67,7 @@ class LoginForm extends React.Component {
               Email
             </Label>
             <Input
-              className="input-style"
+              className="input-styles"
               type="email"
               name="email"
               id="email"
@@ -81,7 +81,7 @@ class LoginForm extends React.Component {
               Password
             </Label>
             <Input
-              className="input-style"
+              className="input-styles"
               type="password"
               name="password"
               id="password"
