@@ -18,6 +18,12 @@
   padding-top: 50px;
 }
 
+/* Card styles */
+.card-styles {
+  background-color: #010101;
+  border: 4px solid #82693b;
+}
+
 /* Bottom Nav and Buttons */
 .arrow-container {
   display: flex;

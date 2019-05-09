@@ -15,7 +15,7 @@ import { style } from "react-toastify";
 export function CardDisplay(props) {
   const holdImg = "https://static.thenounproject.com/png/54756-200.png";
   return (
-    <Card>
+    <Card className="card-styles">
       <CardImg
         src={props.card.image_uris ? props.card.image_uris.normal : holdImg}
         alt={props.card.name}
