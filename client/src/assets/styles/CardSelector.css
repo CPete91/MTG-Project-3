@@ -130,7 +130,7 @@
 
 .arrow-btn:hover {
   animation: shake 2s !important;
-  animation-iteration-count: 2s !important;
+  animation-iteration-count: infinite !important;
 }
 
 .arrow-btn:focus {
