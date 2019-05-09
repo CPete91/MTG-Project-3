@@ -30,6 +30,7 @@
 /* Nav Bar Styles */
 .nav-bar {
   background-color: #010101;
+  border-bottom: 2px solid #82693b;
 }
 
 .nav-brand {
