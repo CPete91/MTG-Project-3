@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import CardDisplay from "../components/cardDisplay";
 import Stats from "./../components/stats";
-import deckProbability from "./../utils/deckProbability";
 import stats from "./../utils/stats";
-import MyProvider from "./../provider";
-import MyContext from "./../context";
+import Navbar from "../components/Navbar";
 
 import {
   Card,
@@ -23,7 +21,7 @@ class CardSelector extends Component {
     console.log("we re-rendered", this.state);
     return (
       <div>
-        {/* <Stats data={localStorage.getItem("deck")} /> */}
+        <Navbar/>
         <Stats data={localStorage.getItem("deckProb")} />
       </div>
     );
