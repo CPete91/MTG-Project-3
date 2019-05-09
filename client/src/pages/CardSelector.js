@@ -227,6 +227,11 @@ class CardSelector extends Component {
     console.log(deckProb);
   };
 
+  seeStats = ()=>{
+    this.saveDeck();
+    
+  }
+
   filterReset = () => {
     this.setState({ showFiltered: false, showSearch: false });
   };
@@ -333,6 +338,7 @@ class CardSelector extends Component {
               <button className="bottom-btn" onClick={this.saveDeck}>
                 Save Deck
               </button>
+              <button className="bottom-btn" onClick={this.seeStats}
             </div>
           </div>
         </Container>

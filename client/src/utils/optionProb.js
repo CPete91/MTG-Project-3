@@ -91,7 +91,9 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
     probabilityArray[cmc + i] = probability;
     // Add in the probability of each possible situation.
   }
+  
   for (let j = 0; j < probabilityArray.length; j++) {
+    
     if (probabilityArray[j] > 1) {
       probabilityArray[j] = 1;
     }
