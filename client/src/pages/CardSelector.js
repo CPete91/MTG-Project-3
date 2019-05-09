@@ -49,7 +49,9 @@ class CardSelector extends Component {
     cardsFlipped: false,
     searchedCards: [],
     toDeckDisplay: false,
-    toStatsPage: false
+    toStatsPage: false,
+    name: "",
+    description: ""
   };
 
   renderCard = () => {
@@ -115,6 +117,9 @@ class CardSelector extends Component {
         //console.log("edited deck" + sessionStorage.getItem("deck"));
         //console.log("uid: " + sessionStorage.getItem("uid"));
         this.setState({ deckArray: data.data[0].cards });
+        this.setState({ name: data.data[0].name });
+        this.setState({ description: data.data[0].description });
+
         this.loadCards();
       });
     }
@@ -186,6 +191,15 @@ class CardSelector extends Component {
       });
     }
   };
+  handleNameChange = event => {
+    this.setState({ name: event.target.value });
+  }
+
+  handleDescriptionChange = event => {
+    this.setState({ description: event.target.value });
+
+
+  }
 
   handleChange = event => {
     // console.log("letter to search!!", event.target.value);
@@ -241,7 +255,9 @@ class CardSelector extends Component {
 
       API.submitDeck({
         cards: this.state.deckArray,
-        uid: sessionStorage.getItem("uid")
+        uid: sessionStorage.getItem("uid"),
+        name: this.state.name,
+        description: this.state.description
       }).then(data => {
         this.setState({ toDeckDisplay: true });
 
@@ -249,7 +265,15 @@ class CardSelector extends Component {
     } else {
 
       if (this.state.deckArray.length > 0) {
-        API.editDeck({ _id: sessionStorage.getItem("deck"), cards: this.state.deckArray })
+        API.editDeck({
+          _id: sessionStorage.getItem("deck"),
+          cards: this.state.deckArray,
+          name: this.state.name,
+          description: this.state.description
+        }
+
+
+        )
           .then(data => {
             this.setState({ toDeckDisplay: true });
 
@@ -430,7 +454,8 @@ class CardSelector extends Component {
                   <Input
                     name="deckName"
                     id="deckname"
-                    placeholder="Sam's Rad Deck"
+                    placeholder={this.state.name}
+                    onChange={e => { this.handleNameChange(e) }}
                   />
                 </Col>
               </FormGroup>
@@ -443,7 +468,8 @@ class CardSelector extends Component {
                     type="textarea"
                     name="deckDescription"
                     id="deckDescription"
-                    placeholder="A "
+                    placeholder={this.state.description}
+                    onChange={e => { this.handleDescriptionChange(e) }}
                   />
                 </Col>
               </FormGroup>
