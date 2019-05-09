@@ -19,28 +19,13 @@ import {
 } from "reactstrap";
 
 class CardSelector extends Component {
-  state = {
-    cardArray: [],
-    deckArray: [],
-    startIndex: 0,
-    endIndex: 6,
-    showFiltered: false,
-    filterTopic: "",
-    cardSelectorPhase: true,
-    cardsFlipped: false
-  };
-
   render() {
     console.log("we re-rendered", this.state);
     return (
-      <MyContext.Consumer>
-        {context => (
-          <React.Fragment>
-            <Stats dataArray={context.state.deck} />
-            <Stats dataArray={context.state.deckProb} />
-          </React.Fragment>
-        )}
-      </MyContext.Consumer>
+      <div>
+        {/* <Stats data={localStorage.getItem("deck")} /> */}
+        <Stats data={localStorage.getItem("deckProb")} />
+      </div>
     );
   }
 }
