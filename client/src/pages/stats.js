@@ -33,14 +33,10 @@ class CardSelector extends Component {
   render() {
     console.log("we re-rendered", this.state);
     return (
-      <MyContext.Consumer>
-        {context => (
-          <React.Fragment>
-            <Stats dataArray={context.state.deck} />
-            <Stats dataArray={context.state.deckProb} />
-          </React.Fragment>
-        )}
-      </MyContext.Consumer>
+      <div>
+        <Stats dataArray={localStorage.getItem("statsDeck")} />
+        <Stats dataArray={localStorage.getItem("deckProb")} />
+      </div>
     );
   }
 }

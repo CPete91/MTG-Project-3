@@ -288,24 +288,38 @@ class CardSelector extends Component {
               className="fas fa-caret-right arrow-icon arrow-btn "
               name="forwardClick"
               onClick={this.handleClick}
-            >
-              {/* <i class="fas fa-caret-right arrow-icon" /> */}
-            </button>
+            />
           </div>
-          {/* <button name="backClick" onClick={this.handleClick}>
-            Back
-          </button>
-          <button name="forwardClick" onClick={this.handleClick}>
-            Forward
-          </button> */}
 
           <div className="save-container">
             <button className="bottom-btn" onClick={this.filterReset}>
               Reset
             </button>
-            <button className="bottom-btn" onClick={this.saveDeck}>
-              Save Deck
-            </button>
+            {/* <MyContext.Consumer>
+              {context => ( */}
+            <div>
+              {/* {this.tomTestFunc(context)} */}
+              <button
+                className="bottom-btn"
+                onClick={() => {
+                  let statsDeck = stats(this.state.deckArray);
+                  let deckProb = deckProbability(statsDeck);
+                  // context.saveDeck(statsDeck, deckProb);
+                  localStorage.setItem("statsDeck", statsDeck);
+                  localStorage.setItem("deckProb", deckProb);
+                  this.saveDeck();
+                  console.log(
+                    "stats Deck",
+                    localStorage.getItem("statsDeck")[0]
+                  );
+                  console.log("deck prob", localStorage.getItem("deckProb"));
+                }}
+              >
+                Save Deck
+              </button>
+            </div>
+            {/* )}
+            </MyContext.Consumer> */}
           </div>
         </Container>
       </div>
