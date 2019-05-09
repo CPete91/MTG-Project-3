@@ -17,25 +17,28 @@ export function CardDisplay(props) {
   return (
     <Card>
       <CardImg
+        className="card-img"
         src={props.card.image_uris ? props.card.image_uris.normal : holdImg}
         alt={props.card.name}
       />
-      <CardBody>
+      <CardBody className="card-body-styles">
         <CardTitle>{props.card.name}</CardTitle>
-        <Button
+        <button
+          className="card-btn add-btn"
           onClick={() => {
             props.addCardToDeck(props.card);
           }}
         >
           Add to Deck
-        </Button>
-        <Button
+        </button>
+        <button
+          className="card-btn"
           onClick={() => {
             props.removeFromDeck(props.card.name);
           }}
         >
           Remove From Deck
-        </Button>
+        </button>
       </CardBody>
     </Card>
   );

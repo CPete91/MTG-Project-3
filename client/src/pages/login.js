@@ -1,24 +1,15 @@
 import React, { Component } from "react";
 import LoginForm from "../components/login-form";
-import {
-  withRouter
-} from 'react-router-dom'
-
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
-
-
   componentDidMount() {
-
     sessionStorage.setItem("uid", false);
     sessionStorage.setItem("deck", false);
     console.log(sessionStorage.getItem("uid"));
   }
 
-
   render() {
-
-
     return (
       <section className="section-mgt">
         <div className="container">
@@ -30,7 +21,7 @@ class Login extends Component {
                   src={require("../assets/img/mgt-logo.png")}
                 />
 
-                <h1 className="mgt-h1">DECK BUILDER</h1>
+                <h1 className="mgt-h1 fadeIn">DECK BUILDER</h1>
               </div>
             </div>
           </div>
