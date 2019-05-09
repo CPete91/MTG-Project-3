@@ -1,0 +1,85 @@
+.deckInfo {
+  float: left;
+  padding: 1em;
+  border: 8px solid #82693b;
+  font-family: "MedievalSharp", cursive;
+  color: #82693b;
+
+  margin-top: 50px;
+}
+
+/* Deck Styles */
+
+/* .deck-content-wrapper {
+  margin-left: 150px;
+} */
+
+.deck-container {
+  padding-top: 50px;
+}
+
+/* Bottom Nav and Buttons */
+.arrow-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+}
+
+.arrow-btn {
+  background: transparent;
+  border: none;
+}
+
+.arrow-btn:last-child {
+  margin-left: 5px;
+}
+
+/* .arrow-btn:active {
+  border: 2px solid #010101;
+} */
+.arrow-btn:focus {
+  outline: 0;
+}
+
+.arrow-icon {
+  color: #82693b;
+  font-size: 80px;
+}
+
+.arrow-icon:active {
+  color: #010101;
+}
+
+.save-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-right: 25px;
+  /* margin: 0 auto; */
+}
+
+.bottom-btn {
+  margin-left: 20px;
+  font-family: "Dark Crystal";
+  font-size: 25px;
+  color: #82693b;
+  background-color: #010101;
+  border: 8px solid #82693b;
+  text-align: center;
+  height: 50px;
+  width: 200px;
+}
+
+.bottom-btn:active {
+  color: #010101;
+  background-color: #82693b;
+  border: 8px solid #010101;
+}
+
+.bottom-btn:focus {
+  outline: 0;
+}
+
+.bottom-btn:last-child {
+  margin-left: 7px;
+}

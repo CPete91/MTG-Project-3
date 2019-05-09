@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import LoginForm from "../components/login-form";
-import "../animate.css";
+import { withRouter } from "react-router-dom";
+
 class Login extends Component {
+  componentDidMount() {
+    sessionStorage.setItem("uid", false);
+    console.log(sessionStorage.getItem("uid"));
+  }
+
   render() {
     return (
       <section className="section-mgt">
@@ -19,11 +25,11 @@ class Login extends Component {
             </div>
           </div>
 
-          <LoginForm />
+          <LoginForm {...this.props} />
         </div>
       </section>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);
