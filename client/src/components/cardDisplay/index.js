@@ -15,27 +15,30 @@ import { style } from "react-toastify";
 export function CardDisplay(props) {
   const holdImg = "https://static.thenounproject.com/png/54756-200.png";
   return (
-    <Card className="card-styles">
+    <Card>
       <CardImg
+        className="card-img"
         src={props.card.image_uris ? props.card.image_uris.normal : holdImg}
         alt={props.card.name}
       />
-      <CardBody>
+      <CardBody className="card-body-styles">
         <CardTitle>{props.card.name}</CardTitle>
-        <Button
+        <button
+          className="card-btn"
           onClick={() => {
             props.addCardToDeck(props.card);
           }}
         >
           Add to Deck
-        </Button>
-        <Button
+        </button>
+        <button
+          className="card-btn"
           onClick={() => {
             props.removeFromDeck(props.card.name);
           }}
         >
           Remove From Deck
-        </Button>
+        </button>
       </CardBody>
     </Card>
   );
