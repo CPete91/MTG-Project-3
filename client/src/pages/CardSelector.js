@@ -59,8 +59,8 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-        ? this.state.searchedCards
-        : this.state.cardArray;
+      ? this.state.searchedCards
+      : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
       for (
@@ -107,8 +107,10 @@ class CardSelector extends Component {
   };
 
   componentDidMount() {
-
-    if (sessionStorage.getItem("deck") == false || sessionStorage.getItem("deck") == "false") {
+    if (
+      sessionStorage.getItem("deck") == false ||
+      sessionStorage.getItem("deck") == "false"
+    ) {
       this.setState({ deckArray: [] });
       this.loadCards();
     } else {
@@ -243,7 +245,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function (obj) {
+    var myArray = this.state.deckArray.filter(function(obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -251,8 +253,10 @@ class CardSelector extends Component {
   };
 
   saveDeck = () => {
-    if (sessionStorage.getItem("deck") == false || sessionStorage.getItem("deck") == "false") {
-
+    if (
+      sessionStorage.getItem("deck") == false ||
+      sessionStorage.getItem("deck") == "false"
+    ) {
       API.submitDeck({
         cards: this.state.deckArray,
         uid: sessionStorage.getItem("uid"),
@@ -260,13 +264,12 @@ class CardSelector extends Component {
         description: this.state.description
       }).then(data => {
         this.setState({ toDeckDisplay: true });
-
       });
     } else {
-
       if (this.state.deckArray.length > 0) {
         API.editDeck({
           _id: sessionStorage.getItem("deck"),
+<<<<<<< HEAD
           cards: this.state.deckArray,
           name: this.state.name,
           description: this.state.description
@@ -278,29 +281,27 @@ class CardSelector extends Component {
             this.setState({ toDeckDisplay: true });
 
           });
+=======
+          cards: this.state.deckArray
+        }).then(data => {
+          this.setState({ toDeckDisplay: true });
+        });
+>>>>>>> master
       } else {
-        API.deleteDeck({ _id: sessionStorage.getItem("deck") })
-          .then(data => {
-            this.setState({ toDeckDisplay: true });
-
-          });
-
+        API.deleteDeck({ _id: sessionStorage.getItem("deck") }).then(data => {
+          this.setState({ toDeckDisplay: true });
+        });
       }
-
     }
   };
 
   seeStats = () => {
     let statsDeck = stats(this.state.deckArray);
     let deckProb = deckProbability(statsDeck);
-    localStorage.setItem(
-      "deckProb",
-      deckProb
-    );
+    localStorage.setItem("deckProb", deckProb);
     this.saveDeck();
     this.setState({ toStatsPage: true });
-
-  }
+  };
 
   filterReset = () => {
     this.setState({ showFiltered: false, showSearch: false });
@@ -332,16 +333,12 @@ class CardSelector extends Component {
       return <Redirect to="/" />;
     }
 
-    if (
-      this.state.toDeckDisplay
-    ) {
-      return <Redirect to="/deckdisplay" />
-
+    if (this.state.toDeckDisplay) {
+      return <Redirect to="/deckdisplay" />;
     }
 
     if (this.state.toStatsPage) {
       return <Redirect to="/stats" />;
-
     }
 
     console.log("we re-rendered", this.state);
@@ -388,10 +385,10 @@ class CardSelector extends Component {
             <option name="Artifact">Artifact</option>
             <option name="Creature">Creature</option>
             <option>Enchantment</option>
-            <option>Sort for Instant</option>
-            <option>Sort for Land</option>
-            <option>Sort for Planeswalker</option>
-            <option>Sort for Sorcery</option>
+            <option>Instant</option>
+            <option>Land</option>
+            <option>Planeswalker</option>
+            <option>Sorcery</option>
           </select>
 
           {/* <button name="Artifact" onClick={this.sortCards}>
@@ -468,8 +465,12 @@ class CardSelector extends Component {
                     type="textarea"
                     name="deckDescription"
                     id="deckDescription"
+<<<<<<< HEAD
                     placeholder={this.state.description}
                     onChange={e => { this.handleDescriptionChange(e) }}
+=======
+                    placeholder="A red/black deck that plays well against....."
+>>>>>>> master
                   />
                 </Col>
               </FormGroup>
