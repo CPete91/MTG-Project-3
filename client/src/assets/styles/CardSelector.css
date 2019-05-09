@@ -26,6 +26,34 @@
   padding-right: 20px;
   margin-top: 1em;
 }
+
+/* Nav Bar Styles */
+.nav-bar {
+  background-color: #010101;
+}
+
+.nav-brand {
+  height: 50px;
+  width: 50px;
+  margin-left: 25px;
+}
+
+.nav-brand:hover {
+  animation: pulse 0.75s !important;
+  animation-iteration-count: 1s !important;
+  scale: 2;
+}
+
+.nav-links-style {
+  font-family: "Dark Crystal" !important;
+  color: #82693b !important;
+  font-size: 25px !important;
+}
+
+.nav-links-style:hover {
+  color: #82693b7e !important;
+}
+
 /* Deck Styles */
 
 /* .deck-content-wrapper {
@@ -56,11 +84,12 @@
   border: 8px solid #010101;
   border-radius: 25px;
 }
-/* .card-btn:first-child {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-} */
+
+.card-btn:hover {
+  animation: pulse 1s !important;
+  animation-iteration-count: 1s !important;
+  box-shadow: -2px 7px 5px 1px #82693b86 !important;
+}
 
 .card-btn:last-child {
   margin-top: 5px;
@@ -76,7 +105,7 @@
 .arrow-container {
   display: flex;
   justify-content: center;
-  padding-top: 25px;
+  padding-top: 20px;
 }
 
 .arrow-btn {
@@ -88,9 +117,11 @@
   margin-left: 5px;
 }
 
-/* .arrow-btn:active {
-  border: 2px solid #010101;
-} */
+.arrow-btn:hover {
+  animation: shake 2s !important;
+  animation-iteration-count: 2s !important;
+}
+
 .arrow-btn:focus {
   outline: 0;
 }
@@ -132,6 +163,12 @@
 
 .bottom-btn:focus {
   outline: 0;
+}
+
+.bottom-btn:hover {
+  animation: pulse 1s !important;
+  animation-iteration-count: 1s !important;
+  box-shadow: 0 12px 6px -6px #82693b4d !important;
 }
 
 .bottom-btn:last-child {
