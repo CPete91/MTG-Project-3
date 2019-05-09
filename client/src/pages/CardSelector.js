@@ -59,8 +59,8 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-      ? this.state.searchedCards
-      : this.state.cardArray;
+        ? this.state.searchedCards
+        : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
       for (
@@ -245,7 +245,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function(obj) {
+    var myArray = this.state.deckArray.filter(function (obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -269,7 +269,6 @@ class CardSelector extends Component {
       if (this.state.deckArray.length > 0) {
         API.editDeck({
           _id: sessionStorage.getItem("deck"),
-<<<<<<< HEAD
           cards: this.state.deckArray,
           name: this.state.name,
           description: this.state.description
@@ -281,12 +280,6 @@ class CardSelector extends Component {
             this.setState({ toDeckDisplay: true });
 
           });
-=======
-          cards: this.state.deckArray
-        }).then(data => {
-          this.setState({ toDeckDisplay: true });
-        });
->>>>>>> master
       } else {
         API.deleteDeck({ _id: sessionStorage.getItem("deck") }).then(data => {
           this.setState({ toDeckDisplay: true });
@@ -465,12 +458,8 @@ class CardSelector extends Component {
                     type="textarea"
                     name="deckDescription"
                     id="deckDescription"
-<<<<<<< HEAD
                     placeholder={this.state.description}
                     onChange={e => { this.handleDescriptionChange(e) }}
-=======
-                    placeholder="A red/black deck that plays well against....."
->>>>>>> master
                   />
                 </Col>
               </FormGroup>
