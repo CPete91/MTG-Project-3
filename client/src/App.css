@@ -37,6 +37,14 @@ body {
   border-radius: 50px; */
 }
 
+.mgt-small{
+  font-family: "Dark Crystal";
+  font-size: 35px;
+  color: #82693b;
+  text-align: center;
+  padding-top: 35px;
+}
+
 .form-h1 {
   font-family: "Dark Crystal";
   font-size: 20px;

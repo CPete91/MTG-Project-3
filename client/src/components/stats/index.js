@@ -57,7 +57,7 @@ export function Stats(props) {
   console.log(cardData)
   return (
     <MDBContainer>
-      <h3 className="mt-5">Probability of Plays on Each Turn</h3>
+      <h3 className="mgt-small mt-5">Probability of Plays on Each Turn</h3>
       <Bar data={cardData.dataBar} options={cardData.barChartOptions} />
     </MDBContainer>
   );
