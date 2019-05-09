@@ -66,6 +66,14 @@ body {
   width: 400px;
 }
 
+input:focus {
+  outline: 0 !important;
+}
+
+.input-styles:focus {
+  outline: 0 !important;
+}
+
 .btn-wrapper {
   display: flex;
   justify-content: center;
@@ -80,13 +88,16 @@ body {
   border: 8px solid #82693b;
   text-align: center;
   padding: 5px 20px 40px 20px;
-
   height: 40px;
   width: auto;
 }
 
 .form-btn:last-child {
   margin-left: 20px;
+}
+
+.form-btn:focus {
+  outline: 0;
 }
 
 .form-btn:hover {
