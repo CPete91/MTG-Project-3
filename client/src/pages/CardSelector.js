@@ -299,38 +299,33 @@ class CardSelector extends Component {
           <button name="Instant" onClick={this.sortCards}>
             Sort Instant
           </button>
-          <div className="deck-container">
-            <CardDeck>{this.renderCard()}</CardDeck>
-          </div>
-          <div className="arrow-container">
-            <button
-              className="fas fa-caret-left arrow-icon arrow-btn "
-              name="backClick"
-              onClick={this.handleClick}
-            />
 
-            <button
-              className="fas fa-caret-right arrow-icon arrow-btn "
-              name="forwardClick"
-              onClick={this.handleClick}
-            >
-              {/* <i class="fas fa-caret-right arrow-icon" /> */}
-            </button>
-          </div>
-          {/* <button name="backClick" onClick={this.handleClick}>
-            Back
-          </button>
-          <button name="forwardClick" onClick={this.handleClick}>
-            Forward
-          </button> */}
+          <div className="deck-content-wrapper">
+            <div className="deck-container">
+              <CardDeck>{this.renderCard()}</CardDeck>
+            </div>
+            <div className="arrow-container">
+              <button
+                className="fas fa-caret-left arrow-icon arrow-btn "
+                name="backClick"
+                onClick={this.handleClick}
+              />
 
-          <div className="save-container">
-            <button className="bottom-btn" onClick={this.filterReset}>
-              Reset
-            </button>
-            <button className="bottom-btn" onClick={this.saveDeck}>
-              Save Deck
-            </button>
+              <button
+                className="fas fa-caret-right arrow-icon arrow-btn "
+                name="forwardClick"
+                onClick={this.handleClick}
+              />
+            </div>
+
+            <div className="save-container">
+              <button className="bottom-btn" onClick={this.filterReset}>
+                Reset
+              </button>
+              <button className="bottom-btn" onClick={this.saveDeck}>
+                Save Deck
+              </button>
+            </div>
           </div>
         </Container>
       </div>
