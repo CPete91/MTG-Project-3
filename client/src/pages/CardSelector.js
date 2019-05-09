@@ -42,7 +42,8 @@ class CardSelector extends Component {
     filterTopic: "",
     cardSelectorPhase: true,
     cardsFlipped: false,
-    searchedCards: []
+    searchedCards: [],
+    toStatsPage: false
   };
 
   renderCard = () => {
@@ -229,7 +230,8 @@ class CardSelector extends Component {
 
   seeStats = ()=>{
     this.saveDeck();
-    
+    this.setState({toStatsPage: true});
+
   }
 
   filterReset = () => {
@@ -264,6 +266,11 @@ class CardSelector extends Component {
       sessionStorage.getItem("uid") == "false"
     ) {
       return <Redirect to="/" />;
+    }
+
+    if(this.state.toStatsPage){
+      return <Redirect to="/stats" />;
+
     }
 
     console.log("we re-rendered", this.state);
@@ -338,7 +345,9 @@ class CardSelector extends Component {
               <button className="bottom-btn" onClick={this.saveDeck}>
                 Save Deck
               </button>
-              <button className="bottom-btn" onClick={this.seeStats}
+              <button className="bottom-btn" onClick={this.seeStats}>
+              See Stats
+              </button>
             </div>
           </div>
         </Container>
