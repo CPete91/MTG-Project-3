@@ -231,19 +231,15 @@ class CardSelector extends Component {
     });
     let statsDeck = stats(this.state.deckArray);
     let deckProb = deckProbability(statsDeck);
-    localStorage.setItem(
-      "deckProb",
-      deckProb
-    );
+    localStorage.setItem("deckProb", deckProb);
     console.log(statsDeck[0]);
     console.log(deckProb);
   };
 
-  seeStats = ()=>{
+  seeStats = () => {
     this.saveDeck();
-    this.setState({toStatsPage: true});
-
-  }
+    this.setState({ toStatsPage: true });
+  };
 
   filterReset = () => {
     this.setState({ showFiltered: false, showSearch: false });
@@ -275,9 +271,8 @@ class CardSelector extends Component {
       return <Redirect to="/" />;
     }
 
-    if(this.state.toStatsPage){
+    if (this.state.toStatsPage) {
       return <Redirect to="/stats" />;
-
     }
 
     console.log("we re-rendered", this.state);
@@ -324,10 +319,10 @@ class CardSelector extends Component {
             <option name="Artifact">Artifact</option>
             <option name="Creature">Creature</option>
             <option>Enchantment</option>
-            <option>Sort for Instant</option>
-            <option>Sort for Land</option>
-            <option>Sort for Planeswalker</option>
-            <option>Sort for Sorcery</option>
+            <option>Instant</option>
+            <option>Land</option>
+            <option>Planeswalker</option>
+            <option>Sorcery</option>
           </select>
 
           {/* <button name="Artifact" onClick={this.sortCards}>
@@ -378,7 +373,7 @@ class CardSelector extends Component {
                 Save Deck
               </button>
               <button className="bottom-btn" onClick={this.seeStats}>
-              See Stats
+                See Stats
               </button>
             </div>
             <div className="deckNaming">
@@ -403,7 +398,7 @@ class CardSelector extends Component {
                     type="textarea"
                     name="deckDescription"
                     id="deckDescription"
-                    placeholder="A "
+                    placeholder="A red/black deck that plays well against....."
                   />
                 </Col>
               </FormGroup>
