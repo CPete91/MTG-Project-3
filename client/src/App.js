@@ -11,8 +11,6 @@ import MyProvider from "./provider";
 import DeckDisplay from "./pages/DeckDisplay";
 import Stats from "./pages/stats";
 
-
-
 function App() {
   console.log("session thing " + sessionStorage.length);
 
@@ -23,7 +21,7 @@ function App() {
         <Route exact path="/cardselector" component={CardSelector} />
         <Route exact path="/flip" component={Flip} />
         <Route exact path="/deckdisplay" component={DeckDisplay} />
-        <Route exact path="/test" component={Test} />
+        <Route exact path="/stats" component={Stats} />
       </Switch>
     </Router>
   );
