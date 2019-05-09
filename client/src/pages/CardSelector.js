@@ -18,6 +18,7 @@ import "../assets/styles/CardSelector.css";
 
 import {
   Card,
+  Col,
   Button,
   CardImg,
   CardTitle,
@@ -25,10 +26,14 @@ import {
   CardDeck,
   CardSubtitle,
   CardBody,
-  Container
+  Container,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Row
 } from "reactstrap";
-
-import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 class CardSelector extends Component {
   state = {
@@ -42,7 +47,11 @@ class CardSelector extends Component {
     filterTopic: "",
     cardSelectorPhase: true,
     cardsFlipped: false,
-    searchedCards: []
+    searchedCards: [],
+    toDeckDisplay: false,
+    toStatsPage: false,
+    name: "",
+    description: ""
   };
 
   renderCard = () => {
@@ -50,8 +59,8 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-      ? this.state.searchedCards
-      : this.state.cardArray;
+        ? this.state.searchedCards
+        : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
       for (
@@ -98,8 +107,24 @@ class CardSelector extends Component {
   };
 
   componentDidMount() {
-    console.log("uid: " + sessionStorage.getItem("uid"));
-    this.loadCards();
+    if (
+      sessionStorage.getItem("deck") == false ||
+      sessionStorage.getItem("deck") == "false"
+    ) {
+      this.setState({ deckArray: [] });
+      this.loadCards();
+    } else {
+      API.getDeck(sessionStorage.getItem("deck")).then(data => {
+        console.log("received selected deck " + data.data[0].cards);
+        //console.log("edited deck" + sessionStorage.getItem("deck"));
+        //console.log("uid: " + sessionStorage.getItem("uid"));
+        this.setState({ deckArray: data.data[0].cards });
+        this.setState({ name: data.data[0].name });
+        this.setState({ description: data.data[0].description });
+
+        this.loadCards();
+      });
+    }
   }
 
   // flipCards = () => {
@@ -168,6 +193,15 @@ class CardSelector extends Component {
       });
     }
   };
+  handleNameChange = event => {
+    this.setState({ name: event.target.value });
+  }
+
+  handleDescriptionChange = event => {
+    this.setState({ description: event.target.value });
+
+
+  }
 
   handleChange = event => {
     // console.log("letter to search!!", event.target.value);
@@ -189,6 +223,12 @@ class CardSelector extends Component {
     });
   };
 
+  sortCards = event => {
+    console.log("NAMMMMMMMMEEEEEEEE", event.target.name, event.target.value);
+
+    this.setState({ showFiltered: true, filterTopic: event.target.value });
+  };
+
   handleSubmit = event => {
     // alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
@@ -205,7 +245,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function(obj) {
+    var myArray = this.state.deckArray.filter(function (obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -213,18 +253,51 @@ class CardSelector extends Component {
   };
 
   saveDeck = () => {
-    API.submitDeck({
-      cards: this.state.deckArray,
-      uid: sessionStorage.getItem("uid")
-    });
+    if (
+      sessionStorage.getItem("deck") == false ||
+      sessionStorage.getItem("deck") == "false"
+    ) {
+      API.submitDeck({
+        cards: this.state.deckArray,
+        uid: sessionStorage.getItem("uid"),
+        name: this.state.name,
+        description: this.state.description
+      }).then(data => {
+        this.setState({ toDeckDisplay: true });
+      });
+    } else {
+      if (this.state.deckArray.length > 0) {
+        API.editDeck({
+          _id: sessionStorage.getItem("deck"),
+          cards: this.state.deckArray,
+          name: this.state.name,
+          description: this.state.description
+        }
+
+
+        )
+          .then(data => {
+            this.setState({ toDeckDisplay: true });
+
+          });
+      } else {
+        API.deleteDeck({ _id: sessionStorage.getItem("deck") }).then(data => {
+          this.setState({ toDeckDisplay: true });
+        });
+      }
+    }
+  };
+
+  seeStats = () => {
+    let statsDeck = stats(this.state.deckArray);
+    let deckProb = deckProbability(statsDeck);
+    localStorage.setItem("deckProb", deckProb);
+    this.saveDeck();
+    this.setState({ toStatsPage: true });
   };
 
   filterReset = () => {
     this.setState({ showFiltered: false, showSearch: false });
-  };
-
-  sortCards = e => {
-    this.setState({ showFiltered: true, filterTopic: e.target.name });
   };
 
   playerDeck = () => {
@@ -253,6 +326,14 @@ class CardSelector extends Component {
       return <Redirect to="/" />;
     }
 
+    if (this.state.toDeckDisplay) {
+      return <Redirect to="/deckdisplay" />;
+    }
+
+    if (this.state.toStatsPage) {
+      return <Redirect to="/stats" />;
+    }
+
     console.log("we re-rendered", this.state);
     return (
       <div>
@@ -263,43 +344,68 @@ class CardSelector extends Component {
           <p>{this.playerDeck()}</p>
         </div>
         <Container>
-          <div className="filterNav" />
-          <select onChange={this.handleChange}>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
-            <option>D</option>
-            <option>E</option>
-            <option>F</option>
-            <option>G</option>
-            <option>H</option>
-            <option>I</option>
-            <option>J</option>
-            <option>K</option>
-            <option>L</option>
-            <option>M</option>
-            <option>N</option>
-            <option>O</option>
-            <option>P</option>
-            <option>Q</option>
-            <option>R</option>
-            <option>S</option>
-            <option>T</option>
-            <option>U</option>
-            <option>V</option>
-            <option>W</option>
-            <option>X</option>
-            <option>Y</option>
-            <option>Z</option>
-          </select>
-          <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
+          <div className="filterNav d-flex justify-content-center">
+            <h4>Sort by Letter: </h4>
+            <select onChange={this.handleChange}>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+              <option>E</option>
+              <option>F</option>
+              <option>G</option>
+              <option>H</option>
+              <option>I</option>
+              <option>J</option>
+              <option>K</option>
+              <option>L</option>
+              <option>M</option>
+              <option>N</option>
+              <option>O</option>
+              <option>P</option>
+              <option>Q</option>
+              <option>R</option>
+              <option>S</option>
+              <option>T</option>
+              <option>U</option>
+              <option>V</option>
+              <option>W</option>
+              <option>X</option>
+              <option>Y</option>
+              <option>Z</option>
+            </select>
+            <select onChange={this.sortCards}>
+              <option name="Artifact">Artifact</option>
+              <option name="Creature">Creature</option>
+              <option>Enchantment</option>
+              <option>Instant</option>
+              <option>Land</option>
+              <option>Planeswalker</option>
+              <option>Sorcery</option>
+            </select>
+            <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
+          </div>
+          {/* <button name="Artifact" onClick={this.sortCards}>
+            Artifacts
+          </button>
           <button name="Creature" onClick={this.sortCards}>
-            Sort for Creatures
+            Creatures
+          </button>
+          <button name="Enchantment" onClick={this.sortCards}>
+            Enchantments
           </button>
           <button name="Instant" onClick={this.sortCards}>
-            Sort Instant
+            Instant
           </button>
-
+          <button name="Land" onClick={this.sortCards}>
+            Lands
+          </button>
+          <button name="Planeswalker" onClick={this.sortCards}>
+            Planeswalkers
+          </button>
+          <button name="Sorcery" onClick={this.sortCards}>
+            Sorcery
+          </button> */}
           <div className="deck-content-wrapper">
             <div className="deck-container">
               <CardDeck>{this.renderCard()}</CardDeck>
@@ -317,7 +423,6 @@ class CardSelector extends Component {
                 onClick={this.handleClick}
               />
             </div>
-
             <div className="save-container">
               <button className="bottom-btn" onClick={this.filterReset}>
                 Reset
@@ -325,6 +430,38 @@ class CardSelector extends Component {
               <button className="bottom-btn" onClick={this.saveDeck}>
                 Save Deck
               </button>
+              <button className="bottom-btn" onClick={this.seeStats}>
+                See Stats
+              </button>
+            </div>
+            <div className="deckNaming">
+              <FormGroup row>
+                <Label for="deckName" sm={2}>
+                  Deck Name
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    name="deckName"
+                    id="deckname"
+                    placeholder={this.state.name}
+                    onChange={e => { this.handleNameChange(e) }}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="exampleText" sm={2}>
+                  Deck Description
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    type="textarea"
+                    name="deckDescription"
+                    id="deckDescription"
+                    placeholder={this.state.description}
+                    onChange={e => { this.handleDescriptionChange(e) }}
+                  />
+                </Col>
+              </FormGroup>
             </div>
           </div>
         </Container>

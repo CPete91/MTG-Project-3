@@ -37,6 +37,14 @@ body {
   border-radius: 50px; */
 }
 
+.mgt-small{
+  font-family: "Dark Crystal";
+  font-size: 35px;
+  color: #82693b;
+  text-align: center;
+  padding-top: 35px;
+}
+
 .form-h1 {
   font-family: "Dark Crystal";
   font-size: 20px;
@@ -101,8 +109,13 @@ input:focus {
 }
 
 .form-btn:hover {
+<<<<<<< HEAD
   animation: pulse 1s !important;
   animation-iteration-count: 1s !important;
+=======
+  animation: shake 2s;
+  animation-iteration-count: 2s;
+>>>>>>> master
   box-shadow: 0 12px 6px -6px #82693b4d;
 }
 

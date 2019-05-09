@@ -18,7 +18,7 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
       // Set up a favorable object. This has attributes of different mana type that are required to play a card.
     }
   });
-  console.log("favorable", favorable);
+  // console.log("favorable", favorable);
   let probabilityArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   // Our chart will take in an array of probabilities. We populate this with the probability of each respective play.
   let probability = 0;
@@ -42,10 +42,10 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
     let keys = Object.keys(favorable);
 
     let manaDrawn = 0;
-    console.log("Cards drawn before loop", cardsDrawn);
+    // console.log("Cards drawn before loop", cardsDrawn);
     keys.forEach(key => {
-      console.log(key, favorable[key]);
-      for (let j = 0; j <= paymentOption[key]; j++) {
+      // console.log(key, favorable[key]);
+      for (let j = 0; j <= paymentOption[key] && j<deckLength; j++) {
         if (key === "C" && thisProb > 0) {
           thisProb =
             (thisProb * (favorable[key] - manaDrawn)) /
@@ -67,7 +67,9 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
           cardsDrawn--;
           manaDrawn--;
         }
-
+        if(thisProb<0 || thisProb === NaN){
+          thisProb =0
+        }
         console.log(
           "key",
           key,
@@ -89,7 +91,9 @@ const optionProb = function(paymentOption, manaObj, deckLength, cmc) {
     probabilityArray[cmc + i] = probability;
     // Add in the probability of each possible situation.
   }
+  
   for (let j = 0; j < probabilityArray.length; j++) {
+    
     if (probabilityArray[j] > 1) {
       probabilityArray[j] = 1;
     }
