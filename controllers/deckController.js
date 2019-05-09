@@ -28,7 +28,12 @@ module.exports = {
 
   },
   editDeck: function (req, res) {
-    db.Deck.findOneAndUpdate({ _id: req.body._id }, { cards: req.body.cards })
+    db.Deck.findOneAndUpdate({ _id: req.body._id },
+      {
+        cards: req.body.cards,
+        name: req.body.name,
+        description: req.body.description
+      })
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
 
