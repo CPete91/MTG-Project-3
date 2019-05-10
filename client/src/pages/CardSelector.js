@@ -59,8 +59,8 @@ class CardSelector extends Component {
     var deckToDisplay = this.state.showFiltered
       ? this.makeFilteredArray()
       : this.state.showSearch
-        ? this.state.searchedCards
-        : this.state.cardArray;
+      ? this.state.searchedCards
+      : this.state.cardArray;
 
     if (deckToDisplay.length > 0) {
       for (
@@ -127,22 +127,6 @@ class CardSelector extends Component {
     }
   }
 
-  // flipCards = () => {
-  //   function compare(a, b) {
-  //     if (a.name < b.name) {
-  //       return 1;
-  //     }
-  //     if (a.name > b.name) {
-  //       return -1;
-  //     }
-  //     return 0;
-  //   }
-  //   var sorted = [].concat(this.state.cardArray).sort(compare);
-  //   this.setState({
-  //     cardArray: sorted
-  //   });
-  // };
-
   flipCards = () => {
     if (this.state.cardsFlipped === false) {
       // console.log("are we flipped?");
@@ -195,13 +179,11 @@ class CardSelector extends Component {
   };
   handleNameChange = event => {
     this.setState({ name: event.target.value });
-  }
+  };
 
   handleDescriptionChange = event => {
     this.setState({ description: event.target.value });
-
-
-  }
+  };
 
   handleChange = event => {
     // console.log("letter to search!!", event.target.value);
@@ -245,7 +227,7 @@ class CardSelector extends Component {
 
   removeFromDeck = name => {
     // console.log(name);
-    var myArray = this.state.deckArray.filter(function (obj) {
+    var myArray = this.state.deckArray.filter(function(obj) {
       return obj.name !== name;
     });
     console.log(myArray);
@@ -272,14 +254,9 @@ class CardSelector extends Component {
           cards: this.state.deckArray,
           name: this.state.name,
           description: this.state.description
-        }
-
-
-        )
-          .then(data => {
-            this.setState({ toDeckDisplay: true });
-
-          });
+        }).then(data => {
+          this.setState({ toDeckDisplay: true });
+        });
       } else {
         API.deleteDeck({ _id: sessionStorage.getItem("deck") }).then(data => {
           this.setState({ toDeckDisplay: true });
@@ -340,13 +317,13 @@ class CardSelector extends Component {
         <Navbar />
 
         <div className="deckInfo">
-          <p>Number of Cards in Deck: {this.state.deckArray.length}</p>
+          <p>Cards in Deck: {this.state.deckArray.length}</p>
           <p>{this.playerDeck()}</p>
         </div>
         <Container>
           <div className="filterNav d-flex justify-content-center">
-            <h4>Sort by Letter: </h4>
-            <select onChange={this.handleChange}>
+            <p className="sortBox navSpacer">Search Filters:</p>
+            <select className="navSpacer" onChange={this.handleChange}>
               <option>A</option>
               <option>B</option>
               <option>C</option>
@@ -374,7 +351,7 @@ class CardSelector extends Component {
               <option>Y</option>
               <option>Z</option>
             </select>
-            <select onChange={this.sortCards}>
+            <select className="navSpacer" onChange={this.sortCards}>
               <option name="Artifact">Artifact</option>
               <option name="Creature">Creature</option>
               <option>Enchantment</option>
@@ -383,7 +360,18 @@ class CardSelector extends Component {
               <option>Planeswalker</option>
               <option>Sorcery</option>
             </select>
-            <button onClick={this.flipCards}>Flip Cards Alphabetically</button>
+            <button
+              className="sortBox sortBoxHover navSpacer"
+              onClick={this.flipCards}
+            >
+              Flip Order
+            </button>
+            <button
+              className="sortBox sortBoxHover navSpacer"
+              onClick={this.filterReset}
+            >
+              Reset
+            </button>
           </div>
           {/* <button name="Artifact" onClick={this.sortCards}>
             Artifacts
@@ -424,9 +412,6 @@ class CardSelector extends Component {
               />
             </div>
             <div className="save-container">
-              <button className="bottom-btn" onClick={this.filterReset}>
-                Reset
-              </button>
               <button className="bottom-btn" onClick={this.saveDeck}>
                 Save Deck
               </button>
@@ -444,7 +429,9 @@ class CardSelector extends Component {
                     name="deckName"
                     id="deckname"
                     placeholder={this.state.name}
-                    onChange={e => { this.handleNameChange(e) }}
+                    onChange={e => {
+                      this.handleNameChange(e);
+                    }}
                   />
                 </Col>
               </FormGroup>
@@ -458,7 +445,9 @@ class CardSelector extends Component {
                     name="deckDescription"
                     id="deckDescription"
                     placeholder={this.state.description}
-                    onChange={e => { this.handleDescriptionChange(e) }}
+                    onChange={e => {
+                      this.handleDescriptionChange(e);
+                    }}
                   />
                 </Col>
               </FormGroup>
