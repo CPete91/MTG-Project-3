@@ -23,16 +23,16 @@ export function Deck(props) {
 
     return (
 
-        <Card>
-            <CardImg src={props.deck.cards[0].image_uris
+        <Card className="deck-card">
+            <CardImg className="card-img deck-img" src={props.deck.cards[0].image_uris
                 ? props.deck.cards[0].image_uris.normal
                 : "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
             }
                 alt={props.deck.cards[0].name} />
-            <CardBody>
+            <CardBody className="card-body-styles">
 
-                <p>{props.deck.name}</p>
-                <Button onClick={e => props.handleEdit(e, props.deck)}>Edit Deck</Button>
+                <CardTitle>{props.deck.name}</CardTitle>
+                <button class="card-btn" onClick={e => props.handleEdit(e, props.deck)}>Edit Deck</button>
 
             </CardBody>
         </Card>
