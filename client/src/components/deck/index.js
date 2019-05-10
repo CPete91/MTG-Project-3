@@ -23,7 +23,7 @@ export function Deck(props) {
           src={
             props.deck.cards[0].image_uris
               ? props.deck.cards[0].image_uris.normal
-              : "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
+              : "https://static.thenounproject.com/png/54756-200.png"
           }
           alt={props.deck.cards[0].name}
         />
