@@ -321,7 +321,7 @@ class CardSelector extends Component {
           <p>{this.playerDeck()}</p>
         </div>
         <Container>
-          <div className="filterNav d-flex justify-content-center ">
+          <div className="filterNav d-flex justify-content-center">
             <p className="sortBox navSpacer">Search Filters:</p>
             <select className="navSpacer" onChange={this.handleChange}>
               <option>A</option>
