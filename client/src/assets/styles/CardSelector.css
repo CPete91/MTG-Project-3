@@ -7,8 +7,9 @@
   overflow: hidden;
   overflow-y: scroll;
   height: 600px;
-  width: 300px;
+  width: 250px;
   margin-top: 4em;
+  font-size: 1.3em;
 }
 
 .filterNav {
@@ -18,6 +19,7 @@
   justify-content: space-between;
   font-family: "Dark Crystal";
   color: #82693b;
+
   /* word-spacing: 2px; */
 }
 .deckInfo::-webkit-scrollbar {
@@ -74,6 +76,27 @@
   padding-top: 50px;
 }
 
+.sortBox {
+  font-family: "Dark Crystal";
+  font-size: 2vh;
+  vertical-align: middle;
+  color: #82693b;
+  background-color: #010101;
+  border: 8px solid #82693b;
+  text-align: center;
+  height: 50px;
+  width: 200px;
+}
+
+.sortBoxHover:hover {
+  animation: pulse 1s !important;
+  animation-iteration-count: 1s !important;
+  box-shadow: 0 12px 6px -6px #82693b4d !important;
+}
+
+.navSpacer {
+  margin: 10px;
+}
 /* Card styles */
 
 .card-img {
@@ -186,4 +209,7 @@
   margin-left: 7px;
 }
 
-
+#new-deck-btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
