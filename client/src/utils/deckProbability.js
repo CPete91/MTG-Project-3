@@ -10,17 +10,23 @@ const deckProbability = function(deck) {
   }
 
   totalProbability = totalProbability.map(element => element / deck.length);
-  while(totalProbability.indexOf(1) === -1 && totalProbability[9]>0){
-    for(let i = 0; i<totalProbability.length;i++){
-      if(totalProbability[i]>0){
-      totalProbability[i] = totalProbability[i] * 10 + i/(totalProbability.length-i);
-      }
-      if (totalProbability[i]>1){
-        totalProbability[i] = 1
-      }
-    }
-  }
+  // while(totalProbability.indexOf(1) === -1 && totalProbability[9]>0){
+  //   for(let i = 0; i<totalProbability.length;i++){
+  //     if(totalProbability[i]>0){
+  //     totalProbability[i] = totalProbability[i] * 10 + i/(totalProbability.length-i);
+  //     }
+  //     if (totalProbability[i]>1){
+  //       totalProbability[i] = 1
+  //     }
+  //   }
+  // }
 
+  for (let i = 0; i < totalProbability.length; i++) {
+    if (totalProbability[i] > 1) {
+      totalProbability[i] = 1;
+    }
+    totalProbability[i] = totalProbability[i] * 100;
+  }
 
   return totalProbability;
 };

@@ -53,7 +53,9 @@ const cardProb = function(deck) {
     tempOdds = [];
     finalOdds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (let j = 0; j < card.options.length; j++) {
-      tempOdds.push(probability(deckLength, card.options[j], manaObj, numCard));
+      tempOdds.push(
+        probability(deckLength, card.options[j], manaObj, numCard, card)
+      );
     }
     for (let j = 0; j < tempOdds.length; j++) {
       for (let k = 0; k < tempOdds[j].length; k++) {

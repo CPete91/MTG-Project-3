@@ -6,7 +6,7 @@
 // gonna either be really impressive or really gosh darned stupid.
 const allArrays = require("./arrays");
 const colorlessAndFailure = require("./colorlessAndFailureCalcs");
-const probability = function(deckLength, option, manaObj, numCard) {
+const probability = function(deckLength, option, manaObj, numCard, card) {
   // We construct an array of arrays for all the ways we can draw
   // the card and each color mana. Start out with an empty array.
   // Slot 0 is the card itself. Slot 1 is B for black. Slot 2 is U for blue. Slot 3 is G for green.
@@ -42,7 +42,7 @@ const probability = function(deckLength, option, manaObj, numCard) {
       for (let j = 0; j < currentOption.length; j++) {
         sum += currentOption[j];
       }
-      if (sum <= cardsInHand) {
+      if (sum <= cardsInHand && card.cmc <= cardsInHand - 6) {
         // Ensure that getting the required colorless mana won't cause our hand to overflow
         totalProbability += colorlessAndFailure(
           cardsInHand,
@@ -50,7 +50,8 @@ const probability = function(deckLength, option, manaObj, numCard) {
           option.C,
           currentOption,
           manaObj,
-          keys
+          keys,
+          option
         );
         // console.log(totalProbability, "Total Prob <-");
       }
