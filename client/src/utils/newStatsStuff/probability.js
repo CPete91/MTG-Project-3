@@ -34,7 +34,7 @@ const probability = function(deckLength, option, manaObj, numCard, card) {
   //   Feed these into my function that will break this array of arrays down into
   // all possible combinations using one element of each sub array.
 
-  for (let cardsInHand = 7; cardsInHand < 18; cardsInHand++) {
+  for (let cardsInHand = 7; cardsInHand < 17; cardsInHand++) {
     let totalProbability = 0;
     for (let i = 0; i < allCombinations.length; i++) {
       let currentOption = allCombinations[i];
@@ -56,7 +56,13 @@ const probability = function(deckLength, option, manaObj, numCard, card) {
         // console.log(totalProbability, "Total Prob <-");
       }
     }
-    finalProbability.push(totalProbability);
+    if (finalProbability.length) {
+      finalProbability.push(
+        totalProbability + finalProbability[finalProbability.length - 1]
+      );
+    } else {
+      finalProbability.push(totalProbability);
+    }
   }
   return finalProbability;
 };

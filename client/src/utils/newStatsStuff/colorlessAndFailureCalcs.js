@@ -33,7 +33,7 @@ const colorlessAndFailure = function(
   // that aren't any of those things.
   let maxColorless = cardsInHand - sum;
   if (excessMana >= colorless) {
-    maxColorless = 0;
+    colorless = 0;
   }
   let manaUsed = sum - option[0];
   // Recall that our option consists of the number of the playable, non-mana cards that we draw (element 0)
@@ -68,26 +68,26 @@ const colorlessAndFailure = function(
         // is 1.
       } else {
         probability += numerator / denominator;
-      }
-      if (Number.isNaN(probability)) {
-        console.log(
-          "Probability",
-          probability,
-          "Cards in hand",
-          cardsInHand,
-          "deck length",
-          deckLength,
-          "colorless",
-          colorless,
-          "option",
-          option,
-          "mana Obj",
-          manaObj,
-          "Colorless Count",
-          numColorless,
-          "Undesirable",
-          undesirable
-        );
+        if (numerator / denominator < 0) {
+          console.log(
+            "Probability",
+            probability,
+            "Cards in hand",
+            cardsInHand,
+            "deck length",
+            deckLength,
+            "colorless",
+            colorless,
+            "option",
+            option,
+            "mana Obj",
+            manaObj,
+            "Colorless Count",
+            numColorless,
+            "Undesirable",
+            undesirable
+          );
+        }
       }
     }
   }

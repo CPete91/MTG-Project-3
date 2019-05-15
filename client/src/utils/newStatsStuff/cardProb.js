@@ -19,9 +19,11 @@ const cardProb = function(deck) {
   let numCard = 0;
   let tempOdds = [];
   let finalOdds = [];
+  let card;
+  let cardOdds;
 
   for (let i = 0; i < deckLength; i++) {
-    let card = deck[i];
+    card = deck[i];
     let type = card.type_line.toLowerCase();
     if (type.includes("land")) {
       //   If a card is a land, we determine its colors. Some lands are for colorless mana, and so have no color identity. We keep track of them with
