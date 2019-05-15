@@ -18,7 +18,6 @@ export function Stats(props) {
   let cardData = {
     dataBar: {
       labels: [
-        "Draw",
         "Turn 1",
         "Turn 2",
         "Turn 3",
@@ -27,7 +26,8 @@ export function Stats(props) {
         "Turn 6",
         "Turn 7",
         "Turn 8",
-        "Turn 9"
+        "Turn 9",
+        "Turn 10"
       ],
       datasets: [
         {

@@ -16,7 +16,8 @@ const manaCalculator = function(card) {
       U: 0,
       W: 0,
       R: 0,
-      C: 0
+      C: 0,
+      options: []
     };
     //   Set up two new objects. Mana is a string that will contain mana costs. A number indicates colorless mana.
     // C is colorless, G is green, B is black, U is blue, R is red, and W is white. The returned JSON is a little weird, in that it encloses everything in curly braces.
