@@ -29,7 +29,7 @@ As a team, we saw the great potential to make a companion app to help players di
 - ReactStrap/Bootstrap
 - MDBReact Charts Library
 - Axios
-- Pseud-Hypergeometric Probability Distribution
+- Pseudo-Hypergeometric Probability Distribution
 
 **Back End:**
 
