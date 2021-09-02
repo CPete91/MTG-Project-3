@@ -22,7 +22,7 @@
   "dependencies": {
     "auth0-js": "^9.10.2",
     "aws-sdk": "^2.450.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "express": "^4.16.3",
